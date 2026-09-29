@@ -3,7 +3,10 @@
   Se genera automáticamente a partir del campo "Proveedor" de cada producto.
 {%- endcomment -%}
 {%- assign letters = 'A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z' | split: ',' -%}
-{%- assign vendors = shop.vendors | sort_natural -%}
+{%- liquid
+  assign hidden = section.settings.hide_vendors | downcase | replace: ', ', ',' | replace: ' ,', ',' | split: ','
+  assign vendors = shop.vendors | sort_natural
+-%}
 <section class="section">
   <div class="page-width">
     <div class="section-header section-header--center reveal">
@@ -18,8 +21,11 @@
           {%- capture group -%}
             {%- for vendor in vendors -%}
               {%- assign first = vendor | slice: 0 | upcase -%}
+              {%- assign v_down = vendor | downcase | strip -%}
               {%- if first == letter -%}
-                <li><a href="{{ vendor | url_for_vendor }}">{{ vendor }}</a></li>
+                {%- unless hidden contains v_down -%}
+                  <li><a href="{{ vendor | url_for_vendor }}">{{ vendor }}</a></li>
+                {%- endunless -%}
               {%- endif -%}
             {%- endfor -%}
           {%- endcapture -%}
@@ -33,7 +39,8 @@
         {%- capture group -%}
           {%- for vendor in vendors -%}
             {%- assign first = vendor | slice: 0 | upcase -%}
-            {%- unless letters contains first -%}
+            {%- assign v_down = vendor | downcase | strip -%}
+            {%- unless letters contains first or hidden contains v_down -%}
               <li><a href="{{ vendor | url_for_vendor }}">{{ vendor }}</a></li>
             {%- endunless -%}
           {%- endfor -%}
@@ -58,7 +65,8 @@
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Directorio" },
     { "type": "inline_richtext", "id": "heading", "label": "Título", "default": "Todas las <em>marcas</em>" },
-    { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Del lujo italiano al streetwear londinense. Se actualiza automáticamente con cada nueva marca.</p>" }
+    { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Del lujo italiano al streetwear londinense. Se actualiza automáticamente con cada nueva marca.</p>" },
+    { "type": "text", "id": "hide_vendors", "label": "Ocultar proveedores", "info": "Nombres separados por comas que no quieres mostrar (por ejemplo, tu propio nombre de tienda)." }
   ],
   "presets": [{ "name": "Índice de marcas A–Z" }]
 }

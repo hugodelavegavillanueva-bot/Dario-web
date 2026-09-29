@@ -5,7 +5,7 @@
   <div class="page-width">
     <div class="footer__top">
       <div class="footer__col--brand">
-        <p class="footer__brand-name">{{ shop.name }}</p>
+        <p class="footer__brand-name">{{ settings.store_name | default: shop.name }}</p>
         {%- if section.settings.about != blank -%}
           <div class="footer__about">{{ section.settings.about }}</div>
         {%- endif -%}
@@ -53,13 +53,13 @@
     </div>
 
     {%- if section.settings.show_wordmark -%}
-      {%- assign wordmark = section.settings.wordmark | default: shop.name -%}
+      {%- assign wordmark = section.settings.wordmark | default: settings.store_name -%}
       {%- assign wm_size = 118.0 | divided_by: wordmark.size -%}
       <p class="footer__wordmark" aria-hidden="true" style="font-size: min(13rem, {{ wm_size }}vw);">{{ wordmark }}</p>
     {%- endif -%}
 
     <div class="footer__bottom">
-      <span>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. {{ section.settings.copyright }}</span>
+      <span>&copy; {{ 'now' | date: '%Y' }} {{ settings.store_name | default: shop.name }}. {{ section.settings.copyright }}</span>
       {%- if section.settings.show_payment_icons -%}
         <div class="footer__payments">
           {%- for type in shop.enabled_payment_types -%}

@@ -228,5 +228,12 @@
     "empty": "Your wishlist is empty",
     "empty_text": "Tap the heart on any piece to save it here.",
     "title": "Wishlist"
+  },
+  "placeholders": {
+    "vendor": "Brand",
+    "product": "Product name",
+    "condition": "Like new",
+    "pick_product": "Pick a product in the editor",
+    "article": "Article title"
   }
 }

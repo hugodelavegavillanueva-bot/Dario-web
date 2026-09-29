@@ -11,11 +11,15 @@
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 64, height: 64 }}">
     {%- endif -%}
 
+    {%- assign brand_name = settings.store_name | default: shop.name -%}
     <title>
-      {{ page_title }}
-      {%- if current_tags %} &ndash; {{ current_tags | join: ', ' }}{% endif -%}
-      {%- if current_page != 1 %} &ndash; {{ 'general.page' | t: page: current_page }}{% endif -%}
-      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+      {%- if request.page_type == 'index' -%}
+        {{ brand_name }}{% if settings.store_tagline != blank %} &ndash; {{ settings.store_tagline }}{% endif %}
+      {%- else -%}
+        {{ page_title }}
+        {%- if current_tags %} &ndash; {{ current_tags | join: ', ' }}{% endif -%}
+        {%- if current_page != 1 %} &ndash; {{ 'general.page' | t: page: current_page }}{% endif %} &ndash; {{ brand_name }}
+      {%- endif -%}
     </title>
 
     {% if page_description %}

@@ -8,6 +8,24 @@
     "theme_support_url": "https://help.shopify.com"
   },
   {
+    "name": "Marca",
+    "settings": [
+      {
+        "type": "text",
+        "id": "store_name",
+        "label": "Nombre de la tienda",
+        "default": "TU MARCA",
+        "info": "Se muestra en la cabecera (si no subes logo), el pie y el título del navegador."
+      },
+      {
+        "type": "text",
+        "id": "store_tagline",
+        "label": "Frase corta (título del navegador en portada)",
+        "default": "Moda de segunda mano seleccionada"
+      }
+    ]
+  },
+  {
     "name": "Colores",
     "settings": [
       {

@@ -67,12 +67,12 @@
         <a href="{{ routes.root_url }}">
           {%- if section.settings.logo != blank -%}
             {%- assign logo_w = section.settings.logo_width -%}
-            {{ section.settings.logo | image_url: width: 600 | image_tag: class: 'logo--dark', alt: shop.name, width: logo_w, style: 'max-width: none;' }}
+            {{ section.settings.logo | image_url: width: 600 | image_tag: class: 'logo--dark', alt: settings.store_name, width: logo_w, style: 'max-width: none;' }}
             {%- if section.settings.logo_light != blank -%}
-              {{ section.settings.logo_light | image_url: width: 600 | image_tag: class: 'logo--light', alt: shop.name, width: logo_w }}
+              {{ section.settings.logo_light | image_url: width: 600 | image_tag: class: 'logo--light', alt: settings.store_name, width: logo_w }}
             {%- endif -%}
           {%- else -%}
-            <span class="site-header__logo-text">{{ shop.name }}</span>
+            <span class="site-header__logo-text">{{ settings.store_name | default: shop.name }}</span>
           {%- endif -%}
         </a>
         {%- if request.page_type == 'index' -%}</h1>{%- endif -%}
@@ -107,7 +107,7 @@
   <div class="drawer__overlay" data-drawer-close></div>
   <div class="drawer__panel" role="dialog" aria-modal="true" aria-label="{{ 'layout.header.menu' | t }}">
     <div class="drawer__header">
-      <span class="site-header__logo-text" style="font-size:1.25rem;">{{ shop.name }}</span>
+      <span class="site-header__logo-text" style="font-size:1.25rem;">{{ settings.store_name | default: shop.name }}</span>
       <button type="button" class="drawer__close" data-drawer-close aria-label="{{ 'general.close' | t }}">{% render 'icon', icon: 'close' %}</button>
     </div>
     <div class="drawer__body">

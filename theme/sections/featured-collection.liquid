@@ -1,9 +1,4 @@
-{%- liquid
-  assign collection = section.settings.collection
-  if collection == blank
-    assign collection = collections.all
-  endif
--%}
+{%- assign collection = section.settings.collection -%}
 <section class="section{% if section.settings.surface %} section--surface{% endif %}">
   <div class="page-width">
     <div class="section-header reveal">
@@ -11,7 +6,7 @@
         {%- if section.settings.eyebrow != blank -%}<span class="eyebrow eyebrow--line">{{ section.settings.eyebrow }}</span>{%- endif -%}
         <h2 class="heading-italic">{{ section.settings.heading }}</h2>
       </div>
-      {%- if section.settings.link_label != blank -%}
+      {%- if section.settings.link_label != blank and collection != blank -%}
         <a href="{{ collection.url }}" class="link-underline">{{ section.settings.link_label }} <span class="arrow">→</span></a>
       {%- endif -%}
     </div>
@@ -22,13 +17,8 @@
           {% render 'product-card', product: product, show_quick_add: section.settings.quick_add %}
         </div>
       {%- else -%}
-        {%- for i in (1..section.settings.columns) -%}
-          <div class="card">
-            <div class="card__media"><div class="card__placeholder">{{ 'apparel-1' | placeholder_svg_tag }}</div></div>
-            <p class="card__vendor">Marca</p>
-            <p class="card__title">Nombre del producto</p>
-            <div class="price">190,00 €</div>
-          </div>
+        {%- for i in (1..section.settings.limit) -%}
+          {% render 'product-card-placeholder', index: i %}
         {%- endfor -%}
       {%- endfor -%}
     </div>

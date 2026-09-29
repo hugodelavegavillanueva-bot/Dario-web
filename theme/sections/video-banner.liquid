@@ -5,7 +5,7 @@
     {%- elsif section.settings.poster != blank -%}
       {{ section.settings.poster | image_url: width: 2400 | image_tag: loading: 'lazy', sizes: '100vw' }}
     {%- else -%}
-      <div class="hero__placeholder">{{ 'lifestyle-2' | placeholder_svg_tag }}</div>
+      <div class="hero__placeholder">{{ 'hero-apparel-2' | placeholder_svg_tag }}</div>
     {%- endif -%}
   </div>
   <div class="page-width video-banner__content reveal">

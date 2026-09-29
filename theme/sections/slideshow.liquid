@@ -27,7 +27,9 @@
               {{ block.settings.image | image_url: width: 2400 | image_tag: loading: loading, sizes: '100vw', widths: '750, 1100, 1500, 1920, 2400' }}
             </picture>
           {%- else -%}
-            <div class="hero__placeholder">{{ 'lifestyle-2' | placeholder_svg_tag }}</div>
+            {%- assign n = forloop.index0 | modulo: 3 | plus: 1 -%}
+            {%- assign ph = 'hero-apparel-' | append: n -%}
+            <div class="hero__placeholder">{{ ph | placeholder_svg_tag }}</div>
           {%- endif -%}
         </div>
         <div class="page-width hero__content">

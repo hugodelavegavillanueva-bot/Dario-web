@@ -481,8 +481,8 @@ a:hover .arrow { transform: translateX(4px); }
 .hero__text { max-width: 30rem; font-size: 1rem; opacity: 0.88; margin-bottom: 2.25rem; }
 .hero__actions { display: flex; flex-wrap: wrap; gap: 1rem; }
 .hero .eyebrow { color: rgba(255,255,255,0.8); }
-.hero__placeholder { width: 100%; height: 100%; background: linear-gradient(135deg, #2a2723, #141414); }
-.hero__placeholder svg { width: 100%; height: 100%; opacity: 0.15; fill: #fff; }
+.hero__placeholder { width: 100%; height: 100%; background: #d9d2c6; }
+.hero__placeholder svg { width: 100%; height: 100%; }
 
 .hero-split { display: grid; grid-template-columns: 1fr 1fr; min-height: var(--hero-height, 90vh); }
 .hero-split__media { position: relative; overflow: hidden; }
@@ -553,7 +553,9 @@ a:hover .arrow { transform: translateX(4px); }
 .card:hover .card__img--secondary { opacity: 1; }
 .card:hover .card__media img { transform: scale(1.03); }
 .card__placeholder { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
-.card__placeholder svg { width: 70%; height: 70%; fill: var(--color-border); }
+.card__placeholder svg { width: 100%; height: 100%; }
+.placeholder-fill { display: block; width: 100%; height: 100%; }
+.card--placeholder .card__media { background: #efeae2; }
 
 .card__badges { position: absolute; top: 0.85rem; left: 0.85rem; z-index: 2; display: flex; flex-direction: column; align-items: flex-start; gap: 0.35rem; }
 .badge {

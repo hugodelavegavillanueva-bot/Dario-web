@@ -1,6 +1,10 @@
-<div class="card">
-  <div class="card__media"><div class="card__placeholder">{{ 'apparel-1' | placeholder_svg_tag }}</div></div>
-  <p class="card__vendor">Marca</p>
-  <p class="card__title">Nombre del producto</p>
-  <div class="price">190,00 €</div>
+{%- comment -%} Prenda de muestra (se ve hasta que eliges una colección). Param: index {%- endcomment -%}
+{%- assign n = index | default: 1 | modulo: 4 | plus: 1 -%}
+{%- assign ph = 'product-apparel-' | append: n -%}
+<div class="card card--placeholder">
+  <div class="card__media"><div class="card__placeholder">{{ ph | placeholder_svg_tag }}</div></div>
+  <p class="card__vendor">{{ 'placeholders.vendor' | t }}</p>
+  <p class="card__title">{{ 'placeholders.product' | t }}</p>
+  <div class="card__meta"><span>{{ 'products.product.size' | t }} M</span><span>{{ 'placeholders.condition' | t }}</span></div>
+  <div class="price">{{ 19000 | money }}</div>
 </div>

@@ -228,5 +228,12 @@
     "empty": "Aún no tienes favoritos",
     "empty_text": "Pulsa el corazón en cualquier prenda para guardarla aquí.",
     "title": "Favoritos"
+  },
+  "placeholders": {
+    "vendor": "Marca",
+    "product": "Nombre de la prenda",
+    "condition": "Como nuevo",
+    "pick_product": "Elige un producto en el editor",
+    "article": "Título del artículo"
   }
 }

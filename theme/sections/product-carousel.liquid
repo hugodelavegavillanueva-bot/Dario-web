@@ -1,4 +1,4 @@
-{%- assign collection = section.settings.collection | default: collections.all -%}
+{%- assign collection = section.settings.collection -%}
 <section class="section{% if section.settings.surface %} section--surface{% endif %}" data-carousel>
   <div class="page-width">
     <div class="section-header reveal">
@@ -7,7 +7,7 @@
         <h2 class="heading-italic">{{ section.settings.heading }}</h2>
       </div>
       <div class="carousel-nav">
-        <a href="{{ collection.url }}" class="link-underline hide-mobile">{{ 'general.view_all' | t }}</a>
+        {%- if collection != blank -%}<a href="{{ collection.url }}" class="link-underline hide-mobile">{{ 'general.view_all' | t }}</a>{%- endif -%}
         <button type="button" class="carousel-nav__btn" data-carousel-prev aria-label="{{ 'general.previous' | t }}">←</button>
         <button type="button" class="carousel-nav__btn" data-carousel-next aria-label="{{ 'general.next' | t }}">→</button>
       </div>
@@ -17,7 +17,7 @@
     {%- for product in collection.products limit: section.settings.limit -%}
       <div class="carousel__item">{% render 'product-card', product: product, show_quick_add: true %}</div>
     {%- else -%}
-      {%- for i in (1..6) -%}<div class="carousel__item">{% render 'product-card-placeholder' %}</div>{%- endfor -%}
+      {%- for i in (1..8) -%}<div class="carousel__item">{% render 'product-card-placeholder', index: i %}</div>{%- endfor -%}
     {%- endfor -%}
   </div>
   <div class="page-width"><div class="carousel-progress"><span data-carousel-progress></span></div></div>

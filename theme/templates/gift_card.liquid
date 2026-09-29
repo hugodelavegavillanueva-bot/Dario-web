@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>{{ 'gift_card.title' | t }} — {{ shop.name }}</title>
+    <title>{{ 'gift_card.title' | t }} — {{ settings.store_name | default: shop.name }}</title>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
     {% render 'css-variables' %}
     {{ 'base.css' | asset_url | stylesheet_tag }}
@@ -14,7 +14,7 @@
   <body>
     <div class="password-page">
       <div style="max-width:30rem;">
-        <p class="footer__brand-name">{{ shop.name }}</p>
+        <p class="footer__brand-name">{{ settings.store_name | default: shop.name }}</p>
         <p class="eyebrow">{{ 'gift_card.title' | t }}</p>
         <p class="h0">{{ gift_card.balance | money }}</p>
         {%- if gift_card.expired or gift_card.enabled == false -%}

@@ -11,7 +11,7 @@
         {%- if section.settings.image != blank -%}
           {{ section.settings.image | image_url: width: 1800 | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 60vw, 100vw', widths: '600, 900, 1200, 1800' }}
         {%- else -%}
-          <div class="card__placeholder">{{ 'lifestyle-1' | placeholder_svg_tag }}</div>
+          <div class="card__placeholder">{{ 'hero-apparel-2' | placeholder_svg_tag }}</div>
         {%- endif -%}
         {%- for block in section.blocks -%}
           {%- assign p = block.settings.product -%}
@@ -29,11 +29,15 @@
             <span class="look__thumb">
               {%- if p.featured_media -%}
                 {{ p.featured_media | image_url: width: 200 | image_tag: loading: 'lazy', alt: p.title }}
+              {%- else -%}
+                {%- assign n = forloop.index0 | modulo: 4 | plus: 1 -%}
+                {%- assign ph = 'product-apparel-' | append: n -%}
+                {{ ph | placeholder_svg_tag: 'placeholder-fill' }}
               {%- endif -%}
             </span>
             <span class="look__info">
-              <span class="card__vendor">{{ p.vendor | default: 'Marca' }}</span>
-              <span class="card__title" style="display:block;margin:0;">{{ p.title | default: 'Selecciona un producto' }}</span>
+              <span class="card__vendor">{%- if p != blank -%}{{ p.vendor }}{%- else -%}{{ 'placeholders.vendor' | t }}{%- endif -%}</span>
+              <span class="card__title" style="display:block;margin:0;">{%- if p != blank -%}{{ p.title }}{%- else -%}{{ 'placeholders.pick_product' | t }}{%- endif -%}</span>
               {%- if p != blank -%}{% render 'price', product: p %}{%- endif -%}
             </span>
             <span class="arrow">→</span>

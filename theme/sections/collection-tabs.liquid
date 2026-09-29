@@ -13,18 +13,20 @@
     </div>
 
     {%- for block in section.blocks -%}
-      {%- assign c = block.settings.collection | default: collections.all -%}
+      {%- assign c = block.settings.collection -%}
       <div class="tabs__panel{% if forloop.first %} is-active{% endif %}" role="tabpanel" data-tab-panel="{{ forloop.index0 }}"{% unless forloop.first %} hidden{% endunless %}>
         <div class="product-grid" style="--cols: {{ section.settings.columns }}; --cols-tablet: 3;">
           {%- for product in c.products limit: section.settings.limit -%}
             {% render 'product-card', product: product, show_quick_add: true %}
           {%- else -%}
-            {%- for i in (1..4) -%}{% render 'product-card-placeholder' %}{%- endfor -%}
+            {%- for i in (1..section.settings.limit) -%}{% render 'product-card-placeholder', index: i %}{%- endfor -%}
           {%- endfor -%}
         </div>
+        {%- if c != blank -%}
         <div class="text-center" style="margin-top:3rem;">
           <a href="{{ c.url }}" class="button button--outline">{{ 'general.view_all' | t }} · {{ block.settings.label | default: c.title }}</a>
         </div>
+        {%- endif -%}
       </div>
     {%- endfor -%}
   </div>
