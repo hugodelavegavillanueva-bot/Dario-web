@@ -23,7 +23,8 @@
       "unique_piece_label": "Pieza única",
       "cart_type": "drawer",
       "cart_note_text": "Envío asegurado y embalaje premium en todos los pedidos.",
-      "store_name": "TU MARCA"
+      "store_name": "TU MARCA",
+      "show_demo_images": true
     },
     "Noir": {
       "color_background": "#0F0F0F",

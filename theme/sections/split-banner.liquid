@@ -6,6 +6,8 @@
           <div class="split-banner__media">
             {%- if block.settings.image != blank -%}
               {{ block.settings.image | image_url: width: 1600 | image_tag: loading: 'lazy', sizes: '(min-width: 750px) 50vw, 100vw', widths: '600, 900, 1200, 1600' }}
+{%- elsif settings.show_demo_images and block.settings.demo != 'none' -%}
+{% render 'demo-image', name: block.settings.demo %}
             {%- else -%}
               {%- assign n = forloop.index0 | modulo: 3 | plus: 1 -%}
               {%- assign ph = 'hero-apparel-' | append: n -%}
@@ -29,17 +31,130 @@
   "class": "section-split-banner",
   "max_blocks": 3,
   "settings": [
-    { "type": "checkbox", "id": "flush", "label": "Ancho completo sin márgenes", "default": true }
+    {
+      "type": "checkbox",
+      "id": "flush",
+      "label": "Ancho completo sin márgenes",
+      "default": true
+    }
   ],
   "blocks": [
     {
-      "type": "panel", "name": "Panel",
+      "type": "panel",
+      "name": "Panel",
       "settings": [
-        { "type": "image_picker", "id": "image", "label": "Imagen" },
-        { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Colección" },
-        { "type": "inline_richtext", "id": "heading", "label": "Título", "default": "Hombre" },
-        { "type": "text", "id": "button_label", "label": "Texto del enlace", "default": "Descubrir" },
-        { "type": "url", "id": "link", "label": "Enlace" }
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagen"
+        },
+        {
+          "type": "select",
+          "id": "demo",
+          "label": "Foto de muestra (si no subes imagen)",
+          "options": [
+            {
+              "value": "none",
+              "label": "Ninguna"
+            },
+            {
+              "value": "demo-plumifero-bosque",
+              "label": "Plumífero – bosque"
+            },
+            {
+              "value": "demo-streetwear-capucha",
+              "label": "Streetwear – capucha"
+            },
+            {
+              "value": "demo-plumifero-ciudad",
+              "label": "Plumífero – ciudad"
+            },
+            {
+              "value": "demo-parka-nieve",
+              "label": "Parka – nieve"
+            },
+            {
+              "value": "demo-plumifero-mujer",
+              "label": "Plumífero – mujer"
+            },
+            {
+              "value": "demo-plumifero-brillo",
+              "label": "Plumífero brillante"
+            },
+            {
+              "value": "demo-sudadera-grafica",
+              "label": "Sudadera gráfica"
+            },
+            {
+              "value": "demo-blazer",
+              "label": "Blazer (sastrería)"
+            },
+            {
+              "value": "demo-look-cuero",
+              "label": "Look cuero"
+            },
+            {
+              "value": "demo-perchero-plumifero",
+              "label": "Plumífero en perchero"
+            },
+            {
+              "value": "demo-boutique",
+              "label": "Boutique"
+            },
+            {
+              "value": "demo-perchero-color",
+              "label": "Perchero de colores"
+            },
+            {
+              "value": "demo-montana",
+              "label": "Montaña / outdoor"
+            },
+            {
+              "value": "demo-montana-espalda",
+              "label": "Outdoor de espaldas"
+            },
+            {
+              "value": "demo-sudadera-negra",
+              "label": "Sudadera negra"
+            },
+            {
+              "value": "demo-chandal",
+              "label": "Chándal"
+            },
+            {
+              "value": "demo-abrigo-borrego",
+              "label": "Abrigo borrego"
+            },
+            {
+              "value": "demo-camiseta",
+              "label": "Camiseta streetwear"
+            }
+          ],
+          "default": "demo-parka-nieve"
+        },
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Antetítulo",
+          "default": "Colección"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "label": "Título",
+          "default": "Hombre"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Texto del enlace",
+          "default": "Descubrir"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Enlace"
+        }
       ]
     }
   ],
@@ -47,8 +162,20 @@
     {
       "name": "Banner dividido",
       "blocks": [
-        { "type": "panel", "settings": { "eyebrow": "Colección", "heading": "Hombre" } },
-        { "type": "panel", "settings": { "eyebrow": "Colección", "heading": "Mujer" } }
+        {
+          "type": "panel",
+          "settings": {
+            "eyebrow": "Colección",
+            "heading": "Hombre"
+          }
+        },
+        {
+          "type": "panel",
+          "settings": {
+            "eyebrow": "Colección",
+            "heading": "Mujer"
+          }
+        }
       ]
     }
   ]

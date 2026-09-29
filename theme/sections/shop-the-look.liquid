@@ -10,7 +10,9 @@
       <div class="look__media reveal">
         {%- if section.settings.image != blank -%}
           {{ section.settings.image | image_url: width: 1800 | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 60vw, 100vw', widths: '600, 900, 1200, 1800' }}
-        {%- else -%}
+        {%- elsif settings.show_demo_images and section.settings.demo != 'none' -%}
+{% render 'demo-image', name: section.settings.demo %}
+{%- else -%}
           <div class="card__placeholder">{{ 'hero-apparel-2' | placeholder_svg_tag }}</div>
         {%- endif -%}
         {%- for block in section.blocks -%}
@@ -57,23 +59,166 @@
   "class": "section-shop-the-look",
   "max_blocks": 6,
   "settings": [
-    { "type": "image_picker", "id": "image", "label": "Imagen del look" },
-    { "type": "checkbox", "id": "reverse", "label": "Imagen a la derecha", "default": false },
-    { "type": "checkbox", "id": "surface", "label": "Fondo secundario", "default": false },
-    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Lookbook" },
-    { "type": "inline_richtext", "id": "heading", "label": "Título", "default": "Compra el <em>look</em>" },
-    { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Combinamos piezas de distintas casas para crear conjuntos con carácter. Pulsa sobre cada punto para ver la prenda.</p>" },
-    { "type": "text", "id": "button_label", "label": "Botón" },
-    { "type": "url", "id": "button_link", "label": "Enlace" }
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imagen del look"
+    },
+    {
+      "type": "select",
+      "id": "demo",
+      "label": "Foto de muestra (si no subes imagen)",
+      "options": [
+        {
+          "value": "none",
+          "label": "Ninguna"
+        },
+        {
+          "value": "demo-plumifero-bosque",
+          "label": "Plumífero – bosque"
+        },
+        {
+          "value": "demo-streetwear-capucha",
+          "label": "Streetwear – capucha"
+        },
+        {
+          "value": "demo-plumifero-ciudad",
+          "label": "Plumífero – ciudad"
+        },
+        {
+          "value": "demo-parka-nieve",
+          "label": "Parka – nieve"
+        },
+        {
+          "value": "demo-plumifero-mujer",
+          "label": "Plumífero – mujer"
+        },
+        {
+          "value": "demo-plumifero-brillo",
+          "label": "Plumífero brillante"
+        },
+        {
+          "value": "demo-sudadera-grafica",
+          "label": "Sudadera gráfica"
+        },
+        {
+          "value": "demo-blazer",
+          "label": "Blazer (sastrería)"
+        },
+        {
+          "value": "demo-look-cuero",
+          "label": "Look cuero"
+        },
+        {
+          "value": "demo-perchero-plumifero",
+          "label": "Plumífero en perchero"
+        },
+        {
+          "value": "demo-boutique",
+          "label": "Boutique"
+        },
+        {
+          "value": "demo-perchero-color",
+          "label": "Perchero de colores"
+        },
+        {
+          "value": "demo-montana",
+          "label": "Montaña / outdoor"
+        },
+        {
+          "value": "demo-montana-espalda",
+          "label": "Outdoor de espaldas"
+        },
+        {
+          "value": "demo-sudadera-negra",
+          "label": "Sudadera negra"
+        },
+        {
+          "value": "demo-chandal",
+          "label": "Chándal"
+        },
+        {
+          "value": "demo-abrigo-borrego",
+          "label": "Abrigo borrego"
+        },
+        {
+          "value": "demo-camiseta",
+          "label": "Camiseta streetwear"
+        }
+      ],
+      "default": "demo-look-cuero"
+    },
+    {
+      "type": "checkbox",
+      "id": "reverse",
+      "label": "Imagen a la derecha",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "surface",
+      "label": "Fondo secundario",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Antetítulo",
+      "default": "Lookbook"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Título",
+      "default": "Compra el <em>look</em>"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texto",
+      "default": "<p>Combinamos piezas de distintas casas para crear conjuntos con carácter. Pulsa sobre cada punto para ver la prenda.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Botón"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Enlace"
+    }
   ],
   "blocks": [
     {
       "type": "hotspot",
       "name": "Punto de producto",
       "settings": [
-        { "type": "product", "id": "product", "label": "Producto" },
-        { "type": "range", "id": "x", "label": "Posición horizontal", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
-        { "type": "range", "id": "y", "label": "Posición vertical", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 }
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Producto"
+        },
+        {
+          "type": "range",
+          "id": "x",
+          "label": "Posición horizontal",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 50
+        },
+        {
+          "type": "range",
+          "id": "y",
+          "label": "Posición vertical",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 50
+        }
       ]
     }
   ],
@@ -81,9 +226,27 @@
     {
       "name": "Compra el look",
       "blocks": [
-        { "type": "hotspot", "settings": { "x": 45, "y": 30 } },
-        { "type": "hotspot", "settings": { "x": 55, "y": 60 } },
-        { "type": "hotspot", "settings": { "x": 40, "y": 85 } }
+        {
+          "type": "hotspot",
+          "settings": {
+            "x": 45,
+            "y": 30
+          }
+        },
+        {
+          "type": "hotspot",
+          "settings": {
+            "x": 55,
+            "y": 60
+          }
+        },
+        {
+          "type": "hotspot",
+          "settings": {
+            "x": 40,
+            "y": 85
+          }
+        }
       ]
     }
   ]

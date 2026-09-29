@@ -26,6 +26,8 @@
               {%- endif -%}
               {{ block.settings.image | image_url: width: 2400 | image_tag: loading: loading, sizes: '100vw', widths: '750, 1100, 1500, 1920, 2400' }}
             </picture>
+{%- elsif settings.show_demo_images and block.settings.demo != 'none' -%}
+{% render 'demo-image', name: block.settings.demo, eager: true %}
           {%- else -%}
             {%- assign n = forloop.index0 | modulo: 3 | plus: 1 -%}
             {%- assign ph = 'hero-apparel-' | append: n -%}
@@ -72,37 +74,205 @@
   "max_blocks": 6,
   "settings": [
     {
-      "type": "select", "id": "height", "label": "Altura",
+      "type": "select",
+      "id": "height",
+      "label": "Altura",
       "options": [
-        { "value": "full", "label": "Pantalla completa" },
-        { "value": "large", "label": "Grande" },
-        { "value": "medium", "label": "Media" }
+        {
+          "value": "full",
+          "label": "Pantalla completa"
+        },
+        {
+          "value": "large",
+          "label": "Grande"
+        },
+        {
+          "value": "medium",
+          "label": "Media"
+        }
       ],
       "default": "full"
     },
-    { "type": "checkbox", "id": "autoplay", "label": "Pasar automáticamente", "default": true },
-    { "type": "range", "id": "speed", "label": "Cambiar cada", "min": 3, "max": 12, "step": 1, "unit": "s", "default": 6 }
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Pasar automáticamente",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "label": "Cambiar cada",
+      "min": 3,
+      "max": 12,
+      "step": 1,
+      "unit": "s",
+      "default": 6
+    }
   ],
   "blocks": [
     {
       "type": "slide",
       "name": "Diapositiva",
       "settings": [
-        { "type": "image_picker", "id": "image", "label": "Imagen" },
-        { "type": "image_picker", "id": "image_mobile", "label": "Imagen móvil (opcional)" },
-        { "type": "range", "id": "overlay", "label": "Oscurecer", "min": 0, "max": 80, "step": 5, "unit": "%", "default": 40 },
         {
-          "type": "select", "id": "align", "label": "Alineación",
-          "options": [{ "value": "left", "label": "Abajo izquierda" }, { "value": "center", "label": "Centrado" }],
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagen"
+        },
+        {
+          "type": "select",
+          "id": "demo",
+          "label": "Foto de muestra (si no subes imagen)",
+          "options": [
+            {
+              "value": "none",
+              "label": "Ninguna"
+            },
+            {
+              "value": "demo-plumifero-bosque",
+              "label": "Plumífero – bosque"
+            },
+            {
+              "value": "demo-streetwear-capucha",
+              "label": "Streetwear – capucha"
+            },
+            {
+              "value": "demo-plumifero-ciudad",
+              "label": "Plumífero – ciudad"
+            },
+            {
+              "value": "demo-parka-nieve",
+              "label": "Parka – nieve"
+            },
+            {
+              "value": "demo-plumifero-mujer",
+              "label": "Plumífero – mujer"
+            },
+            {
+              "value": "demo-plumifero-brillo",
+              "label": "Plumífero brillante"
+            },
+            {
+              "value": "demo-sudadera-grafica",
+              "label": "Sudadera gráfica"
+            },
+            {
+              "value": "demo-blazer",
+              "label": "Blazer (sastrería)"
+            },
+            {
+              "value": "demo-look-cuero",
+              "label": "Look cuero"
+            },
+            {
+              "value": "demo-perchero-plumifero",
+              "label": "Plumífero en perchero"
+            },
+            {
+              "value": "demo-boutique",
+              "label": "Boutique"
+            },
+            {
+              "value": "demo-perchero-color",
+              "label": "Perchero de colores"
+            },
+            {
+              "value": "demo-montana",
+              "label": "Montaña / outdoor"
+            },
+            {
+              "value": "demo-montana-espalda",
+              "label": "Outdoor de espaldas"
+            },
+            {
+              "value": "demo-sudadera-negra",
+              "label": "Sudadera negra"
+            },
+            {
+              "value": "demo-chandal",
+              "label": "Chándal"
+            },
+            {
+              "value": "demo-abrigo-borrego",
+              "label": "Abrigo borrego"
+            },
+            {
+              "value": "demo-camiseta",
+              "label": "Camiseta streetwear"
+            }
+          ],
+          "default": "demo-plumifero-bosque"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_mobile",
+          "label": "Imagen móvil (opcional)"
+        },
+        {
+          "type": "range",
+          "id": "overlay",
+          "label": "Oscurecer",
+          "min": 0,
+          "max": 80,
+          "step": 5,
+          "unit": "%",
+          "default": 40
+        },
+        {
+          "type": "select",
+          "id": "align",
+          "label": "Alineación",
+          "options": [
+            {
+              "value": "left",
+              "label": "Abajo izquierda"
+            },
+            {
+              "value": "center",
+              "label": "Centrado"
+            }
+          ],
           "default": "left"
         },
-        { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Nueva temporada" },
-        { "type": "inline_richtext", "id": "heading", "label": "Título", "default": "Lujo con <em>segunda</em> vida" },
-        { "type": "richtext", "id": "text", "label": "Texto" },
-        { "type": "text", "id": "button_label", "label": "Botón 1", "default": "Comprar ahora" },
-        { "type": "url", "id": "button_link", "label": "Enlace 1" },
-        { "type": "text", "id": "button_label_2", "label": "Botón 2" },
-        { "type": "url", "id": "button_link_2", "label": "Enlace 2" }
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Antetítulo",
+          "default": "Nueva temporada"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "label": "Título",
+          "default": "Lujo con <em>segunda</em> vida"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Texto"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Botón 1",
+          "default": "Comprar ahora"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Enlace 1"
+        },
+        {
+          "type": "text",
+          "id": "button_label_2",
+          "label": "Botón 2"
+        },
+        {
+          "type": "url",
+          "id": "button_link_2",
+          "label": "Enlace 2"
+        }
       ]
     }
   ],
@@ -110,8 +280,20 @@
     {
       "name": "Slideshow / Portada",
       "blocks": [
-        { "type": "slide", "settings": { "eyebrow": "Archivo curado", "heading": "Lujo con <em>segunda</em> vida" } },
-        { "type": "slide", "settings": { "eyebrow": "Streetwear", "heading": "Lo más <em>buscado</em>, verificado" } }
+        {
+          "type": "slide",
+          "settings": {
+            "eyebrow": "Archivo curado",
+            "heading": "Lujo con <em>segunda</em> vida"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "eyebrow": "Streetwear",
+            "heading": "Lo más <em>buscado</em>, verificado"
+          }
+        }
       ]
     }
   ]

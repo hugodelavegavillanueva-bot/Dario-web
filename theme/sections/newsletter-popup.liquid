@@ -1,9 +1,19 @@
 {%- if section.settings.enabled -%}
+  {%- liquid
+    assign has_img = false
+    if section.settings.image != blank
+      assign has_img = true
+    elsif settings.show_demo_images and section.settings.demo != 'none'
+      assign has_img = true
+    endif
+  -%}
   <div class="popup" id="NewsletterPopup" data-popup data-delay="{{ section.settings.delay }}" data-days="{{ section.settings.days }}" data-test="{{ request.design_mode }}" aria-hidden="true" role="dialog" aria-modal="true" aria-label="{{ section.settings.heading | strip_html | escape }}">
     <div class="popup__overlay" data-popup-close></div>
-    <div class="popup__panel{% if section.settings.image == blank %} popup__panel--noimg{% endif %}">
+    <div class="popup__panel{% unless has_img %} popup__panel--noimg{% endunless %}">
       {%- if section.settings.image != blank -%}
         <div class="popup__media">{{ section.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', sizes: '420px' }}</div>
+      {%- elsif has_img -%}
+        <div class="popup__media">{% render 'demo-image', name: section.settings.demo %}</div>
       {%- endif -%}
       <div class="popup__content">
         <button type="button" class="drawer__close popup__close" data-popup-close aria-label="{{ 'general.close' | t }}">{% render 'icon', icon: 'close' %}</button>
@@ -35,14 +45,145 @@
   "name": "Popup de newsletter",
   "class": "section-popup",
   "settings": [
-    { "type": "checkbox", "id": "enabled", "label": "Activar", "default": true },
-    { "type": "range", "id": "delay", "label": "Mostrar tras", "min": 2, "max": 60, "step": 1, "unit": "s", "default": 8 },
-    { "type": "range", "id": "days", "label": "No volver a mostrar durante", "min": 1, "max": 60, "step": 1, "unit": "d", "default": 14 },
-    { "type": "image_picker", "id": "image", "label": "Imagen" },
-    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Acceso anticipado" },
-    { "type": "inline_richtext", "id": "heading", "label": "Título", "default": "−10% en tu <em>primera pieza</em>" },
-    { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Únete a la lista y recibe las nuevas llegadas 24h antes que nadie.</p>" },
-    { "type": "text", "id": "code", "label": "Código de descuento a mostrar", "info": "Créalo antes en Descuentos. Déjalo vacío si no ofreces código." }
+    {
+      "type": "checkbox",
+      "id": "enabled",
+      "label": "Activar",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "demo",
+      "label": "Foto de muestra (si no subes imagen)",
+      "options": [
+        {
+          "value": "none",
+          "label": "Ninguna"
+        },
+        {
+          "value": "demo-plumifero-bosque",
+          "label": "Plumífero – bosque"
+        },
+        {
+          "value": "demo-streetwear-capucha",
+          "label": "Streetwear – capucha"
+        },
+        {
+          "value": "demo-plumifero-ciudad",
+          "label": "Plumífero – ciudad"
+        },
+        {
+          "value": "demo-parka-nieve",
+          "label": "Parka – nieve"
+        },
+        {
+          "value": "demo-plumifero-mujer",
+          "label": "Plumífero – mujer"
+        },
+        {
+          "value": "demo-plumifero-brillo",
+          "label": "Plumífero brillante"
+        },
+        {
+          "value": "demo-sudadera-grafica",
+          "label": "Sudadera gráfica"
+        },
+        {
+          "value": "demo-blazer",
+          "label": "Blazer (sastrería)"
+        },
+        {
+          "value": "demo-look-cuero",
+          "label": "Look cuero"
+        },
+        {
+          "value": "demo-perchero-plumifero",
+          "label": "Plumífero en perchero"
+        },
+        {
+          "value": "demo-boutique",
+          "label": "Boutique"
+        },
+        {
+          "value": "demo-perchero-color",
+          "label": "Perchero de colores"
+        },
+        {
+          "value": "demo-montana",
+          "label": "Montaña / outdoor"
+        },
+        {
+          "value": "demo-montana-espalda",
+          "label": "Outdoor de espaldas"
+        },
+        {
+          "value": "demo-sudadera-negra",
+          "label": "Sudadera negra"
+        },
+        {
+          "value": "demo-chandal",
+          "label": "Chándal"
+        },
+        {
+          "value": "demo-abrigo-borrego",
+          "label": "Abrigo borrego"
+        },
+        {
+          "value": "demo-camiseta",
+          "label": "Camiseta streetwear"
+        }
+      ],
+      "default": "demo-abrigo-borrego"
+    },
+    {
+      "type": "range",
+      "id": "delay",
+      "label": "Mostrar tras",
+      "min": 2,
+      "max": 60,
+      "step": 1,
+      "unit": "s",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "days",
+      "label": "No volver a mostrar durante",
+      "min": 1,
+      "max": 60,
+      "step": 1,
+      "unit": "d",
+      "default": 14
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imagen"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Antetítulo",
+      "default": "Acceso anticipado"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Título",
+      "default": "−10% en tu <em>primera pieza</em>"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texto",
+      "default": "<p>Únete a la lista y recibe las nuevas llegadas 24h antes que nadie.</p>"
+    },
+    {
+      "type": "text",
+      "id": "code",
+      "label": "Código de descuento a mostrar",
+      "info": "Créalo antes en Descuentos. Déjalo vacío si no ofreces código."
+    }
   ]
 }
 {% endschema %}

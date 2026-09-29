@@ -16,6 +16,8 @@
           <div class="collection-tile__media">
             {%- if img != blank -%}
               {{ img | image_url: width: 1200 | image_tag: loading: 'lazy', sizes: '(min-width: 750px) 33vw, 50vw', widths: '400, 600, 800, 1200' }}
+{%- elsif settings.show_demo_images and block.settings.demo != 'none' -%}
+{% render 'demo-image', name: block.settings.demo %}
             {%- else -%}
               {%- assign n = forloop.index0 | modulo: 4 | plus: 1 -%}
               {%- assign ph = 'collection-apparel-' | append: n -%}
@@ -38,29 +40,164 @@
   "class": "section-collection-list",
   "max_blocks": 12,
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Explorar" },
-    { "type": "inline_richtext", "id": "heading", "label": "Título", "default": "Comprar por <em>categoría</em>" },
-    { "type": "range", "id": "columns", "label": "Columnas", "min": 2, "max": 5, "step": 1, "default": 3 },
     {
-      "type": "select", "id": "ratio", "label": "Proporción",
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Antetítulo",
+      "default": "Explorar"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Título",
+      "default": "Comprar por <em>categoría</em>"
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "Columnas",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "select",
+      "id": "ratio",
+      "label": "Proporción",
       "options": [
-        { "value": "portrait", "label": "Retrato" },
-        { "value": "square", "label": "Cuadrada" },
-        { "value": "landscape", "label": "Horizontal" }
+        {
+          "value": "portrait",
+          "label": "Retrato"
+        },
+        {
+          "value": "square",
+          "label": "Cuadrada"
+        },
+        {
+          "value": "landscape",
+          "label": "Horizontal"
+        }
       ],
       "default": "portrait"
     },
-    { "type": "checkbox", "id": "center", "label": "Centrar título", "default": false },
-    { "type": "checkbox", "id": "surface", "label": "Fondo secundario", "default": false }
+    {
+      "type": "checkbox",
+      "id": "center",
+      "label": "Centrar título",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "surface",
+      "label": "Fondo secundario",
+      "default": false
+    }
   ],
   "blocks": [
     {
       "type": "collection",
       "name": "Colección",
       "settings": [
-        { "type": "collection", "id": "collection", "label": "Colección" },
-        { "type": "text", "id": "title", "label": "Título personalizado" },
-        { "type": "image_picker", "id": "image", "label": "Imagen personalizada" }
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Colección"
+        },
+        {
+          "type": "select",
+          "id": "demo",
+          "label": "Foto de muestra (si no subes imagen)",
+          "options": [
+            {
+              "value": "none",
+              "label": "Ninguna"
+            },
+            {
+              "value": "demo-plumifero-bosque",
+              "label": "Plumífero – bosque"
+            },
+            {
+              "value": "demo-streetwear-capucha",
+              "label": "Streetwear – capucha"
+            },
+            {
+              "value": "demo-plumifero-ciudad",
+              "label": "Plumífero – ciudad"
+            },
+            {
+              "value": "demo-parka-nieve",
+              "label": "Parka – nieve"
+            },
+            {
+              "value": "demo-plumifero-mujer",
+              "label": "Plumífero – mujer"
+            },
+            {
+              "value": "demo-plumifero-brillo",
+              "label": "Plumífero brillante"
+            },
+            {
+              "value": "demo-sudadera-grafica",
+              "label": "Sudadera gráfica"
+            },
+            {
+              "value": "demo-blazer",
+              "label": "Blazer (sastrería)"
+            },
+            {
+              "value": "demo-look-cuero",
+              "label": "Look cuero"
+            },
+            {
+              "value": "demo-perchero-plumifero",
+              "label": "Plumífero en perchero"
+            },
+            {
+              "value": "demo-boutique",
+              "label": "Boutique"
+            },
+            {
+              "value": "demo-perchero-color",
+              "label": "Perchero de colores"
+            },
+            {
+              "value": "demo-montana",
+              "label": "Montaña / outdoor"
+            },
+            {
+              "value": "demo-montana-espalda",
+              "label": "Outdoor de espaldas"
+            },
+            {
+              "value": "demo-sudadera-negra",
+              "label": "Sudadera negra"
+            },
+            {
+              "value": "demo-chandal",
+              "label": "Chándal"
+            },
+            {
+              "value": "demo-abrigo-borrego",
+              "label": "Abrigo borrego"
+            },
+            {
+              "value": "demo-camiseta",
+              "label": "Camiseta streetwear"
+            }
+          ],
+          "default": "none"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título personalizado"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagen personalizada"
+        }
       ]
     }
   ],
@@ -68,9 +205,24 @@
     {
       "name": "Lista de colecciones",
       "blocks": [
-        { "type": "collection", "settings": { "title": "Abrigos & Plumíferos" } },
-        { "type": "collection", "settings": { "title": "Streetwear" } },
-        { "type": "collection", "settings": { "title": "Sastrería" } }
+        {
+          "type": "collection",
+          "settings": {
+            "title": "Abrigos & Plumíferos"
+          }
+        },
+        {
+          "type": "collection",
+          "settings": {
+            "title": "Streetwear"
+          }
+        },
+        {
+          "type": "collection",
+          "settings": {
+            "title": "Sastrería"
+          }
+        }
       ]
     }
   ]

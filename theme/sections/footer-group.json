@@ -44,7 +44,8 @@
       "settings": {
         "enabled": true,
         "delay": 8,
-        "days": 14
+        "days": 14,
+        "demo": "demo-abrigo-borrego"
       }
     },
     "cookies": {

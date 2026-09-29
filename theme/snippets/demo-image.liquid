@@ -1,0 +1,10 @@
+{%- comment -%}
+  Foto de demostración incluida en el tema (assets/demo-*.jpg).
+  Se muestra solo si no se ha subido una imagen propia y está activado
+  "Mostrar fotos de demostración" en Configuración del tema → Marca.
+  Params: name (sin extensión), eager (bool), class
+{%- endcomment -%}
+{%- if name != blank and name != 'none' -%}
+  {%- assign file = name | append: '.jpg' -%}
+  <img src="{{ file | asset_url }}" alt="" class="demo-img {{ class }}" loading="{% if eager %}eager{% else %}lazy{% endif %}" width="1400" height="1750">
+{%- endif -%}

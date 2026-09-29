@@ -1,10 +1,42 @@
-{%- comment -%} Prenda de muestra (se ve hasta que eliges una colección). Param: index {%- endcomment -%}
-{%- assign n = index | default: 1 | modulo: 4 | plus: 1 -%}
-{%- assign ph = 'product-apparel-' | append: n -%}
+{%- comment -%}
+  Prenda de ejemplo: se ve hasta que eliges una colección en la sección.
+  Con "Mostrar fotos de demostración" activado usa fotos reales de ejemplo.
+  Param: index
+{%- endcomment -%}
+{%- liquid
+  assign i = index | default: 1 | minus: 1 | modulo: 8
+  assign photos = 'demo-parka-nieve,demo-sudadera-negra,demo-plumifero-brillo,demo-sudadera-grafica,demo-abrigo-borrego,demo-streetwear-capucha,demo-plumifero-mujer,demo-camiseta' | split: ','
+  assign vendors = 'Moncler,Corteiz,The North Face,Stone Island,Max Mara,Trapstar,Moncler,Corteiz' | split: ','
+  assign titles = 'Parka con capucha de pelo,Sudadera Alcatraz,Plumífero Nuptse 1996,Sudadera gráfica oversize,Abrigo teddy,Plumífero con capucha,Chaqueta acolchada,Camiseta logo bordado' | split: ','
+  assign prices = '69000,22000,18500,16000,59000,21000,54000,9500' | split: ','
+  assign compares = '129000,0,32000,0,99000,0,0,0' | split: ','
+  assign sizes = 'M,L,S,M,38,L,40,M' | split: ','
+  assign conditions = 'Como nuevo,Nuevo con etiqueta,Excelente,Como nuevo,Excelente,Nuevo con etiqueta,Como nuevo,Muy bueno' | split: ','
+  assign price = prices[i] | plus: 0
+  assign compare = compares[i] | plus: 0
+  assign n = i | modulo: 4 | plus: 1
+  assign ph = 'product-apparel-' | append: n
+-%}
 <div class="card card--placeholder">
-  <div class="card__media"><div class="card__placeholder">{{ ph | placeholder_svg_tag }}</div></div>
-  <p class="card__vendor">{{ 'placeholders.vendor' | t }}</p>
-  <p class="card__title">{{ 'placeholders.product' | t }}</p>
-  <div class="card__meta"><span>{{ 'products.product.size' | t }} M</span><span>{{ 'placeholders.condition' | t }}</span></div>
-  <div class="price">{{ 19000 | money }}</div>
+  <div class="card__media">
+    {%- if settings.show_demo_images -%}
+      {% render 'demo-image', name: photos[i] %}
+    {%- else -%}
+      <div class="card__placeholder">{{ ph | placeholder_svg_tag }}</div>
+    {%- endif -%}
+    <div class="card__badges">
+      {%- if compare > price -%}
+        {%- assign saving = compare | minus: price | times: 100.0 | divided_by: compare | round -%}
+        <span class="badge">−{{ saving }}%</span>
+      {%- endif -%}
+      <span class="badge">{{ settings.unique_piece_label | default: 'Pieza única' }}</span>
+    </div>
+  </div>
+  <p class="card__vendor">{%- if settings.show_demo_images -%}{{ vendors[i] }}{%- else -%}{{ 'placeholders.vendor' | t }}{%- endif -%}</p>
+  <p class="card__title">{%- if settings.show_demo_images -%}{{ titles[i] }}{%- else -%}{{ 'placeholders.product' | t }}{%- endif -%}</p>
+  <div class="card__meta"><span>{{ 'products.product.size' | t }} {{ sizes[i] }}</span><span>{{ conditions[i] }}</span></div>
+  <div class="price{% if compare > price %} price--sale{% endif %}">
+    <span class="price__current">{{ price | money }}</span>
+    {%- if compare > price -%}<s class="price__compare">{{ compare | money }}</s>{%- endif -%}
+  </div>
 </div>

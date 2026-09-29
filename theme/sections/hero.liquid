@@ -14,7 +14,9 @@
     <div class="hero-split__media">
       {%- if section.settings.image != blank -%}
         {{ section.settings.image | image_url: width: 2000 | image_tag: loading: 'eager', fetchpriority: 'high', sizes: '(min-width: 750px) 50vw, 100vw', widths: '600, 900, 1200, 1600, 2000' }}
-      {%- else -%}
+      {%- elsif settings.show_demo_images and section.settings.demo != 'none' -%}
+{% render 'demo-image', name: section.settings.demo, eager: true %}
+{%- else -%}
         <div class="hero__placeholder">{{ 'hero-apparel-3' | placeholder_svg_tag }}</div>
       {%- endif -%}
     </div>
@@ -42,7 +44,9 @@
         {%- else -%}
           {{ section.settings.image | image_url: width: 2400 | image_tag: loading: 'eager', fetchpriority: 'high', sizes: '100vw', widths: '750, 1100, 1500, 1920, 2400' }}
         {%- endif -%}
-      {%- else -%}
+      {%- elsif settings.show_demo_images and section.settings.demo != 'none' -%}
+{% render 'demo-image', name: section.settings.demo, eager: true %}
+{%- else -%}
         <div class="hero__placeholder">{{ 'hero-apparel-2' | placeholder_svg_tag }}</div>
       {%- endif -%}
     </div>
@@ -65,42 +69,213 @@
   "class": "section-hero",
   "settings": [
     {
-      "type": "select", "id": "layout", "label": "Diseño",
+      "type": "select",
+      "id": "layout",
+      "label": "Diseño",
       "options": [
-        { "value": "full", "label": "Imagen a pantalla completa" },
-        { "value": "split", "label": "Imagen + texto (dividido)" }
-      ],
-      "default": "full"
-    },
-    { "type": "image_picker", "id": "image", "label": "Imagen" },
-    { "type": "image_picker", "id": "image_mobile", "label": "Imagen para móvil (opcional)" },
-    { "type": "video", "id": "video", "label": "Vídeo (opcional, sustituye a la imagen)" },
-    {
-      "type": "select", "id": "height", "label": "Altura",
-      "options": [
-        { "value": "full", "label": "Pantalla completa" },
-        { "value": "large", "label": "Grande" },
-        { "value": "medium", "label": "Media" }
+        {
+          "value": "full",
+          "label": "Imagen a pantalla completa"
+        },
+        {
+          "value": "split",
+          "label": "Imagen + texto (dividido)"
+        }
       ],
       "default": "full"
     },
     {
-      "type": "select", "id": "align", "label": "Alineación del texto",
+      "type": "select",
+      "id": "demo",
+      "label": "Foto de muestra (si no subes imagen)",
       "options": [
-        { "value": "left", "label": "Abajo a la izquierda" },
-        { "value": "center", "label": "Centrado" }
+        {
+          "value": "none",
+          "label": "Ninguna"
+        },
+        {
+          "value": "demo-plumifero-bosque",
+          "label": "Plumífero – bosque"
+        },
+        {
+          "value": "demo-streetwear-capucha",
+          "label": "Streetwear – capucha"
+        },
+        {
+          "value": "demo-plumifero-ciudad",
+          "label": "Plumífero – ciudad"
+        },
+        {
+          "value": "demo-parka-nieve",
+          "label": "Parka – nieve"
+        },
+        {
+          "value": "demo-plumifero-mujer",
+          "label": "Plumífero – mujer"
+        },
+        {
+          "value": "demo-plumifero-brillo",
+          "label": "Plumífero brillante"
+        },
+        {
+          "value": "demo-sudadera-grafica",
+          "label": "Sudadera gráfica"
+        },
+        {
+          "value": "demo-blazer",
+          "label": "Blazer (sastrería)"
+        },
+        {
+          "value": "demo-look-cuero",
+          "label": "Look cuero"
+        },
+        {
+          "value": "demo-perchero-plumifero",
+          "label": "Plumífero en perchero"
+        },
+        {
+          "value": "demo-boutique",
+          "label": "Boutique"
+        },
+        {
+          "value": "demo-perchero-color",
+          "label": "Perchero de colores"
+        },
+        {
+          "value": "demo-montana",
+          "label": "Montaña / outdoor"
+        },
+        {
+          "value": "demo-montana-espalda",
+          "label": "Outdoor de espaldas"
+        },
+        {
+          "value": "demo-sudadera-negra",
+          "label": "Sudadera negra"
+        },
+        {
+          "value": "demo-chandal",
+          "label": "Chándal"
+        },
+        {
+          "value": "demo-abrigo-borrego",
+          "label": "Abrigo borrego"
+        },
+        {
+          "value": "demo-camiseta",
+          "label": "Camiseta streetwear"
+        }
+      ],
+      "default": "demo-plumifero-bosque"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imagen"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Imagen para móvil (opcional)"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Vídeo (opcional, sustituye a la imagen)"
+    },
+    {
+      "type": "select",
+      "id": "height",
+      "label": "Altura",
+      "options": [
+        {
+          "value": "full",
+          "label": "Pantalla completa"
+        },
+        {
+          "value": "large",
+          "label": "Grande"
+        },
+        {
+          "value": "medium",
+          "label": "Media"
+        }
+      ],
+      "default": "full"
+    },
+    {
+      "type": "select",
+      "id": "align",
+      "label": "Alineación del texto",
+      "options": [
+        {
+          "value": "left",
+          "label": "Abajo a la izquierda"
+        },
+        {
+          "value": "center",
+          "label": "Centrado"
+        }
       ],
       "default": "left"
     },
-    { "type": "range", "id": "overlay", "label": "Oscurecer imagen", "min": 0, "max": 80, "step": 5, "unit": "%", "default": 45 },
-    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Archivo curado · Segunda mano" },
-    { "type": "inline_richtext", "id": "heading", "label": "Título", "info": "Usa cursiva para resaltar palabras.", "default": "Lujo con <em>segunda</em> vida" },
-    { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Piezas seleccionadas de las casas más deseadas — de Moncler a Corteiz — verificadas y en estado casi nuevo.</p>" },
-    { "type": "text", "id": "button_label", "label": "Botón 1", "default": "Descubrir la colección" },
-    { "type": "url", "id": "button_link", "label": "Enlace botón 1", "default": "/collections/all" },
-    { "type": "text", "id": "button_label_2", "label": "Botón 2", "default": "Marcas" },
-    { "type": "url", "id": "button_link_2", "label": "Enlace botón 2" }
+    {
+      "type": "range",
+      "id": "overlay",
+      "label": "Oscurecer imagen",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "default": 45
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Antetítulo",
+      "default": "Archivo curado · Segunda mano"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Título",
+      "info": "Usa cursiva para resaltar palabras.",
+      "default": "Lujo con <em>segunda</em> vida"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texto",
+      "default": "<p>Piezas seleccionadas de las casas más deseadas — de Moncler a Corteiz — verificadas y en estado casi nuevo.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Botón 1",
+      "default": "Descubrir la colección"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Enlace botón 1",
+      "default": "/collections/all"
+    },
+    {
+      "type": "text",
+      "id": "button_label_2",
+      "label": "Botón 2",
+      "default": "Marcas"
+    },
+    {
+      "type": "url",
+      "id": "button_link_2",
+      "label": "Enlace botón 2"
+    }
   ],
-  "presets": [{ "name": "Hero / Portada" }]
+  "presets": [
+    {
+      "name": "Hero / Portada"
+    }
+  ]
 }
 {% endschema %}

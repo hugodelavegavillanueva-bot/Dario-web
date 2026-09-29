@@ -11,7 +11,8 @@
         "button_label": "Ver la colección",
         "button_link": "shopify://collections/all",
         "button_label_2": "",
-        "button_link_2": ""
+        "button_link_2": "",
+        "demo": "demo-abrigo-borrego"
       }
     },
     "stats": {
@@ -78,7 +79,8 @@
         "heading": "Verificado a <em>mano</em>, pieza a pieza",
         "text": "<p>Revisamos etiquetas, costuras, herrajes, tejidos y códigos de autenticidad. Fotografiamos la pieza exacta que recibirás y describimos cualquier detalle de uso. Solo publicamos lo que nosotros mismos compraríamos.</p>",
         "button_label": "Guía de autenticidad",
-        "button_link": ""
+        "button_link": "",
+        "demo": "demo-perchero-color"
       }
     },
     "values": {

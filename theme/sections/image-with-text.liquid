@@ -4,7 +4,9 @@
       <div class="editorial__media reveal">
         {%- if section.settings.image != blank -%}
           {{ section.settings.image | image_url: width: 1600 | image_tag: loading: 'lazy', sizes: '(min-width: 750px) 50vw, 100vw', widths: '600, 900, 1200, 1600' }}
-        {%- else -%}
+        {%- elsif settings.show_demo_images and section.settings.demo != 'none' -%}
+{% render 'demo-image', name: section.settings.demo %}
+{%- else -%}
           <div class="card__placeholder">{{ 'detailed-apparel-1' | placeholder_svg_tag }}</div>
         {%- endif -%}
       </div>
@@ -25,15 +27,141 @@
   "name": "Imagen con texto",
   "class": "section-image-with-text",
   "settings": [
-    { "type": "image_picker", "id": "image", "label": "Imagen" },
-    { "type": "checkbox", "id": "reverse", "label": "Imagen a la derecha", "default": false },
-    { "type": "checkbox", "id": "surface", "label": "Fondo secundario", "default": false },
-    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "El proceso" },
-    { "type": "inline_richtext", "id": "heading", "label": "Título", "default": "Verificado a <em>mano</em>, pieza a pieza" },
-    { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Cada prenda pasa por una revisión de más de 20 puntos: etiquetas, costuras, tejidos, herrajes y códigos de autenticidad. Solo publicamos lo que nosotros mismos compraríamos.</p>" },
-    { "type": "text", "id": "button_label", "label": "Botón", "default": "Cómo trabajamos" },
-    { "type": "url", "id": "button_link", "label": "Enlace" }
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imagen"
+    },
+    {
+      "type": "select",
+      "id": "demo",
+      "label": "Foto de muestra (si no subes imagen)",
+      "options": [
+        {
+          "value": "none",
+          "label": "Ninguna"
+        },
+        {
+          "value": "demo-plumifero-bosque",
+          "label": "Plumífero – bosque"
+        },
+        {
+          "value": "demo-streetwear-capucha",
+          "label": "Streetwear – capucha"
+        },
+        {
+          "value": "demo-plumifero-ciudad",
+          "label": "Plumífero – ciudad"
+        },
+        {
+          "value": "demo-parka-nieve",
+          "label": "Parka – nieve"
+        },
+        {
+          "value": "demo-plumifero-mujer",
+          "label": "Plumífero – mujer"
+        },
+        {
+          "value": "demo-plumifero-brillo",
+          "label": "Plumífero brillante"
+        },
+        {
+          "value": "demo-sudadera-grafica",
+          "label": "Sudadera gráfica"
+        },
+        {
+          "value": "demo-blazer",
+          "label": "Blazer (sastrería)"
+        },
+        {
+          "value": "demo-look-cuero",
+          "label": "Look cuero"
+        },
+        {
+          "value": "demo-perchero-plumifero",
+          "label": "Plumífero en perchero"
+        },
+        {
+          "value": "demo-boutique",
+          "label": "Boutique"
+        },
+        {
+          "value": "demo-perchero-color",
+          "label": "Perchero de colores"
+        },
+        {
+          "value": "demo-montana",
+          "label": "Montaña / outdoor"
+        },
+        {
+          "value": "demo-montana-espalda",
+          "label": "Outdoor de espaldas"
+        },
+        {
+          "value": "demo-sudadera-negra",
+          "label": "Sudadera negra"
+        },
+        {
+          "value": "demo-chandal",
+          "label": "Chándal"
+        },
+        {
+          "value": "demo-abrigo-borrego",
+          "label": "Abrigo borrego"
+        },
+        {
+          "value": "demo-camiseta",
+          "label": "Camiseta streetwear"
+        }
+      ],
+      "default": "demo-perchero-plumifero"
+    },
+    {
+      "type": "checkbox",
+      "id": "reverse",
+      "label": "Imagen a la derecha",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "surface",
+      "label": "Fondo secundario",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Antetítulo",
+      "default": "El proceso"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Título",
+      "default": "Verificado a <em>mano</em>, pieza a pieza"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texto",
+      "default": "<p>Cada prenda pasa por una revisión de más de 20 puntos: etiquetas, costuras, tejidos, herrajes y códigos de autenticidad. Solo publicamos lo que nosotros mismos compraríamos.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Botón",
+      "default": "Cómo trabajamos"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Enlace"
+    }
   ],
-  "presets": [{ "name": "Imagen con texto" }]
+  "presets": [
+    {
+      "name": "Imagen con texto"
+    }
+  ]
 }
 {% endschema %}

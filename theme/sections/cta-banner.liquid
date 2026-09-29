@@ -2,6 +2,8 @@
   <div class="cta-banner__media">
     {%- if section.settings.image != blank -%}
       {{ section.settings.image | image_url: width: 2400 | image_tag: loading: 'lazy', sizes: '100vw', widths: '750, 1200, 1800, 2400' }}
+    {%- elsif settings.show_demo_images and section.settings.demo != 'none' -%}
+{% render 'demo-image', name: section.settings.demo %}
     {%- endif -%}
   </div>
   <div class="page-width">
@@ -21,13 +23,129 @@
   "name": "Banner de llamada",
   "class": "section-cta-banner",
   "settings": [
-    { "type": "image_picker", "id": "image", "label": "Imagen de fondo" },
-    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Vende con nosotros" },
-    { "type": "inline_richtext", "id": "heading", "label": "Título", "default": "¿Tu armario tiene <em>joyas</em> olvidadas?" },
-    { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Compramos y vendemos en consignación prendas de marcas premium en excelente estado. Te respondemos en menos de 48h.</p>" },
-    { "type": "text", "id": "button_label", "label": "Botón", "default": "Enviar mis prendas" },
-    { "type": "url", "id": "button_link", "label": "Enlace" }
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imagen de fondo"
+    },
+    {
+      "type": "select",
+      "id": "demo",
+      "label": "Foto de muestra (si no subes imagen)",
+      "options": [
+        {
+          "value": "none",
+          "label": "Ninguna"
+        },
+        {
+          "value": "demo-plumifero-bosque",
+          "label": "Plumífero – bosque"
+        },
+        {
+          "value": "demo-streetwear-capucha",
+          "label": "Streetwear – capucha"
+        },
+        {
+          "value": "demo-plumifero-ciudad",
+          "label": "Plumífero – ciudad"
+        },
+        {
+          "value": "demo-parka-nieve",
+          "label": "Parka – nieve"
+        },
+        {
+          "value": "demo-plumifero-mujer",
+          "label": "Plumífero – mujer"
+        },
+        {
+          "value": "demo-plumifero-brillo",
+          "label": "Plumífero brillante"
+        },
+        {
+          "value": "demo-sudadera-grafica",
+          "label": "Sudadera gráfica"
+        },
+        {
+          "value": "demo-blazer",
+          "label": "Blazer (sastrería)"
+        },
+        {
+          "value": "demo-look-cuero",
+          "label": "Look cuero"
+        },
+        {
+          "value": "demo-perchero-plumifero",
+          "label": "Plumífero en perchero"
+        },
+        {
+          "value": "demo-boutique",
+          "label": "Boutique"
+        },
+        {
+          "value": "demo-perchero-color",
+          "label": "Perchero de colores"
+        },
+        {
+          "value": "demo-montana",
+          "label": "Montaña / outdoor"
+        },
+        {
+          "value": "demo-montana-espalda",
+          "label": "Outdoor de espaldas"
+        },
+        {
+          "value": "demo-sudadera-negra",
+          "label": "Sudadera negra"
+        },
+        {
+          "value": "demo-chandal",
+          "label": "Chándal"
+        },
+        {
+          "value": "demo-abrigo-borrego",
+          "label": "Abrigo borrego"
+        },
+        {
+          "value": "demo-camiseta",
+          "label": "Camiseta streetwear"
+        }
+      ],
+      "default": "demo-boutique"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Antetítulo",
+      "default": "Vende con nosotros"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Título",
+      "default": "¿Tu armario tiene <em>joyas</em> olvidadas?"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texto",
+      "default": "<p>Compramos y vendemos en consignación prendas de marcas premium en excelente estado. Te respondemos en menos de 48h.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Botón",
+      "default": "Enviar mis prendas"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Enlace"
+    }
   ],
-  "presets": [{ "name": "Banner de llamada" }]
+  "presets": [
+    {
+      "name": "Banner de llamada"
+    }
+  ]
 }
 {% endschema %}
