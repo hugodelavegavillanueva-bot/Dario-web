@@ -1,0 +1,100 @@
+{%- comment -%}
+  Tarjeta de producto.
+  Params: product, lazy (bool, default true), show_quick_add (bool)
+{%- endcomment -%}
+{%- liquid
+  assign first_image = product.featured_media
+  assign second_image = product.media[1]
+  assign size_text = ''
+  if settings.card_show_size
+    capture size_text
+      render 'product-size', product: product
+    endcapture
+    assign size_text = size_text | strip
+  endif
+  assign condition_text = ''
+  if settings.card_show_condition
+    capture condition_text
+      render 'product-condition', product: product, style: 'text'
+    endcapture
+    assign condition_text = condition_text | strip
+  endif
+  assign loading = 'lazy'
+  if lazy == false
+    assign loading = 'eager'
+  endif
+  assign is_unique = false
+  if product.variants.size == 1
+    assign v = product.variants.first
+    if v.inventory_management != blank and v.inventory_quantity == 1
+      assign is_unique = true
+    endif
+  endif
+-%}
+<div class="card{% unless product.available %} is-sold-out{% endunless %}">
+  <div class="card__media">
+    {%- if first_image -%}
+      {{
+        first_image
+        | image_url: width: 900
+        | image_tag:
+          loading: loading,
+          sizes: '(min-width: 1100px) 25vw, (min-width: 750px) 33vw, 50vw',
+          widths: '300, 450, 600, 750, 900',
+          alt: first_image.alt,
+          class: 'card__img--primary'
+      }}
+      {%- if settings.card_show_secondary_image and second_image -%}
+        {{
+          second_image
+          | image_url: width: 900
+          | image_tag:
+            loading: 'lazy',
+            sizes: '(min-width: 1100px) 25vw, (min-width: 750px) 33vw, 50vw',
+            widths: '300, 450, 600, 750, 900',
+            alt: second_image.alt,
+            class: 'card__img--secondary'
+        }}
+      {%- endif -%}
+    {%- else -%}
+      <div class="card__placeholder">{{ 'apparel-1' | placeholder_svg_tag }}</div>
+    {%- endif -%}
+
+    <div class="card__badges">
+      {%- if product.available == false -%}
+        <span class="badge badge--dark">{{ 'products.product.sold' | t }}</span>
+      {%- else -%}
+        {%- if product.compare_at_price > product.price -%}
+          {%- assign saving = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round -%}
+          <span class="badge">−{{ saving }}%</span>
+        {%- endif -%}
+        {%- if is_unique and settings.unique_piece_label != blank -%}
+          <span class="badge">{{ settings.unique_piece_label }}</span>
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+
+    {%- if show_quick_add and product.available and product.has_only_default_variant -%}
+      <div class="card__quick">
+        {%- form 'product', product, data-ajax-cart: '' -%}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+          <button type="submit" class="button"><span>{{ 'products.product.add_to_cart' | t }}</span></button>
+        {%- endform -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+  <div class="card__info">
+    {%- if settings.card_show_vendor and product.vendor != blank -%}
+      <p class="card__vendor">{{ product.vendor }}</p>
+    {%- endif -%}
+    <h3 class="card__title"><a href="{{ product.url }}">{{ product.title | escape }}</a></h3>
+    {%- if size_text != blank or condition_text != blank -%}
+      <div class="card__meta">
+        {%- if size_text != blank -%}<span>{{ 'products.product.size' | t }} {{ size_text }}</span>{%- endif -%}
+        {%- if condition_text != blank -%}<span>{{ condition_text }}</span>{%- endif -%}
+      </div>
+    {%- endif -%}
+    {% render 'price', product: product %}
+  </div>
+</div>

@@ -1,0 +1,64 @@
+<div class="page-width" style="padding-bottom: clamp(4rem, 8vw, 7rem);">
+  <div class="page-header">
+    <span class="eyebrow">{{ 'search.title' | t }}</span>
+    <form action="{{ routes.search_url }}" method="get" role="search" class="search-drawer__form" style="max-width:48rem;margin:0 auto;">
+      <input type="hidden" name="type" value="product">
+      <input type="search" name="q" value="{{ search.terms | escape }}" class="search-drawer__input" placeholder="{{ 'layout.header.search_placeholder' | t }}" aria-label="{{ 'layout.header.search' | t }}">
+      <button type="submit" class="icon-button" aria-label="{{ 'layout.header.search' | t }}">{% render 'icon', icon: 'search' %}</button>
+    </form>
+    {%- if search.performed -%}
+      <p class="muted">{{ 'search.results_count' | t: count: search.results_count, terms: search.terms }}</p>
+    {%- endif -%}
+  </div>
+
+  {%- if search.performed -%}
+    {%- paginate search.results by 24 -%}
+      {%- if search.filters.size > 0 -%}
+        <div class="toolbar">
+          <div class="toolbar__left">
+            <button type="button" class="icon-button" data-drawer-open="FilterDrawer">{% render 'icon', icon: 'filter' %} {{ 'collections.filter' | t }}</button>
+          </div>
+        </div>
+      {%- endif -%}
+      {%- if search.results_count > 0 -%}
+        <div class="product-grid" style="--cols: 4;">
+          {%- for item in search.results -%}
+            {%- if item.object_type == 'product' -%}
+              {% render 'product-card', product: item, show_quick_add: true %}
+            {%- else -%}
+              <a href="{{ item.url }}" class="card">
+                <div class="card__media" style="display:flex;align-items:center;justify-content:center;padding:1.5rem;text-align:center;">
+                  <span class="h4">{{ item.title }}</span>
+                </div>
+              </a>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+        {% render 'pagination', paginate: paginate %}
+      {%- else -%}
+        <div class="empty-state">
+          <p>{{ 'search.no_results' | t: terms: search.terms }}</p>
+          <a href="{{ routes.all_products_collection_url }}" class="button">{{ 'cart.continue' | t }}</a>
+        </div>
+      {%- endif -%}
+    {%- endpaginate -%}
+
+    {%- if search.filters.size > 0 -%}
+      <div class="drawer drawer--left" id="FilterDrawer" aria-hidden="true">
+        <div class="drawer__overlay" data-drawer-close></div>
+        <div class="drawer__panel" role="dialog" aria-modal="true">
+          <div class="drawer__header">
+            <h2 class="drawer__title">{{ 'collections.filter' | t }}</h2>
+            <button type="button" class="drawer__close" data-drawer-close aria-label="{{ 'general.close' | t }}">{% render 'icon', icon: 'close' %}</button>
+          </div>
+          <div class="drawer__body">{% render 'facets', results: search, terms: search.terms %}</div>
+          <div class="drawer__footer"><button type="submit" form="FilterForm" class="button button--full">{{ 'collections.view_results' | t }}</button></div>
+        </div>
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+</div>
+
+{% schema %}
+{ "name": "Resultados de búsqueda" }
+{% endschema %}

@@ -1,0 +1,33 @@
+<section class="cta-banner">
+  <div class="cta-banner__media">
+    {%- if section.settings.image != blank -%}
+      {{ section.settings.image | image_url: width: 2400 | image_tag: loading: 'lazy', sizes: '100vw', widths: '750, 1200, 1800, 2400' }}
+    {%- endif -%}
+  </div>
+  <div class="page-width">
+    <div class="cta-banner__content reveal">
+      {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      <h2 class="h1">{{ section.settings.heading }}</h2>
+      {%- if section.settings.text != blank -%}<div class="cta-banner__text">{{ section.settings.text }}</div>{%- endif -%}
+      {%- if section.settings.button_label != blank -%}
+        <a href="{{ section.settings.button_link }}" class="button button--light">{{ section.settings.button_label }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Banner de llamada",
+  "class": "section-cta-banner",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Imagen de fondo" },
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Vende con nosotros" },
+    { "type": "inline_richtext", "id": "heading", "label": "Título", "default": "¿Tu armario tiene <em>joyas</em> olvidadas?" },
+    { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Compramos y vendemos en consignación prendas de marcas premium en excelente estado. Te respondemos en menos de 48h.</p>" },
+    { "type": "text", "id": "button_label", "label": "Botón", "default": "Enviar mis prendas" },
+    { "type": "url", "id": "button_link", "label": "Enlace" }
+  ],
+  "presets": [{ "name": "Banner de llamada" }]
+}
+{% endschema %}

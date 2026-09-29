@@ -1,0 +1,26 @@
+{
+  "type": "header",
+  "name": "Grupo de cabecera",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "blocks": {
+        "a1": { "type": "announcement", "settings": { "text": "Piezas únicas verificadas · Autenticidad garantizada", "link": "" } },
+        "a2": { "type": "announcement", "settings": { "text": "Envío asegurado gratuito a partir de 150 €", "link": "" } },
+        "a3": { "type": "announcement", "settings": { "text": "Nuevas llegadas cada semana", "link": "shopify://collections/all" } }
+      },
+      "block_order": ["a1", "a2", "a3"],
+      "settings": { "speed": 5 }
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+        "menu": "main-menu",
+        "transparent_on_home": true,
+        "logo_width": 140,
+        "mega_caption": "Nuevas llegadas"
+      }
+    }
+  },
+  "order": ["announcement-bar", "header"]
+}

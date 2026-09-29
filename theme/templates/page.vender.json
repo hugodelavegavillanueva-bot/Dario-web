@@ -1,0 +1,28 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "layout": "split", "height": "large",
+        "eyebrow": "Vende con nosotros",
+        "heading": "Dale una <em>segunda vida</em> a tu armario",
+        "text": "<p>Nos encargamos de todo: valoración, fotografía profesional, autenticación, venta y envío. Tú solo cobras.</p>",
+        "button_label": "Solicitar valoración", "button_link": "shopify://pages/contact",
+        "button_label_2": "", "button_link_2": ""
+      }
+    },
+    "steps": {
+      "type": "values",
+      "blocks": {
+        "s1": { "type": "value", "settings": { "title": "Envíanos fotos", "text": "<p>Mándanos fotos de la prenda y su etiqueta a través del formulario.</p>" } },
+        "s2": { "type": "value", "settings": { "title": "Valoramos", "text": "<p>En menos de 48h te enviamos una propuesta de precio justa.</p>" } },
+        "s3": { "type": "value", "settings": { "title": "Publicamos", "text": "<p>Autenticamos, fotografiamos y publicamos tu prenda.</p>" } },
+        "s4": { "type": "value", "settings": { "title": "Cobras", "text": "<p>Cuando se vende, recibes tu pago por transferencia.</p>" } }
+      },
+      "block_order": ["s1", "s2", "s3", "s4"],
+      "settings": { "style": "default", "eyebrow": "Cómo funciona", "heading": "Cuatro pasos, <em>cero complicaciones</em>", "show_numbers": true }
+    },
+    "form": { "type": "contact-form", "settings": { "eyebrow": "Valoración gratuita", "heading": "Cuéntanos qué tienes" } }
+  },
+  "order": ["hero", "steps", "form"]
+}

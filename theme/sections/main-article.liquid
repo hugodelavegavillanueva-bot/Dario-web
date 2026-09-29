@@ -1,0 +1,15 @@
+<article class="page-width page-width--narrow" style="padding-bottom: clamp(4rem, 8vw, 7rem);">
+  <div class="page-header">
+    <span class="eyebrow">{{ article.published_at | date: format: 'date' }}</span>
+    <h1>{{ article.title | escape }}</h1>
+  </div>
+  {%- if article.image -%}
+    <div class="article__hero">{{ article.image | image_url: width: 1800 | image_tag: loading: 'eager', sizes: '(min-width: 820px) 820px, 100vw', widths: '600, 900, 1200, 1800' }}</div>
+  {%- endif -%}
+  <div class="rte">{{ article.content }}</div>
+  <p style="margin-top:3rem;"><a href="{{ blog.url }}" class="link-underline">← {{ blog.title }}</a></p>
+</article>
+
+{% schema %}
+{ "name": "Artículo" }
+{% endschema %}

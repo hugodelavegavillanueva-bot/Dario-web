@@ -1,0 +1,26 @@
+<div class="page-width page-width--medium" style="padding: clamp(3rem, 6vw, 5rem) clamp(1rem, 4vw, 3.5rem);">
+  <p><a href="{{ routes.account_url }}" class="link-underline">← {{ 'customer.account.title' | t }}</a></p>
+  <h1>{{ 'customer.order.title' | t: name: order.name }}</h1>
+  <p class="muted">{{ order.created_at | date: format: 'date' }}{% if order.cancelled %} · {{ 'customer.order.cancelled' | t }}{% endif %}</p>
+  <table class="customer-table" style="margin:2rem 0;">
+    <thead><tr><th>{{ 'customer.order.product' | t }}</th><th>{{ 'customer.order.quantity' | t }}</th><th>{{ 'customer.order.total' | t }}</th></tr></thead>
+    <tbody>
+      {%- for line in order.line_items -%}
+        <tr>
+          <td>{{ line.vendor }} — {{ line.title | link_to: line.product.url }}</td>
+          <td>{{ line.quantity }}</td>
+          <td>{{ line.final_line_price | money }}</td>
+        </tr>
+      {%- endfor -%}
+    </tbody>
+    <tfoot>
+      <tr><td colspan="2">{{ 'cart.subtotal' | t }}</td><td>{{ order.line_items_subtotal_price | money }}</td></tr>
+      {%- for shipping in order.shipping_methods -%}<tr><td colspan="2">{{ shipping.title }}</td><td>{{ shipping.price | money }}</td></tr>{%- endfor -%}
+      <tr><td colspan="2"><strong>{{ 'customer.order.total' | t }}</strong></td><td><strong>{{ order.total_price | money_with_currency }}</strong></td></tr>
+    </tfoot>
+  </table>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;">
+    <div><h2 class="h4">{{ 'customer.order.billing' | t }}</h2>{{ order.billing_address | format_address }}</div>
+    <div><h2 class="h4">{{ 'customer.order.shipping' | t }}</h2>{{ order.shipping_address | format_address }}</div>
+  </div>
+</div>

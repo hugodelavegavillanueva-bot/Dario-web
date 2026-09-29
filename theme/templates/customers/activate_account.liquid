@@ -1,0 +1,11 @@
+<div class="page-width">
+  <div class="customer">
+    <h1>{{ 'customer.activate.title' | t }}</h1>
+    {%- form 'activate_customer_password' -%}
+      {{ form.errors | default_errors }}
+      <div class="field"><label class="field__label" for="ActivatePassword">{{ 'customer.password' | t }}</label><input class="field__input" type="password" id="ActivatePassword" name="customer[password]" autocomplete="new-password"></div>
+      <div class="field"><label class="field__label" for="ActivateConfirm">{{ 'customer.password_confirm' | t }}</label><input class="field__input" type="password" id="ActivateConfirm" name="customer[password_confirmation]" autocomplete="new-password"></div>
+      <button class="button button--full">{{ 'customer.activate.submit' | t }}</button>
+    {%- endform -%}
+  </div>
+</div>

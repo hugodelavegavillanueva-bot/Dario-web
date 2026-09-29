@@ -1,0 +1,44 @@
+<section class="section{% if section.settings.style == 'dark' %} section--dark{% elsif section.settings.style == 'surface' %} section--surface{% endif %}">
+  <div class="page-width">
+    <div class="newsletter reveal">
+      {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      <h2 class="heading-italic">{{ section.settings.heading }}</h2>
+      {%- if section.settings.text != blank -%}<div class="muted">{{ section.settings.text }}</div>{%- endif -%}
+      {%- assign form_id = 'Newsletter-' | append: section.id -%}
+      {%- form 'customer', id: form_id -%}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        {%- if form.posted_successfully? -%}
+          <p style="margin-top:2rem;">{{ 'newsletter.success' | t }}</p>
+        {%- else -%}
+          <div class="newsletter__form">
+            <input type="email" name="contact[email]" class="newsletter__input" placeholder="{{ 'newsletter.placeholder' | t }}" required aria-label="{{ 'newsletter.placeholder' | t }}">
+            <button type="submit" class="newsletter__submit">{{ 'newsletter.button' | t }} →</button>
+          </div>
+          {%- if form.errors -%}<p class="form-message--error" style="margin-top:1rem;">{{ form.errors | default_errors }}</p>{%- endif -%}
+        {%- endif -%}
+      {%- endform -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "class": "section-newsletter",
+  "settings": [
+    {
+      "type": "select", "id": "style", "label": "Estilo",
+      "options": [
+        { "value": "default", "label": "Claro" },
+        { "value": "surface", "label": "Secundario" },
+        { "value": "dark", "label": "Oscuro" }
+      ],
+      "default": "default"
+    },
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Acceso anticipado" },
+    { "type": "inline_richtext", "id": "heading", "label": "Título", "default": "Sé el primero en <em>verlo</em>" },
+    { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Las piezas únicas vuelan. Suscríbete y recibe las nuevas llegadas 24h antes que nadie.</p>" }
+  ],
+  "presets": [{ "name": "Newsletter" }]
+}
+{% endschema %}

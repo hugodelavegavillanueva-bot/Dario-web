@@ -1,0 +1,186 @@
+{
+  "accessibility": {
+    "skip_to_content": "Skip to content"
+  },
+  "general": {
+    "home": "Home",
+    "close": "Close",
+    "cancel": "Cancel",
+    "error": "Something went wrong. Please try again.",
+    "next": "Next",
+    "previous": "Previous",
+    "page": "Page {{ page }}",
+    "pagination": "Pagination",
+    "view_all": "View all"
+  },
+  "layout": {
+    "header": {
+      "menu": "Menu",
+      "search": "Search",
+      "search_placeholder": "Search brands, pieces…",
+      "account": "Account",
+      "cart": "Bag",
+      "popular": "Popular searches"
+    }
+  },
+  "newsletter": {
+    "placeholder": "Your email",
+    "button": "Subscribe",
+    "success": "Thank you. We'll let you know about new arrivals."
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to bag",
+      "added": "Added",
+      "sold_out": "Sold",
+      "sold": "Sold",
+      "from": "From",
+      "size": "Size",
+      "condition": "Condition",
+      "color": "Colour",
+      "reference": "Reference",
+      "retail_price": "Original retail price",
+      "retail_price_hint": "The crossed-out price is the original retail price.",
+      "taxes_included": "Taxes included",
+      "taxes_excluded": "Taxes excluded",
+      "shipping_calculated": "Shipping calculated at checkout",
+      "size_guide": "Size guide",
+      "unique_note": "One of a kind — only one piece available",
+      "unique_piece": "One of a kind",
+      "trust_authentic": "Authenticity guaranteed",
+      "trust_shipping": "Insured shipping",
+      "trust_returns": "14-day returns",
+      "more_from": "More from {{ vendor }}"
+    }
+  },
+  "collections": {
+    "items": {
+      "one": "{{ count }} piece",
+      "other": "{{ count }} pieces"
+    },
+    "filter": "Filter",
+    "sort_by": "Sort by",
+    "clear_all": "Clear filters",
+    "view_results": "View results",
+    "from": "From",
+    "to": "To",
+    "empty": "No pieces available",
+    "empty_text": "Try other filters or come back soon: we add new pieces every week.",
+    "no_brands": "No brands yet. They will appear automatically as you add products."
+  },
+  "cart": {
+    "title": "Your bag",
+    "checkout": "Checkout",
+    "continue": "Continue shopping",
+    "empty": "Your bag is empty",
+    "empty_text": "One-of-a-kind pieces go fast. Discover the latest arrivals.",
+    "note": "Order note",
+    "quantity": "Quantity",
+    "remove": "Remove",
+    "subtotal": "Subtotal",
+    "taxes_note": "Taxes included. Shipping calculated at checkout.",
+    "view_cart": "View bag"
+  },
+  "search": {
+    "title": "Search",
+    "no_results": "No results for “{{ terms }}”.",
+    "view_all": "View all results for “{{ terms }}”",
+    "results_count": {
+      "one": "{{ count }} result for “{{ terms }}”",
+      "other": "{{ count }} results for “{{ terms }}”"
+    }
+  },
+  "contact": {
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "message": "Message",
+    "send": "Send",
+    "subject": "Subject",
+    "subject_order": "Order enquiry",
+    "subject_sell": "I want to sell my pieces",
+    "subject_product": "Question about a piece",
+    "subject_other": "Other",
+    "success": "Thanks for reaching out. We'll get back to you shortly."
+  },
+  "customer": {
+    "email": "Email",
+    "password": "Password",
+    "password_confirm": "Confirm password",
+    "first_name": "First name",
+    "last_name": "Last name",
+    "login": {
+      "title": "Log in",
+      "submit": "Sign in",
+      "forgot": "Forgot your password?",
+      "guest": "Continue as guest"
+    },
+    "register": {
+      "title": "Create account",
+      "submit": "Create account"
+    },
+    "recover": {
+      "text": "We will send you an email to reset your password.",
+      "submit": "Submit",
+      "success": "We've sent you an email with a link to reset your password."
+    },
+    "activate": {
+      "title": "Activate account",
+      "submit": "Activate"
+    },
+    "reset": {
+      "title": "New password",
+      "submit": "Save"
+    },
+    "account": {
+      "title": "My account",
+      "hello": "Hello, {{ name }}",
+      "logout": "Log out",
+      "orders": "Orders",
+      "no_orders": "You haven't placed any orders yet.",
+      "details": "My details",
+      "addresses": "Addresses"
+    },
+    "order": {
+      "title": "Order {{ name }}",
+      "number": "Order",
+      "date": "Date",
+      "status": "Status",
+      "total": "Total",
+      "product": "Product",
+      "quantity": "Quantity",
+      "billing": "Billing address",
+      "shipping": "Shipping address",
+      "cancelled": "Cancelled"
+    },
+    "addresses": {
+      "default": "Default",
+      "delete": "Delete",
+      "delete_confirm": "Are you sure you want to delete this address?",
+      "add": "Add address",
+      "address1": "Address",
+      "address2": "Apartment, suite… (optional)",
+      "city": "City",
+      "zip": "Postal code",
+      "country": "Country",
+      "set_default": "Set as default address"
+    }
+  },
+  "password": {
+    "enter": "Enter using password",
+    "password": "Password",
+    "enter_button": "Enter"
+  },
+  "gift_card": {
+    "title": "Gift card",
+    "code": "Code",
+    "expired": "This gift card has expired or is disabled.",
+    "shop": "Go to store"
+  },
+  "templates": {
+    "404": {
+      "subtext": "The page you are looking for doesn't exist or has been moved.",
+      "title_html": "Page not <em>found</em>"
+    }
+  }
+}

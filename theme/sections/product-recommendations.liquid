@@ -1,0 +1,29 @@
+<section class="section" data-recommendations-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ section.settings.limit }}">
+  {%- if recommendations.performed and recommendations.products_count > 0 -%}
+    <div class="page-width">
+      <div class="section-header">
+        <div>
+          {%- if section.settings.eyebrow != blank -%}<span class="eyebrow eyebrow--line">{{ section.settings.eyebrow }}</span>{%- endif -%}
+          <h2 class="heading-italic">{{ section.settings.heading }}</h2>
+        </div>
+      </div>
+      <div class="product-grid" style="--cols: {{ section.settings.limit | at_most: 4 }};">
+        {%- for product in recommendations.products -%}
+          {% render 'product-card', product: product, show_quick_add: true %}
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Productos relacionados",
+  "class": "section-recommendations",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Seleccionado para ti" },
+    { "type": "inline_richtext", "id": "heading", "label": "Título", "default": "También te <em>gustará</em>" },
+    { "type": "range", "id": "limit", "label": "Número de productos", "min": 2, "max": 8, "step": 1, "default": 4 }
+  ]
+}
+{% endschema %}

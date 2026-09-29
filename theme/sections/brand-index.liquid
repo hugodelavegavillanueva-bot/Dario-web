@@ -1,0 +1,65 @@
+{%- comment -%}
+  Índice A–Z de todas las marcas (proveedores) de la tienda.
+  Se genera automáticamente a partir del campo "Proveedor" de cada producto.
+{%- endcomment -%}
+{%- assign letters = 'A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z' | split: ',' -%}
+{%- assign vendors = shop.vendors | sort_natural -%}
+<section class="section">
+  <div class="page-width">
+    <div class="section-header section-header--center reveal">
+      {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      <h2 class="heading-italic">{{ section.settings.heading }}</h2>
+      {%- if section.settings.text != blank -%}<div class="section-header__intro">{{ section.settings.text }}</div>{%- endif -%}
+    </div>
+
+    {%- if vendors.size > 0 -%}
+      <div class="brand-index">
+        {%- for letter in letters -%}
+          {%- capture group -%}
+            {%- for vendor in vendors -%}
+              {%- assign first = vendor | slice: 0 | upcase -%}
+              {%- if first == letter -%}
+                <li><a href="{{ vendor | url_for_vendor }}">{{ vendor }}</a></li>
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endcapture -%}
+          {%- if group != blank -%}
+            <div class="brand-index__group">
+              <p class="brand-index__letter">{{ letter }}</p>
+              <ul>{{ group }}</ul>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+        {%- capture group -%}
+          {%- for vendor in vendors -%}
+            {%- assign first = vendor | slice: 0 | upcase -%}
+            {%- unless letters contains first -%}
+              <li><a href="{{ vendor | url_for_vendor }}">{{ vendor }}</a></li>
+            {%- endunless -%}
+          {%- endfor -%}
+        {%- endcapture -%}
+        {%- if group != blank -%}
+          <div class="brand-index__group">
+            <p class="brand-index__letter">#</p>
+            <ul>{{ group }}</ul>
+          </div>
+        {%- endif -%}
+      </div>
+    {%- else -%}
+      <p class="text-center muted">{{ 'collections.no_brands' | t }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Índice de marcas A–Z",
+  "class": "section-brand-index",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Directorio" },
+    { "type": "inline_richtext", "id": "heading", "label": "Título", "default": "Todas las <em>marcas</em>" },
+    { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Del lujo italiano al streetwear londinense. Se actualiza automáticamente con cada nueva marca.</p>" }
+  ],
+  "presets": [{ "name": "Índice de marcas A–Z" }]
+}
+{% endschema %}

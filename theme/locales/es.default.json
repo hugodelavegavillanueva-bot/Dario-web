@@ -1,0 +1,186 @@
+{
+  "accessibility": {
+    "skip_to_content": "Saltar al contenido"
+  },
+  "general": {
+    "home": "Inicio",
+    "close": "Cerrar",
+    "cancel": "Cancelar",
+    "error": "Ha ocurrido un error. Inténtalo de nuevo.",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "page": "Página {{ page }}",
+    "pagination": "Paginación",
+    "view_all": "Ver todo"
+  },
+  "layout": {
+    "header": {
+      "menu": "Menú",
+      "search": "Buscar",
+      "search_placeholder": "Buscar marcas, prendas…",
+      "account": "Cuenta",
+      "cart": "Cesta",
+      "popular": "Búsquedas populares"
+    }
+  },
+  "newsletter": {
+    "placeholder": "Tu email",
+    "button": "Suscribirme",
+    "success": "Gracias. Te avisaremos de las nuevas llegadas."
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Añadir a la cesta",
+      "added": "Añadido",
+      "sold_out": "Vendido",
+      "sold": "Vendido",
+      "from": "Desde",
+      "size": "Talla",
+      "condition": "Estado",
+      "color": "Color",
+      "reference": "Referencia",
+      "retail_price": "Precio original en tienda",
+      "retail_price_hint": "El precio tachado corresponde al precio original en tienda.",
+      "taxes_included": "Impuestos incluidos",
+      "taxes_excluded": "Impuestos no incluidos",
+      "shipping_calculated": "Envío calculado al finalizar la compra",
+      "size_guide": "Guía de tallas",
+      "unique_note": "Pieza única — solo hay una unidad disponible",
+      "unique_piece": "Pieza única",
+      "trust_authentic": "Autenticidad garantizada",
+      "trust_shipping": "Envío asegurado",
+      "trust_returns": "Devolución 14 días",
+      "more_from": "Más de {{ vendor }}"
+    }
+  },
+  "collections": {
+    "items": {
+      "one": "{{ count }} pieza",
+      "other": "{{ count }} piezas"
+    },
+    "filter": "Filtrar",
+    "sort_by": "Ordenar por",
+    "clear_all": "Borrar filtros",
+    "view_results": "Ver resultados",
+    "from": "Desde",
+    "to": "Hasta",
+    "empty": "No hay piezas disponibles",
+    "empty_text": "Prueba con otros filtros o vuelve pronto: añadimos nuevas piezas cada semana.",
+    "no_brands": "Aún no hay marcas. Se mostrarán automáticamente al añadir productos."
+  },
+  "cart": {
+    "title": "Tu cesta",
+    "checkout": "Finalizar compra",
+    "continue": "Seguir comprando",
+    "empty": "Tu cesta está vacía",
+    "empty_text": "Las piezas únicas vuelan. Descubre las últimas llegadas.",
+    "note": "Nota del pedido",
+    "quantity": "Cantidad",
+    "remove": "Eliminar",
+    "subtotal": "Subtotal",
+    "taxes_note": "Impuestos incluidos. Envío calculado al finalizar la compra.",
+    "view_cart": "Ver cesta"
+  },
+  "search": {
+    "title": "Búsqueda",
+    "no_results": "No hay resultados para “{{ terms }}”.",
+    "view_all": "Ver todos los resultados de “{{ terms }}”",
+    "results_count": {
+      "one": "{{ count }} resultado para “{{ terms }}”",
+      "other": "{{ count }} resultados para “{{ terms }}”"
+    }
+  },
+  "contact": {
+    "name": "Nombre",
+    "email": "Email",
+    "phone": "Teléfono",
+    "message": "Mensaje",
+    "send": "Enviar",
+    "subject": "Asunto",
+    "subject_order": "Consulta sobre un pedido",
+    "subject_sell": "Quiero vender mis prendas",
+    "subject_product": "Pregunta sobre una prenda",
+    "subject_other": "Otro",
+    "success": "Gracias por escribirnos. Te responderemos lo antes posible."
+  },
+  "customer": {
+    "email": "Email",
+    "password": "Contraseña",
+    "password_confirm": "Confirmar contraseña",
+    "first_name": "Nombre",
+    "last_name": "Apellidos",
+    "login": {
+      "title": "Iniciar sesión",
+      "submit": "Entrar",
+      "forgot": "¿Has olvidado tu contraseña?",
+      "guest": "Continuar como invitado"
+    },
+    "register": {
+      "title": "Crear cuenta",
+      "submit": "Crear cuenta"
+    },
+    "recover": {
+      "text": "Te enviaremos un email para restablecer tu contraseña.",
+      "submit": "Enviar",
+      "success": "Te hemos enviado un email con un enlace para restablecer tu contraseña."
+    },
+    "activate": {
+      "title": "Activar cuenta",
+      "submit": "Activar"
+    },
+    "reset": {
+      "title": "Nueva contraseña",
+      "submit": "Guardar"
+    },
+    "account": {
+      "title": "Mi cuenta",
+      "hello": "Hola, {{ name }}",
+      "logout": "Cerrar sesión",
+      "orders": "Pedidos",
+      "no_orders": "Aún no has hecho ningún pedido.",
+      "details": "Mis datos",
+      "addresses": "Direcciones"
+    },
+    "order": {
+      "title": "Pedido {{ name }}",
+      "number": "Pedido",
+      "date": "Fecha",
+      "status": "Estado",
+      "total": "Total",
+      "product": "Producto",
+      "quantity": "Cantidad",
+      "billing": "Dirección de facturación",
+      "shipping": "Dirección de envío",
+      "cancelled": "Cancelado"
+    },
+    "addresses": {
+      "default": "Predeterminada",
+      "delete": "Eliminar",
+      "delete_confirm": "¿Seguro que quieres eliminar esta dirección?",
+      "add": "Añadir dirección",
+      "address1": "Dirección",
+      "address2": "Piso, puerta… (opcional)",
+      "city": "Ciudad",
+      "zip": "Código postal",
+      "country": "País",
+      "set_default": "Usar como dirección predeterminada"
+    }
+  },
+  "password": {
+    "enter": "Acceso con contraseña",
+    "password": "Contraseña",
+    "enter_button": "Entrar"
+  },
+  "gift_card": {
+    "title": "Tarjeta regalo",
+    "code": "Código",
+    "expired": "Esta tarjeta regalo ha caducado o está desactivada.",
+    "shop": "Ir a la tienda"
+  },
+  "templates": {
+    "404": {
+      "subtext": "La página que buscas no existe o ha sido movida.",
+      "title_html": "Página no <em>encontrada</em>"
+    }
+  }
+}

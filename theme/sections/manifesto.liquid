@@ -1,0 +1,34 @@
+<section class="section{% if section.settings.style == 'dark' %} section--dark{% elsif section.settings.style == 'surface' %} section--surface{% endif %}">
+  <div class="page-width">
+    <div class="manifesto reveal">
+      {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      <div class="manifesto__text">{{ section.settings.text }}</div>
+      {%- if section.settings.button_label != blank -%}
+        <a href="{{ section.settings.button_link }}" class="link-underline">{{ section.settings.button_label }} <span class="arrow">→</span></a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Manifiesto / Texto",
+  "class": "section-manifesto",
+  "settings": [
+    {
+      "type": "select", "id": "style", "label": "Estilo",
+      "options": [
+        { "value": "default", "label": "Claro" },
+        { "value": "surface", "label": "Secundario" },
+        { "value": "dark", "label": "Oscuro" }
+      ],
+      "default": "default"
+    },
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Nuestra filosofía" },
+    { "type": "inline_richtext", "id": "text", "label": "Texto", "default": "Creemos que las mejores prendas merecen <em>más de una historia</em>. Seleccionamos, verificamos y damos una segunda vida a piezas excepcionales." },
+    { "type": "text", "id": "button_label", "label": "Enlace", "default": "Conoce el proceso" },
+    { "type": "url", "id": "button_link", "label": "URL" }
+  ],
+  "presets": [{ "name": "Manifiesto / Texto" }]
+}
+{% endschema %}

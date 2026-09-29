@@ -1,0 +1,50 @@
+<section class="section{% if section.settings.surface %} section--surface{% endif %}">
+  <div class="page-width">
+    <div class="section-header section-header--center reveal">
+      {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      <h2 class="heading-italic">{{ section.settings.heading }}</h2>
+    </div>
+    <div class="faq-list">
+      {%- for block in section.blocks -%}
+        <details class="accordion" {{ block.shopify_attributes }}>
+          <summary>{{ block.settings.question }}</summary>
+          <div class="accordion__content rte">{{ block.settings.answer }}</div>
+        </details>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Preguntas frecuentes",
+  "class": "section-faq",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Ayuda" },
+    { "type": "inline_richtext", "id": "heading", "label": "Título", "default": "Preguntas <em>frecuentes</em>" },
+    { "type": "checkbox", "id": "surface", "label": "Fondo secundario", "default": false }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Pregunta",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Pregunta", "default": "¿Las prendas son auténticas?" },
+        { "type": "richtext", "id": "answer", "label": "Respuesta", "default": "<p>Sí. Cada pieza se verifica antes de publicarse.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Preguntas frecuentes",
+      "blocks": [
+        { "type": "question", "settings": { "question": "¿Las prendas son auténticas?", "answer": "<p>Sí, siempre. Revisamos etiquetas, costuras, herrajes, tejidos y códigos de autenticidad de cada pieza. Si alguna vez recibes una prenda no auténtica, te devolvemos el 100% de tu dinero.</p>" } },
+        { "type": "question", "settings": { "question": "¿En qué estado llegan las prendas?", "answer": "<p>Solo trabajamos con piezas en estado 'Muy bueno' o superior. Cada ficha indica su estado exacto según nuestra escala y muestra fotos reales de la prenda.</p>" } },
+        { "type": "question", "settings": { "question": "¿Puedo devolver una prenda?", "answer": "<p>Sí, dispones de 14 días desde la recepción, siempre que la prenda conserve el precinto de autenticidad y esté en el mismo estado en que la enviamos.</p>" } },
+        { "type": "question", "settings": { "question": "¿Cuánto tarda el envío?", "answer": "<p>Enviamos en 24/48h laborables con seguimiento y seguro incluido.</p>" } },
+        { "type": "question", "settings": { "question": "¿Puedo vender mis prendas con vosotros?", "answer": "<p>¡Claro! Escríbenos con fotos de tus prendas desde la página de contacto y te responderemos en menos de 48h con una valoración.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

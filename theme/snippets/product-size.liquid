@@ -1,0 +1,23 @@
+{%- comment -%}
+  Devuelve la talla de un producto (texto plano).
+  Busca la opción "Talla" / "Size" / "Taille"; si solo hay un valor lo muestra,
+  si hay varios muestra "S – L". Si no hay opción, usa el metacampo custom.talla.
+{%- endcomment -%}
+{%- liquid
+  assign size_text = ''
+  for option in product.options_with_values
+    assign opt_name = option.name | downcase
+    if opt_name == 'talla' or opt_name == 'size' or opt_name == 'taille' or opt_name == 'tamaño' or opt_name == 'medida'
+      if option.values.size == 1
+        assign size_text = option.values.first
+      else
+        assign size_text = option.values.first | append: ' – ' | append: option.values.last
+      endif
+      break
+    endif
+  endfor
+  if size_text == blank
+    assign size_text = product.metafields.custom.talla.value | default: product.metafields.custom.talla
+  endif
+-%}
+{{- size_text | escape -}}

@@ -1,0 +1,36 @@
+<div class="page-width page-width--medium" style="padding: clamp(3rem, 6vw, 5rem) clamp(1rem, 4vw, 3.5rem);">
+  <p><a href="{{ routes.account_url }}" class="link-underline">← {{ 'customer.account.title' | t }}</a></p>
+  <h1>{{ 'customer.account.addresses' | t }}</h1>
+  {%- paginate customer.addresses by 10 -%}
+    {%- for address in customer.addresses -%}
+      <div style="padding:1.5rem 0;border-bottom:1px solid var(--color-border);">
+        {%- if address == customer.default_address -%}<span class="badge badge--dark">{{ 'customer.addresses.default' | t }}</span>{%- endif -%}
+        {{ address | format_address }}
+        {%- form 'customer_address', address -%}
+          <input type="hidden" name="_method" value="delete">
+          <button type="submit" class="cart-item__remove" onclick="return confirm('{{ 'customer.addresses.delete_confirm' | t }}');">{{ 'customer.addresses.delete' | t }}</button>
+        {%- endform -%}
+      </div>
+    {%- endfor -%}
+  {%- endpaginate -%}
+  <h2 class="h3" style="margin-top:3rem;">{{ 'customer.addresses.add' | t }}</h2>
+  {%- form 'customer_address', customer.new_address -%}
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 1rem;">
+      <div class="field"><label class="field__label" for="AddressFirst">{{ 'customer.first_name' | t }}</label><input class="field__input" id="AddressFirst" name="address[first_name]" autocomplete="given-name"></div>
+      <div class="field"><label class="field__label" for="AddressLast">{{ 'customer.last_name' | t }}</label><input class="field__input" id="AddressLast" name="address[last_name]" autocomplete="family-name"></div>
+    </div>
+    <div class="field"><label class="field__label" for="Address1">{{ 'customer.addresses.address1' | t }}</label><input class="field__input" id="Address1" name="address[address1]" autocomplete="address-line1"></div>
+    <div class="field"><label class="field__label" for="Address2">{{ 'customer.addresses.address2' | t }}</label><input class="field__input" id="Address2" name="address[address2]" autocomplete="address-line2"></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 1rem;">
+      <div class="field"><label class="field__label" for="AddressCity">{{ 'customer.addresses.city' | t }}</label><input class="field__input" id="AddressCity" name="address[city]" autocomplete="address-level2"></div>
+      <div class="field"><label class="field__label" for="AddressZip">{{ 'customer.addresses.zip' | t }}</label><input class="field__input" id="AddressZip" name="address[zip]" autocomplete="postal-code"></div>
+    </div>
+    <div class="field">
+      <label class="field__label" for="AddressCountry">{{ 'customer.addresses.country' | t }}</label>
+      <div class="select"><select class="select__select" id="AddressCountry" name="address[country]">{{ all_country_option_tags }}</select></div>
+    </div>
+    <div class="field"><label class="field__label" for="AddressPhone">{{ 'contact.phone' | t }}</label><input class="field__input" id="AddressPhone" name="address[phone]" type="tel" autocomplete="tel"></div>
+    <label class="facet-checkbox"><input type="checkbox" name="address[default]" value="1"> {{ 'customer.addresses.set_default' | t }}</label>
+    <button class="button" style="margin-top:1rem;">{{ 'customer.addresses.add' | t }}</button>
+  {%- endform -%}
+</div>

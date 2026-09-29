@@ -1,0 +1,117 @@
+# Maison Archive — Tema Shopify para moda de segunda mano premium
+
+Tema **Shopify Online Store 2.0** hecho a medida para una tienda de ropa de segunda mano
+"casi nueva" que mezcla lujo (Moncler, Prada, Loro Piana…) y streetwear (Corteiz, Stone Island,
+Carhartt WIP…) con una estética **editorial, elegante y profesional**.
+
+Todo se edita desde el **personalizador visual de Shopify** (Tienda online → Temas → Personalizar),
+sin tocar código. El nombre de la tienda se toma automáticamente de Shopify.
+
+![Portada](docs/preview/01-portada.png)
+
+| Ficha de producto | Colección | Móvil |
+|---|---|---|
+| ![](docs/preview/03-ficha-producto.png) | ![](docs/preview/04-coleccion.png) | ![](docs/preview/05-movil.png) |
+
+> Las capturas usan imágenes de muestra; con las fotos reales de las prendas se verá mucho mejor.
+
+---
+
+## 1. Instalación (5 minutos)
+
+1. Genera el `.zip` del tema:
+   ```bash
+   ./build-zip.sh          # crea dist/maison-archive-theme.zip
+   ```
+   (o comprime el **contenido** de la carpeta `theme/`, de forma que `layout/`, `sections/`… queden en la raíz del zip).
+2. En Shopify: **Tienda online → Temas → Añadir tema → Subir archivo zip**.
+3. Pulsa **Personalizar** para revisarlo y luego **Publicar**.
+
+Alternativa con Shopify CLI: `cd theme && shopify theme push --unpublished`.
+
+## 2. Configuración recomendada en Shopify
+
+### Menús (Tienda online → Navegación)
+- **main-menu**: Novedades · Marcas (con submenús Lujo / Streetwear / Outdoor → marcas) · Categorías · Vender.
+  Si un elemento tiene sub‑submenús se muestra como **mega menú** en columnas.
+- **footer**: Envíos, Devoluciones, Autenticidad, Preguntas frecuentes…
+
+### Páginas (Tienda online → Páginas) — asignar la plantilla indicada
+| Página | Plantilla | Qué muestra |
+|---|---|---|
+| Marcas | `page.marcas` | Índice A–Z automático de todas las marcas |
+| Vender | `page.vender` | Landing "vende con nosotros" + formulario |
+| Contacto | `page.contact` | Formulario (con asunto) + FAQ |
+| Preguntas frecuentes | `page.faq` | FAQ + escala de estados |
+
+### Productos: cómo rellenar cada prenda
+| Dato | Dónde | Ejemplo |
+|---|---|---|
+| **Marca** | Campo *Proveedor* | `Moncler`, `Corteiz` |
+| **Talla** | Variante con opción `Talla` (o metacampo `custom.talla`) | `M`, `48` |
+| **Precio original de tienda** | *Precio de comparación* (se tacha y muestra el % de ahorro) o metacampo `custom.precio_original` | 1.650 € |
+| **Pieza única** | Seguimiento de inventario activado con **cantidad 1** → aparece la etiqueta "Pieza única" | — |
+
+### Metacampos de producto (Configuración → Datos personalizados → Productos)
+Crea estos metacampos con espacio de nombres `custom` (todos opcionales):
+
+| Nombre | Clave | Tipo | Uso |
+|---|---|---|---|
+| Condición | `custom.condicion` | Texto de una línea (mejor con *lista de valores*: Nuevo con etiqueta, Como nuevo, Excelente, Muy bueno) | Estado + puntos de nivel en ficha y tarjetas |
+| Detalles del estado | `custom.detalles_estado` | Texto multilínea | Desplegable en la ficha |
+| Medidas | `custom.medidas` | Texto multilínea | Desplegable en la ficha |
+| Composición | `custom.composicion` | Texto multilínea | Desplegable en la ficha |
+| Color | `custom.color` | Texto de una línea | Ficha técnica |
+| Precio original | `custom.precio_original` | Dinero | "Precio original en tienda" |
+| Talla | `custom.talla` | Texto de una línea | Solo si no usas variantes de talla |
+
+Sin metacampos también funciona: el estado puede ponerse como **etiqueta** `Condicion:Como nuevo`.
+
+### Filtros (marca, talla, estado, precio)
+Instala la app gratuita **Shopify Search & Discovery** y activa los filtros: *Proveedor*, *Talla*,
+*Precio*, *Disponibilidad* y el metacampo *Condición*. Aparecen automáticamente en el panel "Filtrar"
+de las colecciones (la talla se muestra como botones).
+
+### Colecciones sugeridas
+Abrigos & Plumíferos · Streetwear · Sastrería & Punto · Lujo · Nuevas llegadas (automática: ordenada
+por fecha). Asígnalas en la sección **Lista de colecciones** de la portada.
+
+## 3. Qué incluye
+
+**Portada (todo reordenable y editable):** Hero a pantalla completa (imagen, imagen móvil o vídeo) ·
+carrusel de marcas · colección destacada · categorías · manifiesto · imagen con texto · garantías ·
+escala de estados · banner "vende con nosotros" · newsletter · galería/Instagram · FAQ · índice de marcas.
+
+**Tienda:** cabecera transparente sobre el hero con mega menú · buscador predictivo · cesta lateral
+AJAX · ficha de producto con galería + zoom, ficha técnica (talla/estado/color/ref.), aviso de pieza
+única, sellos de confianza, desplegables, botón de compra rápida, barra fija en móvil, productos
+relacionados y datos estructurados para Google (`UsedCondition`) · colecciones con filtros, orden y
+cambio de cuadrícula · cuentas de cliente · blog · 404 · página de contraseña · tarjeta regalo.
+
+**Configuración del tema:** colores (3 estilos predefinidos: *Default* marfil, *Noir* oscuro, *Street*
+blanco), tipografía (serif editorial o sans moderna), proporción de fotos, textos de autenticidad y
+envío, redes sociales, favicon.
+
+## 4. Entregar la tienda al cliente
+
+- **Tienda de desarrollo (Partners):** en el Panel de Partners → Tiendas → *Transferir propiedad* al
+  email del cliente; él elige plan y queda como propietario.
+- **Tienda ya del cliente:** que te añada como *colaborador* (o te dé un código de acceso de
+  colaborador), subes el tema y lo publicas.
+- En ambos casos: revisar Configuración → Pagos, Envíos, Impuestos, Políticas (textos legales) y el
+  dominio antes de abrir la tienda.
+
+## 5. Estructura
+
+```
+theme/
+  layout/      theme.liquid, password.liquid
+  sections/    todas las secciones (portada, producto, colección, cabecera/pie…)
+  snippets/    tarjeta de producto, estado, talla, precio, filtros, iconos…
+  templates/   plantillas JSON (+ páginas marcas / vender / contacto / faq)
+  assets/      base.css, theme.js (sin dependencias externas)
+  config/      ajustes del tema y estilos predefinidos
+  locales/     español (por defecto) e inglés
+```
+
+Validado con **Shopify Theme Check** (0 errores).

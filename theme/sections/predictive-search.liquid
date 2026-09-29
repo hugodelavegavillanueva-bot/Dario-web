@@ -1,0 +1,33 @@
+<div data-predictive-content>
+  {%- if predictive_search.performed -%}
+    {%- if predictive_search.resources.products.size > 0 -%}
+      <div class="search-drawer__results">
+        {%- for product in predictive_search.resources.products -%}
+          <a href="{{ product.url }}" class="mini-card">
+            <div class="mini-card__media">
+              {%- if product.featured_media -%}
+                {{ product.featured_media | image_url: width: 400 | image_tag: loading: 'lazy', alt: product.featured_media.alt }}
+              {%- endif -%}
+            </div>
+            <p class="mini-card__vendor">{{ product.vendor }}</p>
+            <p class="mini-card__title">{{ product.title | escape }}</p>
+            <p style="font-size:0.8125rem;">{{ product.price | money }}</p>
+          </a>
+        {%- endfor -%}
+      </div>
+      <p style="padding-bottom:2rem;">
+        <a class="link-underline" href="{{ routes.search_url }}?q={{ predictive_search.terms | url_encode }}&type=product">
+          {{ 'search.view_all' | t: terms: predictive_search.terms }} <span class="arrow">→</span>
+        </a>
+      </p>
+    {%- else -%}
+      <p class="muted" style="padding-bottom:2rem;">{{ 'search.no_results' | t: terms: predictive_search.terms }}</p>
+    {%- endif -%}
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Búsqueda predictiva"
+}
+{% endschema %}

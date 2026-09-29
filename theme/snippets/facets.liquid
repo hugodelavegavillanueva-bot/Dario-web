@@ -1,0 +1,51 @@
+{%- comment -%}
+  Filtros (requiere la app gratuita "Search & Discovery" de Shopify para configurarlos).
+  Params: results (collection o search), sort_by
+{%- endcomment -%}
+<form data-filter-form id="FilterForm">
+  {%- if terms -%}<input type="hidden" name="q" value="{{ terms | escape }}"><input type="hidden" name="type" value="product">{%- endif -%}
+  {%- for filter in results.filters -%}
+    {%- assign label_down = filter.label | downcase -%}
+    {%- assign chips = false -%}
+    {%- if label_down contains 'talla' or label_down contains 'size' -%}{%- assign chips = true -%}{%- endif -%}
+    <details class="facets__group"{% if filter.active_values.size > 0 or forloop.index <= 2 %} open{% endif %}>
+      <summary>{{ filter.label }}{% if filter.active_values.size > 0 %} ({{ filter.active_values.size }}){% endif %}</summary>
+      {%- case filter.type -%}
+        {%- when 'list', 'boolean' -%}
+          {%- if chips -%}
+            <div class="facet-chips">
+              {%- for value in filter.values -%}
+                <label class="facet-chip">
+                  <input type="checkbox" name="{{ value.param_name }}" value="{{ value.value }}"{% if value.active %} checked{% endif %}{% if value.count == 0 and value.active == false %} disabled{% endif %}>
+                  <span>{{ value.label }}</span>
+                </label>
+              {%- endfor -%}
+            </div>
+          {%- else -%}
+            <ul class="facets__list">
+              {%- for value in filter.values -%}
+                <li>
+                  <label class="facet-checkbox{% if value.count == 0 and value.active == false %} is-disabled{% endif %}">
+                    <input type="checkbox" name="{{ value.param_name }}" value="{{ value.value }}"{% if value.active %} checked{% endif %}{% if value.count == 0 and value.active == false %} disabled{% endif %}>
+                    <span>{{ value.label }}</span>
+                    <span class="count">{{ value.count }}</span>
+                  </label>
+                </li>
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+        {%- when 'price_range' -%}
+          <div class="facets__price">
+            <div class="field">
+              <label class="field__label" for="Min-{{ filter.param_name }}">{{ 'collections.from' | t }}</label>
+              <input class="field__input" type="number" id="Min-{{ filter.param_name }}" name="{{ filter.min_value.param_name }}" value="{%- if filter.min_value.value != nil -%}{{ filter.min_value.value | divided_by: 100 }}{%- endif -%}" placeholder="0" min="0">
+            </div>
+            <div class="field">
+              <label class="field__label" for="Max-{{ filter.param_name }}">{{ 'collections.to' | t }}</label>
+              <input class="field__input" type="number" id="Max-{{ filter.param_name }}" name="{{ filter.max_value.param_name }}" value="{%- if filter.max_value.value != nil -%}{{ filter.max_value.value | divided_by: 100 }}{%- endif -%}" placeholder="{{ filter.range_max | divided_by: 100 }}" min="0">
+            </div>
+          </div>
+      {%- endcase -%}
+    </details>
+  {%- endfor -%}
+</form>

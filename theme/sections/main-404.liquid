@@ -1,0 +1,10 @@
+<div class="page-width empty-state" style="padding: clamp(5rem, 12vw, 10rem) 0;">
+  <span class="eyebrow">404</span>
+  <h1 class="heading-italic">{{ 'templates.404.title_html' | t }}</h1>
+  <p>{{ 'templates.404.subtext' | t }}</p>
+  <a href="{{ routes.all_products_collection_url }}" class="button">{{ 'cart.continue' | t }}</a>
+</div>
+
+{% schema %}
+{ "name": "404" }
+{% endschema %}

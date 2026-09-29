@@ -1,0 +1,28 @@
+{
+  "sections": {
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "q1": { "type": "question", "settings": { "question": "¿Las prendas son auténticas?", "answer": "<p>Sí, siempre. Revisamos etiquetas, costuras, herrajes, tejidos y códigos de autenticidad de cada pieza. Si alguna vez recibes una prenda no auténtica, te devolvemos el 100% de tu dinero.</p>" } },
+        "q2": { "type": "question", "settings": { "question": "¿En qué estado llegan las prendas?", "answer": "<p>Solo trabajamos con piezas en estado 'Muy bueno' o superior. Cada ficha indica su estado exacto según nuestra escala y muestra fotos reales de la prenda.</p>" } },
+        "q3": { "type": "question", "settings": { "question": "¿Puedo devolver una prenda?", "answer": "<p>Sí, dispones de 14 días desde la recepción, siempre que la prenda conserve el precinto de autenticidad y esté en el mismo estado en que la enviamos.</p>" } },
+        "q4": { "type": "question", "settings": { "question": "¿Cuánto tarda el envío?", "answer": "<p>Enviamos en 24/48h laborables con seguimiento y seguro incluido.</p>" } },
+        "q5": { "type": "question", "settings": { "question": "¿Puedo vender mis prendas con vosotros?", "answer": "<p>¡Claro! Escríbenos con fotos de tus prendas desde la página de contacto y te responderemos en menos de 48h con una valoración.</p>" } }
+      },
+      "block_order": ["q1", "q2", "q3", "q4", "q5"],
+      "settings": {}
+    },
+    "conditions": {
+      "type": "condition-guide",
+      "blocks": {
+        "l1": { "type": "level", "settings": { "level": 5, "title": "Nuevo con etiqueta", "text": "<p>Nunca usado. Conserva todas sus etiquetas.</p>" } },
+        "l2": { "type": "level", "settings": { "level": 4, "title": "Como nuevo", "text": "<p>Usado una o dos veces. Sin signos visibles de uso.</p>" } },
+        "l3": { "type": "level", "settings": { "level": 3, "title": "Excelente", "text": "<p>Mínimos signos de uso, detallados en la ficha.</p>" } },
+        "l4": { "type": "level", "settings": { "level": 2, "title": "Muy bueno", "text": "<p>Ligeros signos de uso, siempre fotografiados.</p>" } }
+      },
+      "block_order": ["l1", "l2", "l3", "l4"],
+      "settings": {}
+    }
+  },
+  "order": ["faq", "conditions"]
+}

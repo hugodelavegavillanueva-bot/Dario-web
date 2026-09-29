@@ -1,0 +1,54 @@
+{%- liquid
+  assign collection = section.settings.collection
+  if collection == blank
+    assign collection = collections.all
+  endif
+-%}
+<section class="section{% if section.settings.surface %} section--surface{% endif %}">
+  <div class="page-width">
+    <div class="section-header reveal">
+      <div>
+        {%- if section.settings.eyebrow != blank -%}<span class="eyebrow eyebrow--line">{{ section.settings.eyebrow }}</span>{%- endif -%}
+        <h2 class="heading-italic">{{ section.settings.heading }}</h2>
+      </div>
+      {%- if section.settings.link_label != blank -%}
+        <a href="{{ collection.url }}" class="link-underline">{{ section.settings.link_label }} <span class="arrow">→</span></a>
+      {%- endif -%}
+    </div>
+
+    <div class="product-grid" style="--cols: {{ section.settings.columns }}; --cols-tablet: {{ section.settings.columns | at_most: 3 }};">
+      {%- for product in collection.products limit: section.settings.limit -%}
+        <div class="reveal" style="transition-delay: {{ forloop.index0 | modulo: section.settings.columns | times: 80 }}ms;">
+          {% render 'product-card', product: product, show_quick_add: section.settings.quick_add %}
+        </div>
+      {%- else -%}
+        {%- for i in (1..section.settings.columns) -%}
+          <div class="card">
+            <div class="card__media"><div class="card__placeholder">{{ 'apparel-1' | placeholder_svg_tag }}</div></div>
+            <p class="card__vendor">Marca</p>
+            <p class="card__title">Nombre del producto</p>
+            <div class="price">190,00 €</div>
+          </div>
+        {%- endfor -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Colección destacada",
+  "class": "section-featured-collection",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Recién llegado" },
+    { "type": "inline_richtext", "id": "heading", "label": "Título", "default": "Nuevas <em>llegadas</em>" },
+    { "type": "collection", "id": "collection", "label": "Colección" },
+    { "type": "range", "id": "limit", "label": "Número de productos", "min": 2, "max": 16, "step": 1, "default": 8 },
+    { "type": "range", "id": "columns", "label": "Columnas (escritorio)", "min": 2, "max": 5, "step": 1, "default": 4 },
+    { "type": "text", "id": "link_label", "label": "Texto del enlace", "default": "Ver todo" },
+    { "type": "checkbox", "id": "quick_add", "label": "Botón de añadir rápido", "default": true },
+    { "type": "checkbox", "id": "surface", "label": "Fondo secundario", "default": false }
+  ],
+  "presets": [{ "name": "Colección destacada" }]
+}
+{% endschema %}

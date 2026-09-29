@@ -1,0 +1,49 @@
+<div class="page-width" style="padding-bottom: clamp(4rem, 8vw, 7rem);">
+  <div class="page-header">
+    <h1>{{ 'cart.title' | t }}</h1>
+  </div>
+  {%- if cart.item_count > 0 -%}
+    <form action="{{ routes.cart_url }}" method="post" class="cart-page">
+      <div>
+        {%- for item in cart.items -%}
+          {% render 'cart-item', item: item %}
+        {%- endfor -%}
+        <p style="margin-top:2rem;"><a href="{{ routes.all_products_collection_url }}" class="link-underline">← {{ 'cart.continue' | t }}</a></p>
+      </div>
+      <aside class="cart-page__summary">
+        {%- if section.settings.show_note -%}
+          <div class="cart-note">
+            <label for="CartNote" class="field__label">{{ 'cart.note' | t }}</label>
+            <textarea id="CartNote" name="note">{{ cart.note }}</textarea>
+          </div>
+        {%- endif -%}
+        {%- for discount in cart.cart_level_discount_applications -%}
+          <div class="cart-summary__row"><span>{{ discount.title }}</span><span>−{{ discount.total_allocated_amount | money }}</span></div>
+        {%- endfor -%}
+        <div class="cart-summary__row cart-summary__row--total">
+          <span>{{ 'cart.subtotal' | t }}</span>
+          <span>{{ cart.total_price | money_with_currency }}</span>
+        </div>
+        <p class="cart-summary__note">{{ 'cart.taxes_note' | t }}{% if settings.cart_note_text != blank %} {{ settings.cart_note_text }}{% endif %}</p>
+        <button type="submit" name="checkout" class="button button--full">{{ 'cart.checkout' | t }}</button>
+        {%- if additional_checkout_buttons -%}
+          <div style="margin-top:0.75rem;">{{ content_for_additional_checkout_buttons }}</div>
+        {%- endif -%}
+      </aside>
+    </form>
+  {%- else -%}
+    <div class="cart-empty">
+      <p>{{ 'cart.empty_text' | t }}</p>
+      <a href="{{ routes.all_products_collection_url }}" class="button">{{ 'cart.continue' | t }}</a>
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Carrito",
+  "settings": [
+    { "type": "checkbox", "id": "show_note", "label": "Permitir nota del pedido", "default": true }
+  ]
+}
+{% endschema %}

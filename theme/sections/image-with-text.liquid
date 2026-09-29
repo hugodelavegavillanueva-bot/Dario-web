@@ -1,0 +1,39 @@
+<section class="section{% if section.settings.surface %} section--surface{% endif %}">
+  <div class="page-width">
+    <div class="editorial{% if section.settings.reverse %} editorial--reverse{% endif %}">
+      <div class="editorial__media reveal">
+        {%- if section.settings.image != blank -%}
+          {{ section.settings.image | image_url: width: 1600 | image_tag: loading: 'lazy', sizes: '(min-width: 750px) 50vw, 100vw', widths: '600, 900, 1200, 1600' }}
+        {%- else -%}
+          <div class="card__placeholder">{{ 'lifestyle-1' | placeholder_svg_tag }}</div>
+        {%- endif -%}
+      </div>
+      <div class="editorial__content reveal">
+        {%- if section.settings.eyebrow != blank -%}<span class="eyebrow eyebrow--line">{{ section.settings.eyebrow }}</span>{%- endif -%}
+        <h2 class="heading-italic">{{ section.settings.heading }}</h2>
+        <div class="rte">{{ section.settings.text }}</div>
+        {%- if section.settings.button_label != blank -%}
+          <a href="{{ section.settings.button_link }}" class="button button--outline">{{ section.settings.button_label }}</a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Imagen con texto",
+  "class": "section-image-with-text",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Imagen" },
+    { "type": "checkbox", "id": "reverse", "label": "Imagen a la derecha", "default": false },
+    { "type": "checkbox", "id": "surface", "label": "Fondo secundario", "default": false },
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "El proceso" },
+    { "type": "inline_richtext", "id": "heading", "label": "Título", "default": "Verificado a <em>mano</em>, pieza a pieza" },
+    { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Cada prenda pasa por una revisión de más de 20 puntos: etiquetas, costuras, tejidos, herrajes y códigos de autenticidad. Solo publicamos lo que nosotros mismos compraríamos.</p>" },
+    { "type": "text", "id": "button_label", "label": "Botón", "default": "Cómo trabajamos" },
+    { "type": "url", "id": "button_link", "label": "Enlace" }
+  ],
+  "presets": [{ "name": "Imagen con texto" }]
+}
+{% endschema %}

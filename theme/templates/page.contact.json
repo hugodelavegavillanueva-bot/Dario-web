@@ -1,0 +1,15 @@
+{
+  "sections": {
+    "form": { "type": "contact-form", "settings": {} },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "q1": { "type": "question", "settings": { "question": "¿Las prendas son auténticas?", "answer": "<p>Sí, siempre. Revisamos etiquetas, costuras, herrajes, tejidos y códigos de autenticidad de cada pieza. Si alguna vez recibes una prenda no auténtica, te devolvemos el 100% de tu dinero.</p>" } },
+        "q2": { "type": "question", "settings": { "question": "¿Cómo puedo vender mis prendas?", "answer": "<p>Envíanos fotos de tus prendas (etiqueta incluida) mediante el formulario y te responderemos en menos de 48h con una valoración.</p>" } }
+      },
+      "block_order": ["q1", "q2"],
+      "settings": { "surface": true }
+    }
+  },
+  "order": ["form", "faq"]
+}

@@ -1,0 +1,106 @@
+{%- liquid
+  assign menu_count = section.blocks.size
+-%}
+<footer class="footer" style="--menus: {{ menu_count | at_least: 1 }};">
+  <div class="page-width">
+    <div class="footer__top">
+      <div class="footer__col--brand">
+        <p class="footer__brand-name">{{ shop.name }}</p>
+        {%- if section.settings.about != blank -%}
+          <div class="footer__about">{{ section.settings.about }}</div>
+        {%- endif -%}
+
+        {%- if section.settings.show_newsletter -%}
+          {%- form 'customer', id: 'FooterNewsletter' -%}
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            {%- if form.posted_successfully? -%}
+              <p class="footer__about" style="margin-top:1.25rem;">{{ 'newsletter.success' | t }}</p>
+            {%- else -%}
+              <div class="newsletter__form">
+                <input type="email" name="contact[email]" class="newsletter__input" placeholder="{{ 'newsletter.placeholder' | t }}" required aria-label="{{ 'newsletter.placeholder' | t }}">
+                <button type="submit" class="newsletter__submit">{{ 'newsletter.button' | t }}</button>
+              </div>
+            {%- endif -%}
+          {%- endform -%}
+        {%- endif -%}
+
+        <div class="footer__social">
+          {%- if settings.social_instagram != blank -%}<a href="{{ settings.social_instagram }}" target="_blank" rel="noopener" aria-label="Instagram">{% render 'icon', icon: 'instagram' %}</a>{%- endif -%}
+          {%- if settings.social_tiktok != blank -%}<a href="{{ settings.social_tiktok }}" target="_blank" rel="noopener" aria-label="TikTok">{% render 'icon', icon: 'tiktok' %}</a>{%- endif -%}
+          {%- if settings.social_whatsapp != blank -%}<a href="{{ settings.social_whatsapp }}" target="_blank" rel="noopener" aria-label="WhatsApp">{% render 'icon', icon: 'whatsapp' %}</a>{%- endif -%}
+          {%- if settings.social_pinterest != blank -%}<a href="{{ settings.social_pinterest }}" target="_blank" rel="noopener" aria-label="Pinterest">{% render 'icon', icon: 'pinterest' %}</a>{%- endif -%}
+        </div>
+      </div>
+
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'menu' -%}
+            <div {{ block.shopify_attributes }}>
+              <p class="footer__heading">{{ block.settings.heading | default: block.settings.menu.title }}</p>
+              <ul class="footer__list">
+                {%- for link in block.settings.menu.links -%}
+                  <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                {%- endfor -%}
+              </ul>
+            </div>
+          {%- when 'text' -%}
+            <div {{ block.shopify_attributes }}>
+              <p class="footer__heading">{{ block.settings.heading }}</p>
+              <div class="footer__about">{{ block.settings.text }}</div>
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.show_wordmark -%}
+      {%- assign wordmark = section.settings.wordmark | default: shop.name -%}
+      {%- assign wm_size = 118.0 | divided_by: wordmark.size -%}
+      <p class="footer__wordmark" aria-hidden="true" style="font-size: min(13rem, {{ wm_size }}vw);">{{ wordmark }}</p>
+    {%- endif -%}
+
+    <div class="footer__bottom">
+      <span>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. {{ section.settings.copyright }}</span>
+      {%- if section.settings.show_payment_icons -%}
+        <div class="footer__payments">
+          {%- for type in shop.enabled_payment_types -%}
+            {{ type | payment_type_svg_tag }}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Pie de página",
+  "class": "section-footer",
+  "max_blocks": 5,
+  "settings": [
+    { "type": "richtext", "id": "about", "label": "Texto sobre la tienda", "default": "<p>Moda de segunda mano seleccionada pieza a pieza. De la sastrería de lujo al streetwear más buscado, siempre auténtico y casi nuevo.</p>" },
+    { "type": "checkbox", "id": "show_newsletter", "label": "Mostrar newsletter", "default": true },
+    { "type": "checkbox", "id": "show_wordmark", "label": "Mostrar nombre gigante", "default": true },
+    { "type": "text", "id": "wordmark", "label": "Texto del nombre gigante", "info": "Si está vacío, se usa el nombre de la tienda." },
+    { "type": "text", "id": "copyright", "label": "Texto legal", "default": "Todos los derechos reservados." },
+    { "type": "checkbox", "id": "show_payment_icons", "label": "Mostrar métodos de pago", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "Menú",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Título" },
+        { "type": "link_list", "id": "menu", "label": "Menú", "default": "footer" }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Texto",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Título", "default": "Contacto" },
+        { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>hola@tutienda.com<br>Lun–Vie · 10:00–19:00</p>" }
+      ]
+    }
+  ]
+}
+{% endschema %}

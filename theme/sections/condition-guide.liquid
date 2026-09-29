@@ -1,0 +1,58 @@
+<section class="section{% if section.settings.surface %} section--surface{% endif %}">
+  <div class="page-width">
+    <div class="section-header reveal">
+      <div>
+        {%- if section.settings.eyebrow != blank -%}<span class="eyebrow eyebrow--line">{{ section.settings.eyebrow }}</span>{%- endif -%}
+        <h2 class="heading-italic">{{ section.settings.heading }}</h2>
+        {%- if section.settings.intro != blank -%}<div class="section-header__intro">{{ section.settings.intro }}</div>{%- endif -%}
+      </div>
+    </div>
+    <div class="condition-scale" style="--cols: {{ section.blocks.size | at_most: 4 | at_least: 1 }};">
+      {%- for block in section.blocks -%}
+        <div class="condition-card reveal" style="transition-delay: {{ forloop.index0 | times: 90 }}ms;" {{ block.shopify_attributes }}>
+          <div class="condition-card__dots" aria-label="{{ block.settings.level }}/5">
+            {%- for i in (1..5) -%}<i{% if i <= block.settings.level %} class="is-filled"{% endif %}></i>{%- endfor -%}
+          </div>
+          <h3>{{ block.settings.title }}</h3>
+          <div>{{ block.settings.text }}</div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Guía de estados",
+  "class": "section-condition-guide",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Transparencia total" },
+    { "type": "inline_richtext", "id": "heading", "label": "Título", "default": "Nuestra escala de <em>estado</em>" },
+    { "type": "richtext", "id": "intro", "label": "Introducción", "default": "<p>Cada prenda indica su estado real. Así sabes exactamente lo que vas a recibir.</p>" },
+    { "type": "checkbox", "id": "surface", "label": "Fondo secundario", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "level",
+      "name": "Nivel",
+      "settings": [
+        { "type": "range", "id": "level", "label": "Puntos", "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "text", "id": "title", "label": "Nombre del estado", "default": "Nuevo con etiqueta" },
+        { "type": "richtext", "id": "text", "label": "Descripción", "default": "<p>Nunca usado. Conserva etiquetas originales.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Guía de estados",
+      "blocks": [
+        { "type": "level", "settings": { "level": 5, "title": "Nuevo con etiqueta", "text": "<p>Nunca usado. Conserva todas sus etiquetas y, cuando aplica, su embalaje original.</p>" } },
+        { "type": "level", "settings": { "level": 4, "title": "Como nuevo", "text": "<p>Usado una o dos veces. Sin ningún signo visible de uso.</p>" } },
+        { "type": "level", "settings": { "level": 3, "title": "Excelente", "text": "<p>Mínimos signos de uso, solo apreciables al detalle. Detallados en la ficha.</p>" } },
+        { "type": "level", "settings": { "level": 2, "title": "Muy bueno", "text": "<p>Ligeros signos de uso que no afectan a su aspecto. Siempre fotografiados.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

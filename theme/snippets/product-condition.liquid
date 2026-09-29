@@ -1,0 +1,51 @@
+{%- comment -%}
+  Muestra el estado de una prenda de segunda mano.
+  Fuente: metacampo custom.condicion  → o etiqueta "Condicion:Como nuevo".
+  Params:
+    - product
+    - style: 'text' | 'badge' | 'spec' (con puntos de nivel)
+{%- endcomment -%}
+{%- liquid
+  assign condition = product.metafields.custom.condicion.value | default: product.metafields.custom.condicion
+  if condition == blank
+    assign prefix = settings.condition_tag_prefix | default: 'Condicion:'
+    assign prefix_down = prefix | downcase
+    for tag in product.tags
+      assign tag_down = tag | downcase
+      assign tag_start = tag_down | slice: 0, prefix_down.size
+      if tag_start == prefix_down
+        assign condition = tag | slice: prefix.size, 100 | strip
+        break
+      endif
+    endfor
+  endif
+
+  if condition != blank
+    assign c = condition | downcase
+    assign level = 3
+    if c contains 'etiqueta' or c contains 'tags' or c contains 'nuevo con' or c contains 'new with'
+      assign level = 5
+    elsif c contains 'como nuevo' or c contains 'like new' or c contains 'sin estrenar' or c contains 'impecable'
+      assign level = 4
+    elsif c contains 'excelente' or c contains 'excellent'
+      assign level = 4
+    elsif c contains 'muy bueno' or c contains 'very good'
+      assign level = 3
+    elsif c contains 'bueno' or c contains 'good'
+      assign level = 2
+    endif
+  endif
+-%}
+{%- if condition != blank -%}
+  {%- case style -%}
+    {%- when 'badge' -%}
+      <span class="badge">{{ condition | escape }}</span>
+    {%- when 'spec' -%}
+      {{ condition | escape }}
+      <span class="condition-dots" aria-label="{{ level }}/5">
+        {%- for i in (1..5) -%}<i{% if i <= level %} class="is-filled"{% endif %}></i>{%- endfor -%}
+      </span>
+    {%- else -%}
+      {{- condition | escape -}}
+  {%- endcase -%}
+{%- endif -%}

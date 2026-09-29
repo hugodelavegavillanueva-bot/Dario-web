@@ -1,0 +1,61 @@
+<section class="marquee" style="--marquee-speed: {{ section.settings.speed }}s;" aria-label="{{ section.settings.label | escape }}">
+  <div class="marquee__track">
+    {%- for i in (1..2) -%}
+      <div class="marquee__group"{% if i == 2 %} aria-hidden="true"{% endif %}>
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign url = block.settings.link
+            if url == blank
+              assign url = block.settings.name | url_for_vendor
+            endif
+          -%}
+          <a href="{{ url }}" class="marquee__item" {% if i == 1 %}{{ block.shopify_attributes }}{% endif %}{% if i == 2 %} tabindex="-1"{% endif %}>
+            {%- if block.settings.logo != blank -%}
+              {{ block.settings.logo | image_url: height: 80 | image_tag: loading: 'lazy', alt: block.settings.name }}
+            {%- else -%}
+              {{ block.settings.name | escape }}
+            {%- endif -%}
+          </a>
+          <span class="marquee__sep" aria-hidden="true">✦</span>
+        {%- endfor -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Carrusel de marcas",
+  "class": "section-marquee",
+  "settings": [
+    { "type": "text", "id": "label", "label": "Etiqueta accesible", "default": "Marcas" },
+    { "type": "range", "id": "speed", "label": "Duración de la animación", "min": 15, "max": 90, "step": 5, "unit": "s", "default": 45 }
+  ],
+  "blocks": [
+    {
+      "type": "brand",
+      "name": "Marca",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Nombre (debe coincidir con el proveedor del producto)", "default": "Moncler" },
+        { "type": "image_picker", "id": "logo", "label": "Logo (opcional)" },
+        { "type": "url", "id": "link", "label": "Enlace (opcional)", "info": "Por defecto lleva a todos los productos de esa marca." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Carrusel de marcas",
+      "blocks": [
+        { "type": "brand", "settings": { "name": "Moncler" } },
+        { "type": "brand", "settings": { "name": "Corteiz" } },
+        { "type": "brand", "settings": { "name": "Stone Island" } },
+        { "type": "brand", "settings": { "name": "Prada" } },
+        { "type": "brand", "settings": { "name": "Arc'teryx" } },
+        { "type": "brand", "settings": { "name": "Ralph Lauren" } },
+        { "type": "brand", "settings": { "name": "Carhartt WIP" } },
+        { "type": "brand", "settings": { "name": "Loro Piana" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,106 @@
+{%- liquid
+  assign height = section.settings.height
+  case height
+    when 'full'
+      assign h = '100vh'
+    when 'large'
+      assign h = '88vh'
+    else
+      assign h = '70vh'
+  endcase
+-%}
+{%- if section.settings.layout == 'split' -%}
+  <section class="hero-split" style="--hero-height: {{ h }};">
+    <div class="hero-split__media">
+      {%- if section.settings.image != blank -%}
+        {{ section.settings.image | image_url: width: 2000 | image_tag: loading: 'eager', fetchpriority: 'high', sizes: '(min-width: 750px) 50vw, 100vw', widths: '600, 900, 1200, 1600, 2000' }}
+      {%- else -%}
+        <div class="hero__placeholder">{{ 'lifestyle-1' | placeholder_svg_tag }}</div>
+      {%- endif -%}
+    </div>
+    <div class="hero-split__content reveal">
+      {%- if section.settings.eyebrow != blank -%}<span class="eyebrow eyebrow--line">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      <h2 class="h0 heading-italic" style="max-width:12ch;">{{ section.settings.heading }}</h2>
+      {%- if section.settings.text != blank -%}<div class="muted" style="max-width:30rem;margin-bottom:2.25rem;">{{ section.settings.text }}</div>{%- endif -%}
+      <div class="hero__actions">
+        {%- if section.settings.button_label != blank -%}<a href="{{ section.settings.button_link }}" class="button">{{ section.settings.button_label }}</a>{%- endif -%}
+        {%- if section.settings.button_label_2 != blank -%}<a href="{{ section.settings.button_link_2 }}" class="button button--outline">{{ section.settings.button_label_2 }}</a>{%- endif -%}
+      </div>
+    </div>
+  </section>
+{%- else -%}
+  <section class="hero{% if section.settings.align == 'center' %} hero--center{% endif %}" style="--hero-height: {{ h }}; --hero-overlay: {{ section.settings.overlay | divided_by: 100.0 }};">
+    <div class="hero__media">
+      {%- if section.settings.video != blank -%}
+        {{ section.settings.video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, image_size: '2000x' }}
+      {%- elsif section.settings.image != blank -%}
+        {%- if section.settings.image_mobile != blank -%}
+          <picture>
+            <source media="(max-width: 749px)" srcset="{{ section.settings.image_mobile | image_url: width: 1000 }}">
+            {{ section.settings.image | image_url: width: 2400 | image_tag: loading: 'eager', fetchpriority: 'high', sizes: '100vw', widths: '750, 1100, 1500, 1920, 2400' }}
+          </picture>
+        {%- else -%}
+          {{ section.settings.image | image_url: width: 2400 | image_tag: loading: 'eager', fetchpriority: 'high', sizes: '100vw', widths: '750, 1100, 1500, 1920, 2400' }}
+        {%- endif -%}
+      {%- else -%}
+        <div class="hero__placeholder">{{ 'lifestyle-2' | placeholder_svg_tag }}</div>
+      {%- endif -%}
+    </div>
+    <div class="page-width hero__content">
+      {%- if section.settings.eyebrow != blank -%}<span class="eyebrow eyebrow--line">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      <h2 class="h0 hero__title">{{ section.settings.heading }}</h2>
+      {%- if section.settings.text != blank -%}<div class="hero__text">{{ section.settings.text }}</div>{%- endif -%}
+      <div class="hero__actions">
+        {%- if section.settings.button_label != blank -%}<a href="{{ section.settings.button_link }}" class="button button--light">{{ section.settings.button_label }}</a>{%- endif -%}
+        {%- if section.settings.button_label_2 != blank -%}<a href="{{ section.settings.button_link_2 }}" class="button button--light button--outline">{{ section.settings.button_label_2 }}</a>{%- endif -%}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Hero / Portada",
+  "tag": "div",
+  "class": "section-hero",
+  "settings": [
+    {
+      "type": "select", "id": "layout", "label": "Diseño",
+      "options": [
+        { "value": "full", "label": "Imagen a pantalla completa" },
+        { "value": "split", "label": "Imagen + texto (dividido)" }
+      ],
+      "default": "full"
+    },
+    { "type": "image_picker", "id": "image", "label": "Imagen" },
+    { "type": "image_picker", "id": "image_mobile", "label": "Imagen para móvil (opcional)" },
+    { "type": "video", "id": "video", "label": "Vídeo (opcional, sustituye a la imagen)" },
+    {
+      "type": "select", "id": "height", "label": "Altura",
+      "options": [
+        { "value": "full", "label": "Pantalla completa" },
+        { "value": "large", "label": "Grande" },
+        { "value": "medium", "label": "Media" }
+      ],
+      "default": "full"
+    },
+    {
+      "type": "select", "id": "align", "label": "Alineación del texto",
+      "options": [
+        { "value": "left", "label": "Abajo a la izquierda" },
+        { "value": "center", "label": "Centrado" }
+      ],
+      "default": "left"
+    },
+    { "type": "range", "id": "overlay", "label": "Oscurecer imagen", "min": 0, "max": 80, "step": 5, "unit": "%", "default": 45 },
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Archivo curado · Segunda mano" },
+    { "type": "inline_richtext", "id": "heading", "label": "Título", "info": "Usa cursiva para resaltar palabras.", "default": "Lujo con <em>segunda</em> vida" },
+    { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Piezas seleccionadas de las casas más deseadas — de Moncler a Corteiz — verificadas y en estado casi nuevo.</p>" },
+    { "type": "text", "id": "button_label", "label": "Botón 1", "default": "Descubrir la colección" },
+    { "type": "url", "id": "button_link", "label": "Enlace botón 1", "default": "shopify://collections/all" },
+    { "type": "text", "id": "button_label_2", "label": "Botón 2", "default": "Marcas" },
+    { "type": "url", "id": "button_link_2", "label": "Enlace botón 2" }
+  ],
+  "presets": [{ "name": "Hero / Portada" }]
+}
+{% endschema %}

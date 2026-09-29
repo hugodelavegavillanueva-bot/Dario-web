@@ -1,0 +1,46 @@
+<div class="page-width">
+  <div class="customer">
+    <h1>{{ 'customer.login.title' | t }}</h1>
+    <div id="RecoverPassword" style="display:none;">
+      {%- form 'recover_customer_password' -%}
+        {%- if form.posted_successfully? -%}<p class="form-message">{{ 'customer.recover.success' | t }}</p>{%- endif -%}
+        {{ form.errors | default_errors }}
+        <p class="muted text-center">{{ 'customer.recover.text' | t }}</p>
+        <div class="field">
+          <label class="field__label" for="RecoverEmail">{{ 'customer.email' | t }}</label>
+          <input class="field__input" type="email" id="RecoverEmail" name="email" autocomplete="email" required>
+        </div>
+        <button class="button button--full">{{ 'customer.recover.submit' | t }}</button>
+        <p class="customer__links"><a href="#" onclick="document.getElementById('RecoverPassword').style.display='none';document.getElementById('CustomerLogin').style.display='block';return false;">{{ 'general.cancel' | t }}</a></p>
+      {%- endform -%}
+    </div>
+    <div id="CustomerLogin">
+      {%- form 'customer_login', novalidate: 'novalidate' -%}
+        {%- if form.errors -%}<div class="form-message form-message--error">{{ form.errors | default_errors }}</div>{%- endif -%}
+        <div class="field">
+          <label class="field__label" for="CustomerEmail">{{ 'customer.email' | t }}</label>
+          <input class="field__input" type="email" id="CustomerEmail" name="customer[email]" autocomplete="email" required>
+        </div>
+        {%- if form.password_needed -%}
+          <div class="field">
+            <label class="field__label" for="CustomerPassword">{{ 'customer.password' | t }}</label>
+            <input class="field__input" type="password" id="CustomerPassword" name="customer[password]" autocomplete="current-password" required>
+          </div>
+        {%- endif -%}
+        <button class="button button--full">{{ 'customer.login.submit' | t }}</button>
+        <div class="customer__links">
+          <a href="{{ routes.account_register_url }}">{{ 'customer.register.title' | t }}</a>
+          {%- if form.password_needed -%}
+            <a href="#recover" onclick="document.getElementById('RecoverPassword').style.display='block';document.getElementById('CustomerLogin').style.display='none';return false;">{{ 'customer.login.forgot' | t }}</a>
+          {%- endif -%}
+        </div>
+      {%- endform -%}
+    </div>
+    {%- if shop.checkout.guest_login -%}
+      <hr style="border:0;border-top:1px solid var(--color-border);margin:2.5rem 0;">
+      {%- form 'guest_login' -%}
+        <button class="button button--outline button--full">{{ 'customer.login.guest' | t }}</button>
+      {%- endform -%}
+    {%- endif -%}
+  </div>
+</div>

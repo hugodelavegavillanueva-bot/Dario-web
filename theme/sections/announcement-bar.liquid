@@ -1,0 +1,45 @@
+{%- if section.blocks.size > 0 -%}
+  <div class="announcement" data-speed="{{ section.settings.speed | times: 1000 }}" {{ section.shopify_attributes }}>
+    <div class="page-width announcement__inner">
+      {%- for block in section.blocks -%}
+        <div class="announcement__item{% if forloop.first %} is-active{% endif %}" {{ block.shopify_attributes }}>
+          {%- if block.settings.link != blank -%}
+            <a href="{{ block.settings.link }}">{{ block.settings.text | escape }}</a>
+          {%- else -%}
+            {{ block.settings.text | escape }}
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Barra de anuncios",
+  "class": "section-announcement",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "range", "id": "speed", "label": "Cambiar cada", "min": 3, "max": 10, "step": 1, "unit": "s", "default": 5 }
+  ],
+  "blocks": [
+    {
+      "type": "announcement",
+      "name": "Anuncio",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Texto", "default": "Envío asegurado gratuito a partir de 150 €" },
+        { "type": "url", "id": "link", "label": "Enlace" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Barra de anuncios",
+      "blocks": [
+        { "type": "announcement", "settings": { "text": "Piezas únicas verificadas · Autenticidad garantizada" } },
+        { "type": "announcement", "settings": { "text": "Envío asegurado gratuito a partir de 150 €" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

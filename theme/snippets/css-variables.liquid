@@ -1,0 +1,42 @@
+{%- liquid
+  if settings.heading_font == 'inter'
+    assign heading_family = "'Inter', system-ui, sans-serif"
+    assign heading_weight = 400
+    assign heading_tracking = '-0.02em'
+  else
+    assign heading_family = "'Cormorant Garamond', 'Times New Roman', serif"
+    assign heading_weight = 400
+    assign heading_tracking = '-0.01em'
+  endif
+  case settings.card_image_ratio
+    when 'tall'
+      assign card_ratio = '2 / 3'
+    when 'square'
+      assign card_ratio = '1 / 1'
+    else
+      assign card_ratio = '4 / 5'
+  endcase
+-%}
+<style>
+  :root {
+    --color-bg: {{ settings.color_background }};
+    --color-surface: {{ settings.color_surface }};
+    --color-text: {{ settings.color_text }};
+    --color-text-rgb: {{ settings.color_text.red }}, {{ settings.color_text.green }}, {{ settings.color_text.blue }};
+    --color-muted: {{ settings.color_muted }};
+    --color-accent: {{ settings.color_accent }};
+    --color-border: {{ settings.color_border }};
+    --color-dark: {{ settings.color_dark }};
+    --color-sale: {{ settings.color_sale }};
+
+    --font-heading: {{ heading_family }};
+    --font-heading-weight: {{ heading_weight }};
+    --font-heading-tracking: {{ heading_tracking }};
+    --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --heading-scale: {{ settings.heading_scale | divided_by: 100.0 }};
+    --body-scale: {{ settings.body_scale | divided_by: 100.0 }};
+
+    --page-width: {{ settings.page_width }}px;
+    --card-ratio: {{ card_ratio }};
+  }
+</style>

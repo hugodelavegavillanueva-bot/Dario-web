@@ -1,0 +1,17 @@
+{
+  "sections": {
+    "brands": { "type": "brand-index", "settings": {} },
+    "marquee": {
+      "type": "brand-marquee",
+      "blocks": {
+        "b1": { "type": "brand", "settings": { "name": "Moncler" } },
+        "b2": { "type": "brand", "settings": { "name": "Corteiz" } },
+        "b3": { "type": "brand", "settings": { "name": "Stone Island" } },
+        "b4": { "type": "brand", "settings": { "name": "Prada" } }
+      },
+      "block_order": ["b1", "b2", "b3", "b4"],
+      "settings": {}
+    }
+  },
+  "order": ["brands", "marquee"]
+}

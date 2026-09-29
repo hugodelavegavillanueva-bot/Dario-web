@@ -1,0 +1,28 @@
+{%- comment -%}
+  Params: product (o variant via `variant`), show_saving (bool)
+{%- endcomment -%}
+{%- liquid
+  assign target = variant | default: product.selected_or_first_available_variant
+  assign price = target.price
+  assign compare = target.compare_at_price
+  assign on_sale = false
+  if compare > price
+    assign on_sale = true
+  endif
+  if variant == blank and product.price_varies
+    assign from = true
+  endif
+-%}
+<div class="price{% if on_sale %} price--sale{% endif %}" {% if data_attr %}data-price{% endif %}>
+  <span class="price__current">
+    {%- if from -%}{{ 'products.product.from' | t }} {% endif -%}
+    {{- price | money -}}
+  </span>
+  {%- if on_sale -%}
+    <s class="price__compare">{{ compare | money }}</s>
+    {%- if show_saving -%}
+      {%- assign saving = compare | minus: price | times: 100.0 | divided_by: compare | round -%}
+      <span class="price__saving">−{{ saving }}%</span>
+    {%- endif -%}
+  {%- endif -%}
+</div>

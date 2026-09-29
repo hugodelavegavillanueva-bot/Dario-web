@@ -1,0 +1,22 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "description": { "type": "description", "settings": { "heading": "Descripción", "open": true } },
+        "condition": { "type": "metafield", "settings": { "heading": "Detalles del estado", "key": "detalles_estado", "open": false } },
+        "measures": { "type": "metafield", "settings": { "heading": "Medidas", "key": "medidas", "open": false } },
+        "composition": { "type": "metafield", "settings": { "heading": "Composición y cuidados", "key": "composicion", "open": false } },
+        "authenticity": { "type": "authenticity", "settings": { "heading": "Garantía de autenticidad", "open": false } },
+        "shipping": { "type": "shipping", "settings": { "heading": "Envío y devoluciones", "open": false } }
+      },
+      "block_order": ["description", "condition", "measures", "composition", "authenticity", "shipping"],
+      "settings": { "gallery_layout": "grid", "show_dynamic_checkout": true, "show_sku": true, "compare_as_retail": true }
+    },
+    "recommendations": {
+      "type": "product-recommendations",
+      "settings": { "eyebrow": "Seleccionado para ti", "heading": "También te <em>gustará</em>", "limit": 4 }
+    }
+  },
+  "order": ["main", "recommendations"]
+}

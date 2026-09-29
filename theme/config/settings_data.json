@@ -1,0 +1,60 @@
+{
+  "current": "Default",
+  "presets": {
+    "Default": {
+      "color_background": "#F5F2EC",
+      "color_surface": "#ECE7DF",
+      "color_text": "#141414",
+      "color_muted": "#6E6A63",
+      "color_accent": "#9A8466",
+      "color_border": "#D9D3C8",
+      "color_dark": "#141414",
+      "color_sale": "#8A3B2E",
+      "heading_font": "cormorant",
+      "heading_scale": 100,
+      "body_scale": 100,
+      "page_width": 1600,
+      "card_image_ratio": "portrait",
+      "card_show_secondary_image": true,
+      "card_show_vendor": true,
+      "card_show_condition": true,
+      "card_show_size": true,
+      "condition_tag_prefix": "Condicion:",
+      "unique_piece_label": "Pieza única",
+      "cart_type": "drawer",
+      "cart_note_text": "Envío asegurado y embalaje premium en todos los pedidos."
+    },
+    "Noir": {
+      "color_background": "#0F0F0F",
+      "color_surface": "#1A1918",
+      "color_text": "#F2EEE7",
+      "color_muted": "#9C978F",
+      "color_accent": "#B89F7A",
+      "color_border": "#2C2A27",
+      "color_dark": "#050505",
+      "color_sale": "#C8735F",
+      "heading_font": "cormorant",
+      "heading_scale": 100,
+      "body_scale": 100,
+      "page_width": 1600,
+      "card_image_ratio": "portrait",
+      "cart_type": "drawer"
+    },
+    "Street": {
+      "color_background": "#FFFFFF",
+      "color_surface": "#F2F2F2",
+      "color_text": "#0A0A0A",
+      "color_muted": "#707070",
+      "color_accent": "#0A0A0A",
+      "color_border": "#E2E2E2",
+      "color_dark": "#0A0A0A",
+      "color_sale": "#C8102E",
+      "heading_font": "inter",
+      "heading_scale": 95,
+      "body_scale": 100,
+      "page_width": 1700,
+      "card_image_ratio": "portrait",
+      "cart_type": "drawer"
+    }
+  }
+}
