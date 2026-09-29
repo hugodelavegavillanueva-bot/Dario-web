@@ -39,8 +39,8 @@ cabecera, el pie y el título del navegador. Si subes un logo en la sección *Ca
 logo en lugar del nombre. El tema **no** usa el nombre de la tienda de Shopify donde esté instalado.
 
 ### Fotos de demostración
-El tema incluye 18 fotos de ropa (plumíferos, parkas, streetwear, outdoor, sastrería, boutique) para
-que no se vea vacío al instalarlo. Aparecen **solo donde aún no has subido una imagen propia** y cada
+El tema incluye 17 fotos **solo de prendas** (colgadas, dobladas o en plano, sin modelos) para que
+no se vea vacío al instalarlo. Aparecen **solo donde aún no has subido una imagen propia** y cada
 sección tiene un selector *"Foto de muestra"*. Para quitarlas todas:
 **Configuración del tema → Marca → Mostrar fotos de demostración** (desactivar).
 
@@ -51,24 +51,23 @@ prendas reales.
 
 | Archivo | Origen |
 |---|---|
-| `demo-plumifero-bosque.jpg` | [pexels.com/photo/10012896](https://www.pexels.com/photo/10012896/) |
-| `demo-streetwear-capucha.jpg` | [pexels.com/photo/11047380](https://www.pexels.com/photo/11047380/) |
-| `demo-plumifero-ciudad.jpg` | [pexels.com/photo/19682551](https://www.pexels.com/photo/19682551/) |
-| `demo-parka-nieve.jpg` | [pexels.com/photo/11274805](https://www.pexels.com/photo/11274805/) |
-| `demo-plumifero-mujer.jpg` | [pexels.com/photo/15639609](https://www.pexels.com/photo/15639609/) |
-| `demo-plumifero-brillo.jpg` | [pexels.com/photo/17474393](https://www.pexels.com/photo/17474393/) |
-| `demo-sudadera-grafica.jpg` | [pexels.com/photo/31700390](https://www.pexels.com/photo/31700390/) |
-| `demo-blazer.jpg` | [pexels.com/photo/32167462](https://www.pexels.com/photo/32167462/) |
-| `demo-look-cuero.jpg` | [pexels.com/photo/14347552](https://www.pexels.com/photo/14347552/) |
-| `demo-perchero-plumifero.jpg` | [pexels.com/photo/6045058](https://www.pexels.com/photo/6045058/) |
+| `demo-accesorios.jpg` | [pexels.com/photo/28719728](https://www.pexels.com/photo/28719728/) |
 | `demo-boutique.jpg` | [pexels.com/photo/5424922](https://www.pexels.com/photo/5424922/) |
+| `demo-boutique-clara.jpg` | [pexels.com/photo/3965545](https://www.pexels.com/photo/3965545/) |
+| `demo-camisa-blanca.jpg` | [pexels.com/photo/28576622](https://www.pexels.com/photo/28576622/) |
+| `demo-camiseta-negra.jpg` | [pexels.com/photo/8532616](https://www.pexels.com/photo/8532616/) |
+| `demo-chaquetas-plano.jpg` | [pexels.com/photo/3998647](https://www.pexels.com/photo/3998647/) |
+| `demo-outfit-plano.jpg` | [pexels.com/photo/14577586](https://www.pexels.com/photo/14577586/) |
+| `demo-outfit-plano-2.jpg` | [pexels.com/photo/8408556](https://www.pexels.com/photo/8408556/) |
+| `demo-perchero-calido.jpg` | [pexels.com/photo/4169370](https://www.pexels.com/photo/4169370/) |
 | `demo-perchero-color.jpg` | [pexels.com/photo/4857762](https://www.pexels.com/photo/4857762/) |
-| `demo-montana.jpg` | [pexels.com/photo/2101881](https://www.pexels.com/photo/2101881/) |
-| `demo-montana-espalda.jpg` | [pexels.com/photo/842155](https://www.pexels.com/photo/842155/) |
-| `demo-sudadera-negra.jpg` | [pexels.com/photo/32430590](https://www.pexels.com/photo/32430590/) |
-| `demo-chandal.jpg` | [pexels.com/photo/10877553](https://www.pexels.com/photo/10877553/) |
-| `demo-abrigo-borrego.jpg` | [pexels.com/photo/8305201](https://www.pexels.com/photo/8305201/) |
-| `demo-camiseta.jpg` | [pexels.com/photo/34579430](https://www.pexels.com/photo/34579430/) |
+| `demo-perchero-plumifero.jpg` | [pexels.com/photo/6045058](https://www.pexels.com/photo/6045058/) |
+| `demo-perchero-tienda.jpg` | [pexels.com/photo/1884584](https://www.pexels.com/photo/1884584/) |
+| `demo-punto.jpg` | [pexels.com/photo/5710046](https://www.pexels.com/photo/5710046/) |
+| `demo-ropa-doblada.jpg` | [pexels.com/photo/6461392](https://www.pexels.com/photo/6461392/) |
+| `demo-sudaderas-perchero.jpg` | [pexels.com/photo/9594679](https://www.pexels.com/photo/9594679/) |
+| `demo-vaqueros.jpg` | [pexels.com/photo/7679454](https://www.pexels.com/photo/7679454/) |
+| `demo-vestido-perchero.jpg` | [pexels.com/photo/8274730](https://www.pexels.com/photo/8274730/) |
 
 ### Productos en la portada
 Las secciones de productos (pestañas, carrusel, colección destacada, "compra el look") muestran

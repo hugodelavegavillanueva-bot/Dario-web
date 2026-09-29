@@ -1,0 +1,228 @@
+{%- liquid
+  assign has_img = false
+  if section.settings.image != blank
+    assign has_img = true
+  elsif settings.show_demo_images and section.settings.demo != 'none'
+    assign has_img = true
+  endif
+-%}
+<section class="hero-search{% if has_img %} hero-search--image{% endif %}" style="--hs-height: {{ section.settings.height }}vh;">
+  <div class="hero-search__media">
+    {%- if section.settings.image != blank -%}
+      {{ section.settings.image | image_url: width: 2400 | image_tag: loading: 'eager', fetchpriority: 'high', sizes: '100vw', widths: '750, 1100, 1500, 1920, 2400' }}
+    {%- elsif has_img -%}
+      {% render 'demo-image', name: section.settings.demo, eager: true %}
+    {%- endif -%}
+  </div>
+  <div class="page-width hero-search__content">
+    {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+    {%- if section.index == 1 -%}
+      <h1 class="h1 heading-italic">{{ section.settings.heading }}</h1>
+    {%- else -%}
+      <h2 class="h1 heading-italic">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    {%- if section.settings.text != blank -%}<div class="hero-search__text">{{ section.settings.text }}</div>{%- endif -%}
+
+    <form action="{{ routes.search_url }}" method="get" role="search" class="hero-search__form">
+      <input type="hidden" name="type" value="product">
+      {% render 'icon', icon: 'search' %}
+      <input type="search" name="q" placeholder="{{ section.settings.placeholder }}" aria-label="{{ 'layout.header.search' | t }}" autocomplete="off">
+      <button type="submit" class="button">{{ 'layout.header.search' | t }}</button>
+    </form>
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="hero-search__chips">
+        {%- if section.settings.chips_label != blank -%}<span class="hero-search__chips-label">{{ section.settings.chips_label }}</span>{%- endif -%}
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign url = block.settings.link
+            if url == blank
+              assign url = block.settings.label | url_for_vendor
+            endif
+          -%}
+          <a href="{{ url }}" class="chip" {{ block.shopify_attributes }}>{{ block.settings.label }}</a>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Portada con buscador",
+  "class": "section-hero-search",
+  "max_blocks": 10,
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imagen de fondo"
+    },
+    {
+      "type": "select",
+      "id": "demo",
+      "label": "Foto de muestra (si no subes imagen)",
+      "options": [
+        {
+          "value": "none",
+          "label": "Ninguna"
+        },
+        {
+          "value": "demo-perchero-tienda",
+          "label": "Perchero de tienda"
+        },
+        {
+          "value": "demo-boutique-clara",
+          "label": "Boutique luminosa"
+        },
+        {
+          "value": "demo-perchero-calido",
+          "label": "Perchero cálido"
+        },
+        {
+          "value": "demo-perchero-plumifero",
+          "label": "Plumífero en perchero"
+        },
+        {
+          "value": "demo-perchero-color",
+          "label": "Perchero de colores"
+        },
+        {
+          "value": "demo-boutique",
+          "label": "Boutique"
+        },
+        {
+          "value": "demo-chaquetas-plano",
+          "label": "Chaquetas en plano"
+        },
+        {
+          "value": "demo-sudaderas-perchero",
+          "label": "Sudaderas en perchero"
+        },
+        {
+          "value": "demo-camiseta-negra",
+          "label": "Camiseta negra"
+        },
+        {
+          "value": "demo-vaqueros",
+          "label": "Vaqueros"
+        },
+        {
+          "value": "demo-punto",
+          "label": "Jerséis de punto"
+        },
+        {
+          "value": "demo-camisa-blanca",
+          "label": "Camisa blanca"
+        },
+        {
+          "value": "demo-accesorios",
+          "label": "Accesorios"
+        },
+        {
+          "value": "demo-ropa-doblada",
+          "label": "Ropa doblada"
+        },
+        {
+          "value": "demo-outfit-plano",
+          "label": "Outfit en plano"
+        },
+        {
+          "value": "demo-outfit-plano-2",
+          "label": "Outfit en plano 2"
+        },
+        {
+          "value": "demo-vestido-perchero",
+          "label": "Vestido en perchero"
+        }
+      ],
+      "default": "demo-perchero-chaquetas"
+    },
+    {
+      "type": "range",
+      "id": "height",
+      "label": "Altura",
+      "min": 40,
+      "max": 90,
+      "step": 5,
+      "unit": "vh",
+      "default": 65
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Antetítulo",
+      "default": "Segunda mano · Verificado"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Título",
+      "default": "Ropa de marca, <em>casi nueva</em>"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texto",
+      "default": "<p>Cientos de prendas revisadas una a una. Encuentra tu talla y tu marca a mejor precio.</p>"
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Texto del buscador",
+      "default": "Busca marca, prenda o talla…"
+    },
+    {
+      "type": "text",
+      "id": "chips_label",
+      "label": "Texto antes de los atajos",
+      "default": "Populares:"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "chip",
+      "name": "Atajo",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Texto",
+          "default": "Moncler"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Enlace",
+          "info": "Si lo dejas vacío, lleva a todos los productos de esa marca."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Portada con buscador",
+      "blocks": [
+        {
+          "type": "chip",
+          "settings": {
+            "label": "Moncler"
+          }
+        },
+        {
+          "type": "chip",
+          "settings": {
+            "label": "Corteiz"
+          }
+        },
+        {
+          "type": "chip",
+          "settings": {
+            "label": "The North Face"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

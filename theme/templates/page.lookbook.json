@@ -7,13 +7,13 @@
         "height": "large",
         "align": "center",
         "eyebrow": "Lookbook",
-        "heading": "Archivo <em>invierno</em>",
+        "heading": "Conjuntos <em>de archivo</em>",
         "text": "<p>Piezas de distintas casas, combinadas con intención.</p>",
         "button_label": "",
         "button_link": "",
         "button_label_2": "",
         "button_link_2": "",
-        "demo": "demo-montana-espalda"
+        "demo": "demo-perchero-tienda"
       }
     },
     "look1": {
@@ -48,8 +48,8 @@
       ],
       "settings": {
         "eyebrow": "Look 01",
-        "heading": "Lujo <em>discreto</em>",
-        "demo": "demo-plumifero-brillo"
+        "heading": "Look <em>casual</em>",
+        "demo": "demo-outfit-plano"
       }
     },
     "look2": {
@@ -76,10 +76,10 @@
       ],
       "settings": {
         "eyebrow": "Look 02",
-        "heading": "Street <em>archive</em>",
+        "heading": "Básicos <em>que combinan</em>",
         "reverse": true,
         "surface": true,
-        "demo": "demo-sudadera-negra"
+        "demo": "demo-outfit-plano-2"
       }
     },
     "split": {
@@ -89,18 +89,18 @@
           "type": "panel",
           "settings": {
             "eyebrow": "Colección",
-            "heading": "Lujo",
+            "heading": "Abrigos",
             "button_label": "Descubrir",
-            "demo": "demo-blazer"
+            "demo": "demo-chaquetas-plano"
           }
         },
         "p2": {
           "type": "panel",
           "settings": {
             "eyebrow": "Colección",
-            "heading": "Streetwear",
+            "heading": "Sudaderas",
             "button_label": "Descubrir",
-            "demo": "demo-sudadera-grafica"
+            "demo": "demo-sudaderas-perchero"
           }
         }
       },

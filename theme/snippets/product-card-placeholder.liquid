@@ -5,12 +5,12 @@
 {%- endcomment -%}
 {%- liquid
   assign i = index | default: 1 | minus: 1 | modulo: 8
-  assign photos = 'demo-parka-nieve,demo-sudadera-negra,demo-plumifero-brillo,demo-sudadera-grafica,demo-abrigo-borrego,demo-streetwear-capucha,demo-plumifero-mujer,demo-camiseta' | split: ','
-  assign vendors = 'Moncler,Corteiz,The North Face,Stone Island,Max Mara,Trapstar,Moncler,Corteiz' | split: ','
-  assign titles = 'Parka con capucha de pelo,Sudadera Alcatraz,Plumífero Nuptse 1996,Sudadera gráfica oversize,Abrigo teddy,Plumífero con capucha,Chaqueta acolchada,Camiseta logo bordado' | split: ','
+  assign photos = 'demo-perchero-plumifero,demo-sudaderas-perchero,demo-camiseta-negra,demo-chaquetas-plano,demo-punto,demo-camisa-blanca,demo-vaqueros,demo-outfit-plano-2' | split: ','
+  assign vendors = 'Moncler,Corteiz,Stone Island,The North Face,Ralph Lauren,Carhartt WIP,Levi’s,Corteiz' | split: ','
+  assign titles = 'Plumífero Maya negro,Sudadera con capucha,Camiseta básica negra,Chaqueta Nuptse 1996,Jersey de punto,Camisa Oxford blanca,Vaqueros 501 azul,Pack pantalón + camiseta' | split: ','
   assign prices = '69000,22000,18500,16000,59000,21000,54000,9500' | split: ','
   assign compares = '129000,0,32000,0,99000,0,0,0' | split: ','
-  assign sizes = 'M,L,S,M,38,L,40,M' | split: ','
+  assign sizes = 'M,L,S,M,L,M,32,M' | split: ','
   assign conditions = 'Como nuevo,Nuevo con etiqueta,Excelente,Como nuevo,Excelente,Nuevo con etiqueta,Como nuevo,Muy bueno' | split: ','
   assign price = prices[i] | plus: 0
   assign compare = compares[i] | plus: 0

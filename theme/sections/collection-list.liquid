@@ -8,7 +8,7 @@
         </div>
       </div>
     {%- endif -%}
-    <div class="collection-tiles" style="--cols: {{ section.settings.columns }}; --tile-ratio: {% if section.settings.ratio == 'square' %}1 / 1{% elsif section.settings.ratio == 'landscape' %}4 / 3{% else %}3 / 4{% endif %};">
+    <div class="collection-tiles{% if section.settings.title_below %} collection-tiles--below{% endif %}" style="--cols: {{ section.settings.columns }}; --tile-ratio: {% if section.settings.ratio == 'square' %}1 / 1{% elsif section.settings.ratio == 'landscape' %}4 / 3{% else %}3 / 4{% endif %};">
       {%- for block in section.blocks -%}
         {%- assign c = block.settings.collection -%}
         {%- assign img = block.settings.image | default: c.featured_image -%}
@@ -57,7 +57,7 @@
       "id": "columns",
       "label": "Columnas",
       "min": 2,
-      "max": 5,
+      "max": 6,
       "step": 1,
       "default": 3
     },
@@ -92,6 +92,12 @@
       "id": "surface",
       "label": "Fondo secundario",
       "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "title_below",
+      "label": "Título debajo de la imagen (estilo catálogo)",
+      "default": false
     }
   ],
   "blocks": [
@@ -114,76 +120,72 @@
               "label": "Ninguna"
             },
             {
-              "value": "demo-plumifero-bosque",
-              "label": "Plumífero – bosque"
+              "value": "demo-perchero-tienda",
+              "label": "Perchero de tienda"
             },
             {
-              "value": "demo-streetwear-capucha",
-              "label": "Streetwear – capucha"
+              "value": "demo-boutique-clara",
+              "label": "Boutique luminosa"
             },
             {
-              "value": "demo-plumifero-ciudad",
-              "label": "Plumífero – ciudad"
-            },
-            {
-              "value": "demo-parka-nieve",
-              "label": "Parka – nieve"
-            },
-            {
-              "value": "demo-plumifero-mujer",
-              "label": "Plumífero – mujer"
-            },
-            {
-              "value": "demo-plumifero-brillo",
-              "label": "Plumífero brillante"
-            },
-            {
-              "value": "demo-sudadera-grafica",
-              "label": "Sudadera gráfica"
-            },
-            {
-              "value": "demo-blazer",
-              "label": "Blazer (sastrería)"
-            },
-            {
-              "value": "demo-look-cuero",
-              "label": "Look cuero"
+              "value": "demo-perchero-calido",
+              "label": "Perchero cálido"
             },
             {
               "value": "demo-perchero-plumifero",
               "label": "Plumífero en perchero"
             },
             {
-              "value": "demo-boutique",
-              "label": "Boutique"
-            },
-            {
               "value": "demo-perchero-color",
               "label": "Perchero de colores"
             },
             {
-              "value": "demo-montana",
-              "label": "Montaña / outdoor"
+              "value": "demo-boutique",
+              "label": "Boutique"
             },
             {
-              "value": "demo-montana-espalda",
-              "label": "Outdoor de espaldas"
+              "value": "demo-chaquetas-plano",
+              "label": "Chaquetas en plano"
             },
             {
-              "value": "demo-sudadera-negra",
-              "label": "Sudadera negra"
+              "value": "demo-sudaderas-perchero",
+              "label": "Sudaderas en perchero"
             },
             {
-              "value": "demo-chandal",
-              "label": "Chándal"
+              "value": "demo-camiseta-negra",
+              "label": "Camiseta negra"
             },
             {
-              "value": "demo-abrigo-borrego",
-              "label": "Abrigo borrego"
+              "value": "demo-vaqueros",
+              "label": "Vaqueros"
             },
             {
-              "value": "demo-camiseta",
-              "label": "Camiseta streetwear"
+              "value": "demo-punto",
+              "label": "Jerséis de punto"
+            },
+            {
+              "value": "demo-camisa-blanca",
+              "label": "Camisa blanca"
+            },
+            {
+              "value": "demo-accesorios",
+              "label": "Accesorios"
+            },
+            {
+              "value": "demo-ropa-doblada",
+              "label": "Ropa doblada"
+            },
+            {
+              "value": "demo-outfit-plano",
+              "label": "Outfit en plano"
+            },
+            {
+              "value": "demo-outfit-plano-2",
+              "label": "Outfit en plano 2"
+            },
+            {
+              "value": "demo-vestido-perchero",
+              "label": "Vestido en perchero"
             }
           ],
           "default": "none"

@@ -1,0 +1,60 @@
+<section class="section section--tight{% if section.settings.surface %} section--surface{% endif %}">
+  <div class="page-width">
+    <div class="quick-links{% if section.settings.center %} quick-links--center{% endif %}">
+      {%- if section.settings.heading != blank -%}<h2 class="h3 quick-links__title">{{ section.settings.heading }}</h2>{%- endif -%}
+      <div class="quick-links__list">
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign url = block.settings.link
+            if url == blank
+              assign url = block.settings.label | url_for_vendor
+            endif
+          -%}
+          <a href="{{ url }}" class="chip chip--lg" {{ block.shopify_attributes }}>
+            {{ block.settings.label }}
+            {%- if block.settings.note != blank -%}<small>{{ block.settings.note }}</small>{%- endif -%}
+          </a>
+        {%- endfor -%}
+      </div>
+      {%- if section.settings.link_label != blank -%}
+        <a href="{{ section.settings.link | default: '/pages/marcas' }}" class="link-underline">{{ section.settings.link_label }} <span class="arrow">→</span></a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Atajos (marcas / tallas)",
+  "class": "section-quick-links",
+  "max_blocks": 24,
+  "settings": [
+    { "type": "inline_richtext", "id": "heading", "label": "Título", "default": "Marcas populares" },
+    { "type": "text", "id": "link_label", "label": "Enlace final", "default": "Ver todas las marcas" },
+    { "type": "url", "id": "link", "label": "URL del enlace final" },
+    { "type": "checkbox", "id": "center", "label": "Centrar", "default": false },
+    { "type": "checkbox", "id": "surface", "label": "Fondo secundario", "default": false }
+  ],
+  "blocks": [
+    {
+      "type": "link", "name": "Atajo",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Texto", "default": "Moncler" },
+        { "type": "text", "id": "note", "label": "Nota pequeña (opcional)" },
+        { "type": "url", "id": "link", "label": "Enlace", "info": "Vacío = todos los productos de esa marca." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Atajos (marcas / tallas)",
+      "blocks": [
+        { "type": "link", "settings": { "label": "Moncler" } },
+        { "type": "link", "settings": { "label": "Corteiz" } },
+        { "type": "link", "settings": { "label": "The North Face" } },
+        { "type": "link", "settings": { "label": "Stone Island" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
