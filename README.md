@@ -38,6 +38,38 @@ Alternativa con Shopify CLI: `cd theme && shopify theme push --unpublished`.
 cabecera, el pie y el título del navegador. Si subes un logo en la sección *Cabecera*, se muestra el
 logo en lugar del nombre. El tema **no** usa el nombre de la tienda de Shopify donde esté instalado.
 
+### Fotos de demostración
+El tema incluye 18 fotos de ropa (plumíferos, parkas, streetwear, outdoor, sastrería, boutique) para
+que no se vea vacío al instalarlo. Aparecen **solo donde aún no has subido una imagen propia** y cada
+sección tiene un selector *"Foto de muestra"*. Para quitarlas todas:
+**Configuración del tema → Marca → Mostrar fotos de demostración** (desactivar).
+
+Son fotos de [Pexels](https://www.pexels.com/license/) (uso comercial gratuito, sin atribución
+obligatoria). **No** son fotos oficiales de Moncler, Corteiz, The North Face, etc.: esas tienen
+derechos de autor y no deben usarse sin permiso. Lo ideal es sustituirlas por fotos propias de las
+prendas reales.
+
+| Archivo | Origen |
+|---|---|
+| `demo-plumifero-bosque.jpg` | [pexels.com/photo/10012896](https://www.pexels.com/photo/10012896/) |
+| `demo-streetwear-capucha.jpg` | [pexels.com/photo/11047380](https://www.pexels.com/photo/11047380/) |
+| `demo-plumifero-ciudad.jpg` | [pexels.com/photo/19682551](https://www.pexels.com/photo/19682551/) |
+| `demo-parka-nieve.jpg` | [pexels.com/photo/11274805](https://www.pexels.com/photo/11274805/) |
+| `demo-plumifero-mujer.jpg` | [pexels.com/photo/15639609](https://www.pexels.com/photo/15639609/) |
+| `demo-plumifero-brillo.jpg` | [pexels.com/photo/17474393](https://www.pexels.com/photo/17474393/) |
+| `demo-sudadera-grafica.jpg` | [pexels.com/photo/31700390](https://www.pexels.com/photo/31700390/) |
+| `demo-blazer.jpg` | [pexels.com/photo/32167462](https://www.pexels.com/photo/32167462/) |
+| `demo-look-cuero.jpg` | [pexels.com/photo/14347552](https://www.pexels.com/photo/14347552/) |
+| `demo-perchero-plumifero.jpg` | [pexels.com/photo/6045058](https://www.pexels.com/photo/6045058/) |
+| `demo-boutique.jpg` | [pexels.com/photo/5424922](https://www.pexels.com/photo/5424922/) |
+| `demo-perchero-color.jpg` | [pexels.com/photo/4857762](https://www.pexels.com/photo/4857762/) |
+| `demo-montana.jpg` | [pexels.com/photo/2101881](https://www.pexels.com/photo/2101881/) |
+| `demo-montana-espalda.jpg` | [pexels.com/photo/842155](https://www.pexels.com/photo/842155/) |
+| `demo-sudadera-negra.jpg` | [pexels.com/photo/32430590](https://www.pexels.com/photo/32430590/) |
+| `demo-chandal.jpg` | [pexels.com/photo/10877553](https://www.pexels.com/photo/10877553/) |
+| `demo-abrigo-borrego.jpg` | [pexels.com/photo/8305201](https://www.pexels.com/photo/8305201/) |
+| `demo-camiseta.jpg` | [pexels.com/photo/34579430](https://www.pexels.com/photo/34579430/) |
+
 ### Productos en la portada
 Las secciones de productos (pestañas, carrusel, colección destacada, "compra el look") muestran
 **prendas de muestra** hasta que eliges una colección o producto en el editor: nunca cargan solas
