@@ -33,6 +33,16 @@ Alternativa con Shopify CLI: `cd theme && shopify theme push --unpublished`.
 
 ## 2. Configuración recomendada en Shopify
 
+### Nombre y logo (lo primero)
+**Configuración del tema → Marca → Nombre de la tienda** (por defecto `TU MARCA`). Se usa en la
+cabecera, el pie y el título del navegador. Si subes un logo en la sección *Cabecera*, se muestra el
+logo en lugar del nombre. El tema **no** usa el nombre de la tienda de Shopify donde esté instalado.
+
+### Productos en la portada
+Las secciones de productos (pestañas, carrusel, colección destacada, "compra el look") muestran
+**prendas de muestra** hasta que eliges una colección o producto en el editor: nunca cargan solas
+todo el catálogo de la tienda.
+
 ### Menús (Tienda online → Navegación)
 - **main-menu**: Novedades · Marcas (con submenús Lujo / Streetwear / Outdoor → marcas) · Categorías · Vender.
   Si un elemento tiene sub‑submenús se muestra como **mega menú** en columnas.
