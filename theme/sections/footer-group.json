@@ -5,18 +5,58 @@
     "footer": {
       "type": "footer",
       "blocks": {
-        "m1": { "type": "menu", "settings": { "heading": "Tienda", "menu": "main-menu" } },
-        "m2": { "type": "menu", "settings": { "heading": "Ayuda", "menu": "footer" } },
-        "t1": { "type": "text", "settings": { "heading": "Contacto", "text": "<p>hola@tutienda.com<br>Lun–Vie · 10:00–19:00</p>" } }
+        "m1": {
+          "type": "menu",
+          "settings": {
+            "heading": "Tienda",
+            "menu": "main-menu"
+          }
+        },
+        "m2": {
+          "type": "menu",
+          "settings": {
+            "heading": "Ayuda",
+            "menu": "footer"
+          }
+        },
+        "t1": {
+          "type": "text",
+          "settings": {
+            "heading": "Contacto",
+            "text": "<p>hola@tutienda.com<br>Lun–Vie · 10:00–19:00</p>"
+          }
+        }
       },
-      "block_order": ["m1", "m2", "t1"],
+      "block_order": [
+        "m1",
+        "m2",
+        "t1"
+      ],
       "settings": {
         "show_newsletter": true,
         "show_wordmark": true,
         "copyright": "Todos los derechos reservados.",
         "show_payment_icons": true
       }
+    },
+    "popup": {
+      "type": "newsletter-popup",
+      "settings": {
+        "enabled": true,
+        "delay": 8,
+        "days": 14
+      }
+    },
+    "cookies": {
+      "type": "cookie-banner",
+      "settings": {
+        "enabled": true
+      }
     }
   },
-  "order": ["footer"]
+  "order": [
+    "footer",
+    "popup",
+    "cookies"
+  ]
 }

@@ -1,0 +1,26 @@
+<div class="page-width" style="padding-bottom: clamp(4rem, 8vw, 7rem);">
+  <div class="page-header">
+    <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+    <h1 class="heading-italic">{{ section.settings.heading }}</h1>
+    <p class="muted">{{ section.settings.text }}</p>
+  </div>
+  <div class="product-grid" style="--cols: 4;" data-wishlist-grid></div>
+  <div class="empty-state" data-wishlist-empty hidden>
+    <p class="h3">{{ 'wishlist.empty' | t }}</p>
+    <p>{{ 'wishlist.empty_text' | t }}</p>
+    <a href="{{ routes.all_products_collection_url }}" class="button">{{ 'cart.continue' | t }}</a>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Favoritos",
+  "class": "section-wishlist",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Tu selección" },
+    { "type": "inline_richtext", "id": "heading", "label": "Título", "default": "Mis <em>favoritos</em>" },
+    { "type": "text", "id": "text", "label": "Texto", "default": "Las piezas únicas vuelan: si te gusta algo, no esperes demasiado." }
+  ],
+  "presets": [{ "name": "Favoritos" }]
+}
+{% endschema %}

@@ -1,5 +1,8 @@
 {%- liquid
   assign cols = section.settings.columns
+  if section.settings.sidebar and collection.filters.size > 0 and cols > 3
+    assign cols = cols | minus: 1
+  endif
   assign sort_by = collection.sort_by | default: collection.default_sort_by
   assign active_count = 0
   for filter in collection.filters
@@ -36,11 +39,18 @@
 {%- endif -%}
 
 <div class="page-width" style="padding-bottom: clamp(4rem, 8vw, 7rem);">
+  {%- if section.settings.pills_menu != blank -%}
+    <nav class="pills" aria-label="{{ 'collections.subcategories' | t }}">
+      {%- for link in section.settings.pills_menu.links -%}
+        <a href="{{ link.url }}" class="pill{% if link.active %} is-active{% endif %}">{{ link.title }}</a>
+      {%- endfor -%}
+    </nav>
+  {%- endif -%}
   {%- paginate collection.products by section.settings.per_page -%}
     <div class="toolbar">
       <div class="toolbar__left">
         {%- if collection.filters.size > 0 -%}
-          <button type="button" class="icon-button" data-drawer-open="FilterDrawer">
+          <button type="button" class="icon-button{% if section.settings.sidebar %} hide-desktop{% endif %}" data-drawer-open="FilterDrawer">
             {% render 'icon', icon: 'filter' %} {{ 'collections.filter' | t }}{% if active_count > 0 %} ({{ active_count }}){% endif %}
           </button>
         {%- endif -%}
@@ -80,26 +90,56 @@
       </div>
     {%- endif -%}
 
-    {%- if collection.products.size > 0 -%}
-      <div class="product-grid" data-collection-grid style="--cols: {{ cols }}; --cols-tablet: {{ cols | at_most: 3 }};">
-        {%- for product in collection.products -%}
-          {%- liquid
-            assign lazy = true
-            if forloop.index <= cols
-              assign lazy = false
-            endif
-          -%}
-          {% render 'product-card', product: product, lazy: lazy, show_quick_add: section.settings.quick_add %}
-        {%- endfor -%}
+    <div class="collection-layout{% if section.settings.sidebar and collection.filters.size > 0 %} collection-layout--sidebar{% endif %}">
+      {%- if section.settings.sidebar and collection.filters.size > 0 -%}
+        <aside class="collection-sidebar hide-mobile">
+          {% render 'facets', results: collection, form_id: 'SidebarFilterForm', auto: true %}
+        </aside>
+      {%- endif -%}
+      <div>
+        {%- if collection.products.size > 0 -%}
+          <div class="product-grid" data-collection-grid style="--cols: {{ cols }}; --cols-tablet: {{ cols | at_most: 3 }};">
+            {%- for product in collection.products -%}
+              {%- liquid
+                assign lazy = true
+                if forloop.index <= cols
+                  assign lazy = false
+                endif
+              -%}
+              {%- if section.settings.promo_image != blank and paginate.current_page == 1 and forloop.index == section.settings.promo_position -%}
+                <a href="{{ section.settings.promo_link | default: '#' }}" class="promo-tile">
+                  {{ section.settings.promo_image | image_url: width: 1000 | image_tag: loading: 'lazy', sizes: '(min-width: 1100px) 50vw, 100vw' }}
+                  <span class="promo-tile__content">
+                    {%- if section.settings.promo_eyebrow != blank -%}<span class="eyebrow">{{ section.settings.promo_eyebrow }}</span>{%- endif -%}
+                    <span class="h2">{{ section.settings.promo_heading }}</span>
+                    {%- if section.settings.promo_button != blank -%}<span class="link-underline">{{ section.settings.promo_button }} <span class="arrow">→</span></span>{%- endif -%}
+                  </span>
+                </a>
+              {%- endif -%}
+              <div class="grid-item">{% render 'product-card', product: product, lazy: lazy, show_quick_add: section.settings.quick_add %}</div>
+            {%- endfor -%}
+          </div>
+          {%- if section.settings.pagination == 'load_more' -%}
+            {%- if paginate.next -%}
+              <div class="load-more">
+                {%- assign shown = paginate.current_offset | plus: collection.products.size -%}
+                <p class="muted">{{ 'collections.showing' | t: shown: shown, total: paginate.items }}</p>
+                <div class="load-more__track"><span style="width: {{ shown | times: 100 | divided_by: paginate.items }}%;"></span></div>
+                <a href="{{ paginate.next.url }}" class="button button--outline" data-load-more>{{ 'collections.load_more' | t }}</a>
+              </div>
+            {%- endif -%}
+          {%- else -%}
+            {% render 'pagination', paginate: paginate %}
+          {%- endif -%}
+        {%- else -%}
+          <div class="empty-state">
+            <p class="h3">{{ 'collections.empty' | t }}</p>
+            <p>{{ 'collections.empty_text' | t }}</p>
+            <a href="{{ collection.url }}" class="button button--outline">{{ 'collections.clear_all' | t }}</a>
+          </div>
+        {%- endif -%}
       </div>
-      {% render 'pagination', paginate: paginate %}
-    {%- else -%}
-      <div class="empty-state">
-        <p class="h3">{{ 'collections.empty' | t }}</p>
-        <p>{{ 'collections.empty_text' | t }}</p>
-        <a href="{{ collection.url }}" class="button button--outline">{{ 'collections.clear_all' | t }}</a>
-      </div>
-    {%- endif -%}
+    </div>
   {%- endpaginate -%}
 </div>
 
@@ -131,6 +171,20 @@
     { "type": "range", "id": "columns", "label": "Columnas (escritorio)", "min": 3, "max": 5, "step": 1, "default": 4 },
     { "type": "checkbox", "id": "show_image", "label": "Mostrar imagen de colección como cabecera", "default": true },
     { "type": "checkbox", "id": "quick_add", "label": "Botón de añadir rápido", "default": true },
+    { "type": "checkbox", "id": "sidebar", "label": "Filtros en columna lateral (escritorio)", "default": true },
+    {
+      "type": "select", "id": "pagination", "label": "Paginación",
+      "options": [{ "value": "load_more", "label": "Botón 'Cargar más'" }, { "value": "pages", "label": "Números de página" }],
+      "default": "load_more"
+    },
+    { "type": "link_list", "id": "pills_menu", "label": "Menú de subcategorías (píldoras)" },
+    { "type": "header", "content": "Banner dentro de la rejilla" },
+    { "type": "image_picker", "id": "promo_image", "label": "Imagen" },
+    { "type": "range", "id": "promo_position", "label": "Posición", "min": 1, "max": 24, "step": 1, "default": 5 },
+    { "type": "text", "id": "promo_eyebrow", "label": "Antetítulo", "default": "Vende con nosotros" },
+    { "type": "text", "id": "promo_heading", "label": "Título", "default": "Tu armario vale más de lo que crees" },
+    { "type": "text", "id": "promo_button", "label": "Texto del enlace", "default": "Solicitar valoración" },
+    { "type": "url", "id": "promo_link", "label": "Enlace" },
     { "type": "paragraph", "content": "Los filtros (marca, talla, estado, precio…) se configuran con la app gratuita Search & Discovery de Shopify." }
   ]
 }

@@ -1,0 +1,135 @@
+{
+  "sections": {
+    "intro": {
+      "type": "manifesto",
+      "settings": {
+        "style": "surface",
+        "eyebrow": "Garantía de autenticidad",
+        "text": "Si no es <em>auténtico</em>, no está aquí. Y si alguna vez lo dudas, te devolvemos el 100%.",
+        "button_label": "",
+        "button_link": ""
+      }
+    },
+    "steps": {
+      "type": "values",
+      "blocks": {
+        "s1": {
+          "type": "value",
+          "settings": {
+            "title": "Procedencia",
+            "text": "<p>Solicitamos factura, ticket o historial de compra siempre que es posible.</p>"
+          }
+        },
+        "s2": {
+          "type": "value",
+          "settings": {
+            "title": "Inspección",
+            "text": "<p>Etiquetas, códigos, costuras, herrajes y tejidos revisados punto por punto.</p>"
+          }
+        },
+        "s3": {
+          "type": "value",
+          "settings": {
+            "title": "Comparativa",
+            "text": "<p>Contrastamos cada detalle con referencias originales de la misma temporada.</p>"
+          }
+        },
+        "s4": {
+          "type": "value",
+          "settings": {
+            "title": "Precinto",
+            "text": "<p>La pieza sale con nuestro precinto de autenticidad numerado.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+      ],
+      "settings": {
+        "style": "default",
+        "eyebrow": "Cómo verificamos",
+        "heading": "Cuatro pasos, <em>cero dudas</em>",
+        "show_numbers": true
+      }
+    },
+    "conditions": {
+      "type": "condition-guide",
+      "blocks": {
+        "l1": {
+          "type": "level",
+          "settings": {
+            "level": 5,
+            "title": "Nuevo con etiqueta",
+            "text": "<p>Nunca usado. Conserva todas sus etiquetas.</p>"
+          }
+        },
+        "l2": {
+          "type": "level",
+          "settings": {
+            "level": 4,
+            "title": "Como nuevo",
+            "text": "<p>Usado una o dos veces. Sin signos visibles de uso.</p>"
+          }
+        },
+        "l3": {
+          "type": "level",
+          "settings": {
+            "level": 3,
+            "title": "Excelente",
+            "text": "<p>Mínimos signos de uso, detallados en la ficha.</p>"
+          }
+        },
+        "l4": {
+          "type": "level",
+          "settings": {
+            "level": 2,
+            "title": "Muy bueno",
+            "text": "<p>Ligeros signos de uso, siempre fotografiados.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "l1",
+        "l2",
+        "l3",
+        "l4"
+      ],
+      "settings": {
+        "surface": true
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "¿Qué pasa si recibo una pieza no auténtica?",
+            "answer": "<p>Te devolvemos el 100% del importe, incluidos los gastos de envío. Sin preguntas.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "¿Puedo verificarla con un servicio externo?",
+            "answer": "<p>Por supuesto. Si un servicio de autenticación reconocido determina que no es original, aplicamos la garantía.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "intro",
+    "steps",
+    "conditions",
+    "faq"
+  ]
+}

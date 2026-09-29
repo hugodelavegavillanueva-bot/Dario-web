@@ -50,6 +50,20 @@
 
     {% section 'cart-drawer' %}
 
+    <div class="modal" id="QuickView" aria-hidden="true" role="dialog" aria-modal="true">
+      <div class="drawer__overlay" data-modal-close></div>
+      <div class="modal__panel">
+        <button type="button" class="drawer__close modal__close" data-modal-close aria-label="{{ 'general.close' | t }}">{% render 'icon', icon: 'close' %}</button>
+        <div class="modal__content" data-quick-view-content></div>
+      </div>
+    </div>
+
+    <div class="toast" data-toast role="status" aria-live="polite"></div>
+
+    {%- if settings.back_to_top -%}
+      <button type="button" class="back-to-top" data-back-to-top aria-label="{{ 'general.back_to_top' | t }}">↑</button>
+    {%- endif -%}
+
     <script>
       window.theme = {
         routes: {
@@ -63,8 +77,15 @@
           addToCart: {{ 'products.product.add_to_cart' | t | json }},
           soldOut: {{ 'products.product.sold_out' | t | json }},
           added: {{ 'products.product.added' | t | json }},
-          error: {{ 'general.error' | t | json }}
+          error: {{ 'general.error' | t | json }},
+          wishlistAdded: {{ 'wishlist.added' | t | json }},
+          wishlistRemoved: {{ 'wishlist.removed' | t | json }},
+          copied: {{ 'general.copied' | t | json }}
         },
+        settings: {
+          recentlyViewed: {{ settings.recently_viewed_track | json }}
+        },
+        product: {% if template.name == 'product' %}{{ product.handle | json }}{% else %}null{% endif %},
         moneyFormat: {{ shop.money_format | json }}
       };
     </script>

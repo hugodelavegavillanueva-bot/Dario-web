@@ -2,7 +2,7 @@
   Filtros (requiere la app gratuita "Search & Discovery" de Shopify para configurarlos).
   Params: results (collection o search), sort_by
 {%- endcomment -%}
-<form data-filter-form id="FilterForm">
+<form data-filter-form id="{{ form_id | default: 'FilterForm' }}"{% if auto %} data-auto-submit{% endif %}>
   {%- if terms -%}<input type="hidden" name="q" value="{{ terms | escape }}"><input type="hidden" name="type" value="product">{%- endif -%}
   {%- for filter in results.filters -%}
     {%- assign label_down = filter.label | downcase -%}
@@ -37,14 +37,15 @@
         {%- when 'price_range' -%}
           <div class="facets__price">
             <div class="field">
-              <label class="field__label" for="Min-{{ filter.param_name }}">{{ 'collections.from' | t }}</label>
-              <input class="field__input" type="number" id="Min-{{ filter.param_name }}" name="{{ filter.min_value.param_name }}" value="{%- if filter.min_value.value != nil -%}{{ filter.min_value.value | divided_by: 100 }}{%- endif -%}" placeholder="0" min="0">
+              <label class="field__label" for="Min-{{ form_id }}{{ filter.param_name }}">{{ 'collections.from' | t }}</label>
+              <input class="field__input" type="number" id="Min-{{ form_id }}{{ filter.param_name }}" name="{{ filter.min_value.param_name }}" value="{%- if filter.min_value.value != nil -%}{{ filter.min_value.value | divided_by: 100 }}{%- endif -%}" placeholder="0" min="0">
             </div>
             <div class="field">
-              <label class="field__label" for="Max-{{ filter.param_name }}">{{ 'collections.to' | t }}</label>
-              <input class="field__input" type="number" id="Max-{{ filter.param_name }}" name="{{ filter.max_value.param_name }}" value="{%- if filter.max_value.value != nil -%}{{ filter.max_value.value | divided_by: 100 }}{%- endif -%}" placeholder="{{ filter.range_max | divided_by: 100 }}" min="0">
+              <label class="field__label" for="Max-{{ form_id }}{{ filter.param_name }}">{{ 'collections.to' | t }}</label>
+              <input class="field__input" type="number" id="Max-{{ form_id }}{{ filter.param_name }}" name="{{ filter.max_value.param_name }}" value="{%- if filter.max_value.value != nil -%}{{ filter.max_value.value | divided_by: 100 }}{%- endif -%}" placeholder="{{ filter.range_max | divided_by: 100 }}" min="0">
             </div>
           </div>
+          {%- if auto -%}<button type="submit" class="button button--outline button--full" style="margin-bottom:1.25rem;">{{ 'collections.apply' | t }}</button>{%- endif -%}
       {%- endcase -%}
     </details>
   {%- endfor -%}

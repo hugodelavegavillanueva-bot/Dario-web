@@ -1,0 +1,24 @@
+<section class="section" data-recently-viewed data-limit="{{ section.settings.limit }}" data-exclude="{{ product.handle }}" hidden>
+  <div class="page-width">
+    <div class="section-header">
+      <div>
+        {%- if section.settings.eyebrow != blank -%}<span class="eyebrow eyebrow--line">{{ section.settings.eyebrow }}</span>{%- endif -%}
+        <h2 class="heading-italic">{{ section.settings.heading }}</h2>
+      </div>
+    </div>
+    <div class="product-grid" style="--cols: {{ section.settings.limit | at_most: 5 }};" data-recently-viewed-grid></div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Vistos recientemente",
+  "class": "section-recently-viewed",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Tu historial" },
+    { "type": "inline_richtext", "id": "heading", "label": "Título", "default": "Vistos <em>recientemente</em>" },
+    { "type": "range", "id": "limit", "label": "Productos", "min": 2, "max": 8, "step": 1, "default": 4 }
+  ],
+  "presets": [{ "name": "Vistos recientemente" }]
+}
+{% endschema %}

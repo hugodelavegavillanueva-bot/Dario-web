@@ -103,7 +103,12 @@
       {%- if product.vendor != blank -%}
         <a href="{{ product.vendor | url_for_vendor }}" class="product-info__vendor">{{ product.vendor }}</a>
       {%- endif -%}
-      <h1 class="product-info__title">{{ product.title | escape }}</h1>
+      <div class="product-info__head">
+        <h1 class="product-info__title">{{ product.title | escape }}</h1>
+        {%- if settings.wishlist_enabled -%}
+          <button type="button" class="product-wish" data-wishlist-toggle="{{ product.handle }}" aria-label="{{ 'wishlist.add' | t }}" aria-pressed="false">{% render 'icon', icon: 'heart' %}</button>
+        {%- endif -%}
+      </div>
 
       {% render 'price', product: product, variant: current_variant, show_saving: true, data_attr: true %}
       {%- if retail_price != blank -%}
@@ -143,8 +148,8 @@
               <fieldset class="variant-picker" data-option-index="{{ forloop.index0 }}">
                 <legend>
                   <span>{{ option.name }}: <span data-selected-value>{{ option.selected_value }}</span></span>
-                  {%- if section.settings.size_guide_page != blank and forloop.first -%}
-                    <a href="{{ section.settings.size_guide_page.url }}" style="text-decoration:underline;text-transform:none;letter-spacing:0;">{{ 'products.product.size_guide' | t }}</a>
+                  {%- if forloop.first -%}
+                    <button type="button" class="text-link" data-drawer-open="SizeGuideDrawer">{% render 'icon', icon: 'ruler' %} {{ 'products.product.size_guide' | t }}</button>
                   {%- endif -%}
                 </legend>
                 <div class="variant-picker__options">
@@ -178,6 +183,24 @@
         </div>
         <p class="product-form__error" role="alert"></p>
       {%- endform -%}
+
+      <div class="product-extras">
+        {%- if product.available -%}
+          <p class="product-extras__row" data-delivery data-min="{{ settings.delivery_min_days }}" data-max="{{ settings.delivery_max_days }}">
+            {% render 'icon', icon: 'calendar' %}
+            <span>{{ 'products.product.delivery_estimate' | t }} <strong data-delivery-range>{{ settings.delivery_min_days }}–{{ settings.delivery_max_days }} {{ 'products.product.business_days' | t }}</strong></span>
+          </p>
+        {%- endif -%}
+        <button type="button" class="product-extras__row text-link" data-drawer-open="SizeGuideDrawer">
+          {% render 'icon', icon: 'ruler' %}<span>{{ 'products.product.size_help' | t }}</span>
+        </button>
+        {%- if settings.whatsapp_number != blank -%}
+          {%- capture wa_text -%}{{ 'products.product.whatsapp_message' | t: title: product.title, vendor: product.vendor }} {{ request.origin }}{{ product.url }}{%- endcapture -%}
+          <a class="product-extras__row" href="https://wa.me/{{ settings.whatsapp_number | remove: '+' | remove: ' ' }}?text={{ wa_text | url_encode }}" target="_blank" rel="noopener">
+            {% render 'icon', icon: 'whatsapp' %}<span>{{ 'products.product.ask_whatsapp' | t }}</span>
+          </a>
+        {%- endif -%}
+      </div>
 
       <div class="trust-row">
         <div class="trust-row__item">{% render 'icon', icon: 'shield' %}<span>{{ 'products.product.trust_authentic' | t }}</span></div>
@@ -224,6 +247,34 @@
         {%- endcase -%}
       {%- endfor -%}
 
+      {%- assign complements = product.metafields.custom.complementos.value -%}
+      {%- if complements != blank -%}
+        <div class="complete-look">
+          <p class="eyebrow">{{ 'products.product.complete_look' | t }}</p>
+          {%- for p in complements limit: 4 -%}
+            <a href="{{ p.url }}" class="look__item">
+              <span class="look__thumb">{%- if p.featured_media -%}{{ p.featured_media | image_url: width: 200 | image_tag: loading: 'lazy', alt: p.title }}{%- endif -%}</span>
+              <span class="look__info">
+                <span class="card__vendor">{{ p.vendor }}</span>
+                <span class="card__title" style="display:block;margin:0;">{{ p.title }}</span>
+                {% render 'price', product: p %}
+              </span>
+              <span class="arrow">→</span>
+            </a>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      {%- if settings.show_share -%}
+        <div class="share">
+          <span class="caps">{{ 'products.product.share' | t }}</span>
+          {%- assign share_url = request.origin | append: product.url -%}
+          <a href="https://wa.me/?text={{ product.title | append: ' ' | append: share_url | url_encode }}" target="_blank" rel="noopener" aria-label="WhatsApp">{% render 'icon', icon: 'whatsapp' %}</a>
+          <a href="https://pinterest.com/pin/create/button/?url={{ share_url | url_encode }}&media={{ product.featured_media | image_url: width: 1200 | prepend: 'https:' | url_encode }}&description={{ product.title | url_encode }}" target="_blank" rel="noopener" aria-label="Pinterest">{% render 'icon', icon: 'pinterest' %}</a>
+          <button type="button" data-copy="{{ share_url }}" aria-label="{{ 'products.product.copy_link' | t }}">{% render 'icon', icon: 'link' %}</button>
+        </div>
+      {%- endif -%}
+
       {%- if product.vendor != blank -%}
         <p style="margin-top:2rem;">
           <a href="{{ product.vendor | url_for_vendor }}" class="link-underline">{{ 'products.product.more_from' | t: vendor: product.vendor }} <span class="arrow">→</span></a>
@@ -249,6 +300,29 @@
       ]
     }
   </script>
+</div>
+
+<div class="drawer" id="SizeGuideDrawer" aria-hidden="true">
+  <div class="drawer__overlay" data-drawer-close></div>
+  <div class="drawer__panel drawer__panel--wide" role="dialog" aria-modal="true" aria-label="{{ 'products.product.size_guide' | t }}">
+    <div class="drawer__header">
+      <h2 class="drawer__title">{{ 'products.product.size_guide' | t }}</h2>
+      <button type="button" class="drawer__close" data-drawer-close aria-label="{{ 'general.close' | t }}">{% render 'icon', icon: 'close' %}</button>
+    </div>
+    <div class="drawer__body rte">
+      {%- if section.settings.size_guide_page != blank -%}
+        {{ section.settings.size_guide_page.content }}
+      {%- else -%}
+        {{ settings.size_guide_text }}
+        {% render 'size-tables' %}
+      {%- endif -%}
+      {%- assign measures = product.metafields.custom.medidas.value -%}
+      {%- if measures != blank -%}
+        <h3 class="h4" style="margin-top:2rem;">{{ 'products.product.this_piece' | t }}</h3>
+        <p>{{ measures | newline_to_br }}</p>
+      {%- endif -%}
+    </div>
+  </div>
 </div>
 
 {%- if product.available -%}

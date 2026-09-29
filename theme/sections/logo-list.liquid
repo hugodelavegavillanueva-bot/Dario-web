@@ -1,0 +1,50 @@
+<section class="section section--tight">
+  <div class="page-width">
+    {%- if section.settings.heading != blank -%}<p class="eyebrow text-center" style="display:block;">{{ section.settings.heading }}</p>{%- endif -%}
+    <div class="logo-list">
+      {%- for block in section.blocks -%}
+        <a href="{{ block.settings.link | default: '#' }}" class="logo-list__item" {{ block.shopify_attributes }}>
+          {%- if block.settings.logo != blank -%}
+            {{ block.settings.logo | image_url: height: 80 | image_tag: loading: 'lazy', alt: block.settings.name }}
+          {%- else -%}
+            <span>{{ block.settings.name }}</span>
+          {%- endif -%}
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Logos (prensa / marcas)",
+  "class": "section-logo-list",
+  "max_blocks": 12,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Título", "default": "Marcas que encontrarás" }
+  ],
+  "blocks": [
+    {
+      "type": "logo", "name": "Logo",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Nombre", "default": "Marca" },
+        { "type": "image_picker", "id": "logo", "label": "Logo" },
+        { "type": "url", "id": "link", "label": "Enlace" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Logos (prensa / marcas)",
+      "blocks": [
+        { "type": "logo", "settings": { "name": "MONCLER" } },
+        { "type": "logo", "settings": { "name": "CRTZ" } },
+        { "type": "logo", "settings": { "name": "STONE ISLAND" } },
+        { "type": "logo", "settings": { "name": "PRADA" } },
+        { "type": "logo", "settings": { "name": "ARC'TERYX" } },
+        { "type": "logo", "settings": { "name": "LORO PIANA" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

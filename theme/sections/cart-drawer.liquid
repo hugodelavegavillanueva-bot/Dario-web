@@ -8,11 +8,49 @@
 
     {%- if cart.item_count > 0 -%}
       <div class="drawer__body">
+        {% render 'free-shipping-bar' %}
         {%- for item in cart.items -%}
           {% render 'cart-item', item: item %}
         {%- endfor -%}
+
+        {%- assign upsell = settings.cart_upsell_collection -%}
+        {%- if upsell != blank and upsell.products_count > 0 -%}
+          <div class="cart-upsell">
+            <p class="eyebrow">{%- if settings.cart_upsell_heading != blank -%}{{ settings.cart_upsell_heading }}{%- else -%}{{ 'cart.upsell' | t }}{%- endif -%}</p>
+            <div class="cart-upsell__list">
+              {%- assign shown = 0 -%}
+              {%- for p in upsell.products -%}
+                {%- assign in_cart = false -%}
+                {%- for item in cart.items -%}{%- if item.product_id == p.id -%}{%- assign in_cart = true -%}{%- endif -%}{%- endfor -%}
+                {%- if p.available and in_cart == false and shown < 6 -%}
+                  {%- assign shown = shown | plus: 1 -%}
+                  <div class="cart-upsell__item">
+                    <a href="{{ p.url }}" class="cart-upsell__media">
+                      {%- if p.featured_media -%}{{ p.featured_media | image_url: width: 300 | image_tag: loading: 'lazy', alt: p.title }}{%- endif -%}
+                    </a>
+                    <p class="cart-item__vendor">{{ p.vendor }}</p>
+                    <a href="{{ p.url }}" class="cart-upsell__title">{{ p.title }}</a>
+                    <p class="cart-upsell__price">{{ p.price | money }}</p>
+                    {%- if p.has_only_default_variant or p.variants.size == 1 -%}
+                      {%- form 'product', p, data-ajax-cart: '' -%}
+                        <input type="hidden" name="id" value="{{ p.selected_or_first_available_variant.id }}">
+                        <button type="submit" class="cart-upsell__add"><span>+ {{ 'products.product.add_short' | t }}</span></button>
+                      {%- endform -%}
+                    {%- endif -%}
+                  </div>
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+          </div>
+        {%- endif -%}
       </div>
       <div class="drawer__footer">
+        {%- if settings.cart_show_note -%}
+          <details class="cart-drawer-note">
+            <summary>{{ 'cart.note_toggle' | t }}</summary>
+            <textarea name="note" form="CartDrawerForm" placeholder="{{ 'cart.note_placeholder' | t }}" data-cart-note>{{ cart.note }}</textarea>
+          </details>
+        {%- endif -%}
         {%- for discount in cart.cart_level_discount_applications -%}
           <div class="cart-summary__row"><span>{{ discount.title }}</span><span>−{{ discount.total_allocated_amount | money }}</span></div>
         {%- endfor -%}
@@ -21,10 +59,13 @@
           <span>{{ cart.total_price | money_with_currency }}</span>
         </div>
         <p class="cart-summary__note">{{ 'cart.taxes_note' | t }}{% if settings.cart_note_text != blank %} {{ settings.cart_note_text }}{% endif %}</p>
-        <form action="{{ routes.cart_url }}" method="post">
-          <button type="submit" name="checkout" class="button button--full">{{ 'cart.checkout' | t }}</button>
+        <form action="{{ routes.cart_url }}" method="post" id="CartDrawerForm">
+          <button type="submit" name="checkout" class="button button--full">{{ 'cart.checkout' | t }} · {{ cart.total_price | money }}</button>
         </form>
-        <p style="text-align:center;margin-top:1rem;"><a href="{{ routes.cart_url }}" class="link-underline">{{ 'cart.view_cart' | t }}</a></p>
+        <div class="cart-drawer__payments">
+          {%- for type in shop.enabled_payment_types limit: 6 -%}{{ type | payment_type_svg_tag }}{%- endfor -%}
+        </div>
+        <p style="text-align:center;margin-top:0.75rem;"><a href="{{ routes.cart_url }}" class="link-underline">{{ 'cart.view_cart' | t }}</a></p>
       </div>
     {%- else -%}
       <div class="drawer__body">
@@ -33,6 +74,19 @@
           <p>{{ 'cart.empty_text' | t }}</p>
           <a href="{{ routes.all_products_collection_url }}" class="button">{{ 'cart.continue' | t }}</a>
         </div>
+        {%- assign upsell = settings.cart_upsell_collection -%}
+        {%- if upsell != blank -%}
+          <p class="eyebrow" style="margin-top:2rem;">{{ 'cart.popular' | t }}</p>
+          <div class="cart-upsell__list">
+            {%- for p in upsell.products limit: 4 -%}
+              <a href="{{ p.url }}" class="cart-upsell__item">
+                <span class="cart-upsell__media">{%- if p.featured_media -%}{{ p.featured_media | image_url: width: 300 | image_tag: loading: 'lazy', alt: p.title }}{%- endif -%}</span>
+                <span class="cart-item__vendor">{{ p.vendor }}</span>
+                <span class="cart-upsell__price">{{ p.price | money }}</span>
+              </a>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
       </div>
     {%- endif -%}
   </div>

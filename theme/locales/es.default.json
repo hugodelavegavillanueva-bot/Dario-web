@@ -11,7 +11,11 @@
     "previous": "Anterior",
     "page": "Página {{ page }}",
     "pagination": "Paginación",
-    "view_all": "Ver todo"
+    "view_all": "Ver todo",
+    "back_to_top": "Volver arriba",
+    "bought": "Compró",
+    "copied": "Enlace copiado",
+    "verified": "Verificado"
   },
   "layout": {
     "header": {
@@ -26,7 +30,8 @@
   "newsletter": {
     "placeholder": "Tu email",
     "button": "Suscribirme",
-    "success": "Gracias. Te avisaremos de las nuevas llegadas."
+    "success": "Gracias. Te avisaremos de las nuevas llegadas.",
+    "no_thanks": "No, gracias"
   },
   "products": {
     "product": {
@@ -50,7 +55,19 @@
       "trust_authentic": "Autenticidad garantizada",
       "trust_shipping": "Envío asegurado",
       "trust_returns": "Devolución 14 días",
-      "more_from": "Más de {{ vendor }}"
+      "more_from": "Más de {{ vendor }}",
+      "add_short": "Añadir",
+      "ask_whatsapp": "¿Dudas? Pregunta por esta prenda en WhatsApp",
+      "business_days": "días laborables",
+      "complete_look": "Completa el look",
+      "copy_link": "Copiar enlace",
+      "delivery_estimate": "Recíbelo entre",
+      "quick_view": "Vista rápida",
+      "share": "Compartir",
+      "size_help": "Guía de tallas y medidas",
+      "this_piece": "Medidas de esta pieza",
+      "view_details": "Ver ficha completa",
+      "whatsapp_message": "Hola, me interesa {{ vendor }} – {{ title }}:"
     }
   },
   "collections": {
@@ -66,7 +83,11 @@
     "to": "Hasta",
     "empty": "No hay piezas disponibles",
     "empty_text": "Prueba con otros filtros o vuelve pronto: añadimos nuevas piezas cada semana.",
-    "no_brands": "Aún no hay marcas. Se mostrarán automáticamente al añadir productos."
+    "no_brands": "Aún no hay marcas. Se mostrarán automáticamente al añadir productos.",
+    "apply": "Aplicar",
+    "load_more": "Cargar más",
+    "showing": "Mostrando {{ shown }} de {{ total }} piezas",
+    "subcategories": "Subcategorías"
   },
   "cart": {
     "title": "Tu cesta",
@@ -79,7 +100,13 @@
     "remove": "Eliminar",
     "subtotal": "Subtotal",
     "taxes_note": "Impuestos incluidos. Envío calculado al finalizar la compra.",
-    "view_cart": "Ver cesta"
+    "view_cart": "Ver cesta",
+    "free_shipping_done": "¡Enhorabuena! Tu pedido tiene envío gratis.",
+    "free_shipping_remaining_html": "Te faltan <strong>{{ amount }}</strong> para el envío gratis",
+    "note_placeholder": "Instrucciones especiales, envolver para regalo…",
+    "note_toggle": "Añadir nota o envolver para regalo",
+    "popular": "Lo más visto",
+    "upsell": "Combínalo con"
   },
   "search": {
     "title": "Búsqueda",
@@ -182,5 +209,24 @@
       "subtext": "La página que buscas no existe o ha sido movida.",
       "title_html": "Página no <em>encontrada</em>"
     }
+  },
+  "cookies": {
+    "accept": "Aceptar",
+    "decline": "Rechazar",
+    "more": "Más información"
+  },
+  "countdown": {
+    "days": "Días",
+    "hours": "Horas",
+    "minutes": "Min",
+    "seconds": "Seg"
+  },
+  "wishlist": {
+    "add": "Añadir a favoritos",
+    "added": "Añadido a favoritos",
+    "removed": "Eliminado de favoritos",
+    "empty": "Aún no tienes favoritos",
+    "empty_text": "Pulsa el corazón en cualquier prenda para guardarla aquí.",
+    "title": "Favoritos"
   }
 }

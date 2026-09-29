@@ -1,0 +1,117 @@
+{%- liquid
+  case section.settings.height
+    when 'full'
+      assign h = '100vh'
+    when 'large'
+      assign h = '88vh'
+    else
+      assign h = '70vh'
+  endcase
+-%}
+<section class="slideshow" data-slideshow data-autoplay="{{ section.settings.autoplay }}" data-speed="{{ section.settings.speed | times: 1000 }}" style="--hero-height: {{ h }};" aria-roledescription="carousel">
+  <div class="slideshow__track">
+    {%- for block in section.blocks -%}
+      <div class="slideshow__slide hero{% if block.settings.align == 'center' %} hero--center{% endif %}{% if forloop.first %} is-active{% endif %}" style="--hero-overlay: {{ block.settings.overlay | divided_by: 100.0 }};" data-slide="{{ forloop.index0 }}" role="group" aria-roledescription="slide" aria-label="{{ forloop.index }} / {{ forloop.length }}" {{ block.shopify_attributes }}>
+        <div class="hero__media">
+          {%- if block.settings.image != blank -%}
+            {%- liquid
+              assign loading = 'lazy'
+              if forloop.first
+                assign loading = 'eager'
+              endif
+            -%}
+            <picture>
+              {%- if block.settings.image_mobile != blank -%}
+                <source media="(max-width: 749px)" srcset="{{ block.settings.image_mobile | image_url: width: 1000 }}">
+              {%- endif -%}
+              {{ block.settings.image | image_url: width: 2400 | image_tag: loading: loading, sizes: '100vw', widths: '750, 1100, 1500, 1920, 2400' }}
+            </picture>
+          {%- else -%}
+            <div class="hero__placeholder">{{ 'lifestyle-2' | placeholder_svg_tag }}</div>
+          {%- endif -%}
+        </div>
+        <div class="page-width hero__content">
+          {%- if block.settings.eyebrow != blank -%}<span class="eyebrow eyebrow--line">{{ block.settings.eyebrow }}</span>{%- endif -%}
+          {%- if forloop.first and section.index == 1 -%}
+            <h1 class="h0 hero__title">{{ block.settings.heading }}</h1>
+          {%- else -%}
+            <h2 class="h0 hero__title">{{ block.settings.heading }}</h2>
+          {%- endif -%}
+          {%- if block.settings.text != blank -%}<div class="hero__text">{{ block.settings.text }}</div>{%- endif -%}
+          <div class="hero__actions">
+            {%- if block.settings.button_label != blank -%}<a href="{{ block.settings.button_link }}" class="button button--light">{{ block.settings.button_label }}</a>{%- endif -%}
+            {%- if block.settings.button_label_2 != blank -%}<a href="{{ block.settings.button_link_2 }}" class="button button--light button--outline">{{ block.settings.button_label_2 }}</a>{%- endif -%}
+          </div>
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+
+  {%- if section.blocks.size > 1 -%}
+    <div class="slideshow__controls page-width">
+      <div class="slideshow__counter"><span data-slide-current>01</span> <i></i> <span>{{ section.blocks.size | prepend: '0' | slice: -2, 2 }}</span></div>
+      <div class="slideshow__dots">
+        {%- for block in section.blocks -%}
+          <button type="button" class="slideshow__dot{% if forloop.first %} is-active{% endif %}" data-slide-to="{{ forloop.index0 }}" aria-label="{{ forloop.index }}"><span></span></button>
+        {%- endfor -%}
+      </div>
+      <div class="slideshow__arrows">
+        <button type="button" data-slide-prev aria-label="{{ 'general.previous' | t }}">←</button>
+        <button type="button" data-slide-next aria-label="{{ 'general.next' | t }}">→</button>
+      </div>
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Slideshow / Portada",
+  "class": "section-slideshow",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "select", "id": "height", "label": "Altura",
+      "options": [
+        { "value": "full", "label": "Pantalla completa" },
+        { "value": "large", "label": "Grande" },
+        { "value": "medium", "label": "Media" }
+      ],
+      "default": "full"
+    },
+    { "type": "checkbox", "id": "autoplay", "label": "Pasar automáticamente", "default": true },
+    { "type": "range", "id": "speed", "label": "Cambiar cada", "min": 3, "max": 12, "step": 1, "unit": "s", "default": 6 }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Diapositiva",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Imagen" },
+        { "type": "image_picker", "id": "image_mobile", "label": "Imagen móvil (opcional)" },
+        { "type": "range", "id": "overlay", "label": "Oscurecer", "min": 0, "max": 80, "step": 5, "unit": "%", "default": 40 },
+        {
+          "type": "select", "id": "align", "label": "Alineación",
+          "options": [{ "value": "left", "label": "Abajo izquierda" }, { "value": "center", "label": "Centrado" }],
+          "default": "left"
+        },
+        { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Nueva temporada" },
+        { "type": "inline_richtext", "id": "heading", "label": "Título", "default": "Lujo con <em>segunda</em> vida" },
+        { "type": "richtext", "id": "text", "label": "Texto" },
+        { "type": "text", "id": "button_label", "label": "Botón 1", "default": "Comprar ahora" },
+        { "type": "url", "id": "button_link", "label": "Enlace 1" },
+        { "type": "text", "id": "button_label_2", "label": "Botón 2" },
+        { "type": "url", "id": "button_link_2", "label": "Enlace 2" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Slideshow / Portada",
+      "blocks": [
+        { "type": "slide", "settings": { "eyebrow": "Archivo curado", "heading": "Lujo con <em>segunda</em> vida" } },
+        { "type": "slide", "settings": { "eyebrow": "Streetwear", "heading": "Lo más <em>buscado</em>, verificado" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

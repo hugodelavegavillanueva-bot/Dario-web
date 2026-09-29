@@ -1,0 +1,38 @@
+<section class="video-banner" data-video-banner style="--vb-height: {{ section.settings.height }}vh;">
+  <div class="video-banner__media">
+    {%- if section.settings.video != blank -%}
+      {{ section.settings.video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, preload: 'metadata', image_size: '1920x' }}
+    {%- elsif section.settings.poster != blank -%}
+      {{ section.settings.poster | image_url: width: 2400 | image_tag: loading: 'lazy', sizes: '100vw' }}
+    {%- else -%}
+      <div class="hero__placeholder">{{ 'lifestyle-2' | placeholder_svg_tag }}</div>
+    {%- endif -%}
+  </div>
+  <div class="page-width video-banner__content reveal">
+    {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+    <h2 class="h0 heading-italic">{{ section.settings.heading }}</h2>
+    {%- if section.settings.button_label != blank -%}
+      <a href="{{ section.settings.button_link }}" class="button button--light">{{ section.settings.button_label }}</a>
+    {%- endif -%}
+  </div>
+  {%- if section.settings.video != blank -%}
+    <button type="button" class="video-banner__toggle" data-video-toggle aria-label="Pausa / Play">❚❚</button>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Vídeo a pantalla completa",
+  "class": "section-video-banner",
+  "settings": [
+    { "type": "video", "id": "video", "label": "Vídeo (se sube a Shopify)" },
+    { "type": "image_picker", "id": "poster", "label": "Imagen si no hay vídeo" },
+    { "type": "range", "id": "height", "label": "Altura", "min": 50, "max": 100, "step": 5, "unit": "vh", "default": 80 },
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Campaña" },
+    { "type": "inline_richtext", "id": "heading", "label": "Título", "default": "Hecho para <em>durar</em>" },
+    { "type": "text", "id": "button_label", "label": "Botón", "default": "Ver colección" },
+    { "type": "url", "id": "button_link", "label": "Enlace" }
+  ],
+  "presets": [{ "name": "Vídeo a pantalla completa" }]
+}
+{% endschema %}

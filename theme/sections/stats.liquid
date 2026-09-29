@@ -1,0 +1,48 @@
+<section class="section section--tight{% if section.settings.style == 'dark' %} section--dark{% elsif section.settings.style == 'surface' %} section--surface{% endif %}">
+  <div class="page-width">
+    <div class="stats" style="--cols: {{ section.blocks.size | at_most: 4 | at_least: 1 }};">
+      {%- for block in section.blocks -%}
+        <div class="stat reveal" {{ block.shopify_attributes }}>
+          <span class="stat__num"><span data-count-to="{{ block.settings.number }}">{{ block.settings.number }}</span>{{ block.settings.suffix }}</span>
+          <span class="stat__label">{{ block.settings.label }}</span>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Cifras",
+  "class": "section-stats",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "select", "id": "style", "label": "Estilo",
+      "options": [{ "value": "default", "label": "Claro" }, { "value": "surface", "label": "Secundario" }, { "value": "dark", "label": "Oscuro" }],
+      "default": "default"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat", "name": "Cifra",
+      "settings": [
+        { "type": "number", "id": "number", "label": "Número", "default": 100 },
+        { "type": "text", "id": "suffix", "label": "Sufijo", "default": "%" },
+        { "type": "text", "id": "label", "label": "Texto", "default": "Piezas verificadas" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cifras",
+      "blocks": [
+        { "type": "stat", "settings": { "number": 100, "suffix": "%", "label": "Piezas verificadas a mano" } },
+        { "type": "stat", "settings": { "number": 60, "suffix": "+", "label": "Marcas seleccionadas" } },
+        { "type": "stat", "settings": { "number": 48, "suffix": "h", "label": "Envío asegurado" } },
+        { "type": "stat", "settings": { "number": 70, "suffix": "%", "label": "Ahorro medio vs. tienda" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -11,7 +11,11 @@
     "previous": "Previous",
     "page": "Page {{ page }}",
     "pagination": "Pagination",
-    "view_all": "View all"
+    "view_all": "View all",
+    "back_to_top": "Back to top",
+    "bought": "Bought",
+    "copied": "Link copied",
+    "verified": "Verified"
   },
   "layout": {
     "header": {
@@ -26,7 +30,8 @@
   "newsletter": {
     "placeholder": "Your email",
     "button": "Subscribe",
-    "success": "Thank you. We'll let you know about new arrivals."
+    "success": "Thank you. We'll let you know about new arrivals.",
+    "no_thanks": "No, thanks"
   },
   "products": {
     "product": {
@@ -50,7 +55,19 @@
       "trust_authentic": "Authenticity guaranteed",
       "trust_shipping": "Insured shipping",
       "trust_returns": "14-day returns",
-      "more_from": "More from {{ vendor }}"
+      "more_from": "More from {{ vendor }}",
+      "add_short": "Add",
+      "ask_whatsapp": "Questions? Ask about this piece on WhatsApp",
+      "business_days": "business days",
+      "complete_look": "Complete the look",
+      "copy_link": "Copy link",
+      "delivery_estimate": "Get it between",
+      "quick_view": "Quick view",
+      "share": "Share",
+      "size_help": "Size guide & measurements",
+      "this_piece": "This piece's measurements",
+      "view_details": "View full details",
+      "whatsapp_message": "Hi, I'm interested in {{ vendor }} – {{ title }}:"
     }
   },
   "collections": {
@@ -66,7 +83,11 @@
     "to": "To",
     "empty": "No pieces available",
     "empty_text": "Try other filters or come back soon: we add new pieces every week.",
-    "no_brands": "No brands yet. They will appear automatically as you add products."
+    "no_brands": "No brands yet. They will appear automatically as you add products.",
+    "apply": "Apply",
+    "load_more": "Load more",
+    "showing": "Showing {{ shown }} of {{ total }} pieces",
+    "subcategories": "Subcategories"
   },
   "cart": {
     "title": "Your bag",
@@ -79,7 +100,13 @@
     "remove": "Remove",
     "subtotal": "Subtotal",
     "taxes_note": "Taxes included. Shipping calculated at checkout.",
-    "view_cart": "View bag"
+    "view_cart": "View bag",
+    "free_shipping_done": "Congrats! Your order ships free.",
+    "free_shipping_remaining_html": "You're <strong>{{ amount }}</strong> away from free shipping",
+    "note_placeholder": "Special instructions, gift wrap…",
+    "note_toggle": "Add a note or gift wrap",
+    "popular": "Most viewed",
+    "upsell": "Pair it with"
   },
   "search": {
     "title": "Search",
@@ -182,5 +209,24 @@
       "subtext": "The page you are looking for doesn't exist or has been moved.",
       "title_html": "Page not <em>found</em>"
     }
+  },
+  "cookies": {
+    "accept": "Accept",
+    "decline": "Decline",
+    "more": "Learn more"
+  },
+  "countdown": {
+    "days": "Days",
+    "hours": "Hours",
+    "minutes": "Min",
+    "seconds": "Sec"
+  },
+  "wishlist": {
+    "add": "Add to wishlist",
+    "added": "Added to wishlist",
+    "removed": "Removed from wishlist",
+    "empty": "Your wishlist is empty",
+    "empty_text": "Tap the heart on any piece to save it here.",
+    "title": "Wishlist"
   }
 }

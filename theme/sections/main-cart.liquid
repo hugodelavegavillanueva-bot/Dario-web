@@ -5,6 +5,7 @@
   {%- if cart.item_count > 0 -%}
     <form action="{{ routes.cart_url }}" method="post" class="cart-page">
       <div>
+        {% render 'free-shipping-bar' %}
         {%- for item in cart.items -%}
           {% render 'cart-item', item: item %}
         {%- endfor -%}

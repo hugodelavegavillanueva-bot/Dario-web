@@ -2,7 +2,7 @@
   {
     "name": "theme_info",
     "theme_name": "Maison Archive",
-    "theme_version": "1.0.0",
+    "theme_version": "2.0.0",
     "theme_author": "Custom",
     "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
     "theme_support_url": "https://help.shopify.com"
@@ -10,14 +10,54 @@
   {
     "name": "Colores",
     "settings": [
-      { "type": "color", "id": "color_background", "label": "Fondo", "default": "#F5F2EC" },
-      { "type": "color", "id": "color_surface", "label": "Fondo secundario (tarjetas, bloques)", "default": "#ECE7DF" },
-      { "type": "color", "id": "color_text", "label": "Texto", "default": "#141414" },
-      { "type": "color", "id": "color_muted", "label": "Texto secundario", "default": "#6E6A63" },
-      { "type": "color", "id": "color_accent", "label": "Acento (detalles dorados)", "default": "#9A8466" },
-      { "type": "color", "id": "color_border", "label": "Bordes", "default": "#D9D3C8" },
-      { "type": "color", "id": "color_dark", "label": "Fondo oscuro (secciones invertidas)", "default": "#141414" },
-      { "type": "color", "id": "color_sale", "label": "Precio rebajado", "default": "#8A3B2E" }
+      {
+        "type": "color",
+        "id": "color_background",
+        "label": "Fondo",
+        "default": "#F5F2EC"
+      },
+      {
+        "type": "color",
+        "id": "color_surface",
+        "label": "Fondo secundario (tarjetas, bloques)",
+        "default": "#ECE7DF"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Texto",
+        "default": "#141414"
+      },
+      {
+        "type": "color",
+        "id": "color_muted",
+        "label": "Texto secundario",
+        "default": "#6E6A63"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Acento (detalles dorados)",
+        "default": "#9A8466"
+      },
+      {
+        "type": "color",
+        "id": "color_border",
+        "label": "Bordes",
+        "default": "#D9D3C8"
+      },
+      {
+        "type": "color",
+        "id": "color_dark",
+        "label": "Fondo oscuro (secciones invertidas)",
+        "default": "#141414"
+      },
+      {
+        "type": "color",
+        "id": "color_sale",
+        "label": "Precio rebajado",
+        "default": "#8A3B2E"
+      }
     ]
   },
   {
@@ -28,8 +68,14 @@
         "id": "heading_font",
         "label": "Fuente de títulos",
         "options": [
-          { "value": "cormorant", "label": "Cormorant Garamond (serif editorial)" },
-          { "value": "inter", "label": "Inter (sans moderna)" }
+          {
+            "value": "cormorant",
+            "label": "Cormorant Garamond (serif editorial)"
+          },
+          {
+            "value": "inter",
+            "label": "Inter (sans moderna)"
+          }
         ],
         "default": "cormorant"
       },
@@ -73,9 +119,18 @@
         "id": "card_image_ratio",
         "label": "Proporción de imagen en tarjetas de producto",
         "options": [
-          { "value": "portrait", "label": "Retrato 4:5" },
-          { "value": "tall", "label": "Alta 2:3" },
-          { "value": "square", "label": "Cuadrada" }
+          {
+            "value": "portrait",
+            "label": "Retrato 4:5"
+          },
+          {
+            "value": "tall",
+            "label": "Alta 2:3"
+          },
+          {
+            "value": "square",
+            "label": "Cuadrada"
+          }
         ],
         "default": "portrait"
       },
@@ -146,8 +201,14 @@
         "id": "cart_type",
         "label": "Tipo de carrito",
         "options": [
-          { "value": "drawer", "label": "Panel lateral" },
-          { "value": "page", "label": "Página" }
+          {
+            "value": "drawer",
+            "label": "Panel lateral"
+          },
+          {
+            "value": "page",
+            "label": "Página"
+          }
         ],
         "default": "drawer"
       },
@@ -156,22 +217,153 @@
         "id": "cart_note_text",
         "label": "Mensaje en el carrito",
         "default": "Envío asegurado y embalaje premium en todos los pedidos."
+      },
+      {
+        "type": "header",
+        "content": "Envío gratis"
+      },
+      {
+        "type": "number",
+        "id": "free_shipping_threshold",
+        "label": "Envío gratis a partir de (€)",
+        "default": 150,
+        "info": "0 para ocultar la barra de progreso. Debe coincidir con tu tarifa de envío en Shopify."
+      },
+      {
+        "type": "header",
+        "content": "Venta cruzada"
+      },
+      {
+        "type": "collection",
+        "id": "cart_upsell_collection",
+        "label": "Colección para sugerir en el carrito"
+      },
+      {
+        "type": "text",
+        "id": "cart_upsell_heading",
+        "label": "Título de sugerencias",
+        "default": "Combínalo con"
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_show_note",
+        "label": "Permitir nota / envolver para regalo en el carrito lateral",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Funciones de tienda",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "wishlist_enabled",
+        "label": "Activar favoritos (corazón)",
+        "default": true
+      },
+      {
+        "type": "page",
+        "id": "wishlist_page",
+        "label": "Página de favoritos",
+        "info": "Crea una página con la plantilla 'page.favoritos'."
+      },
+      {
+        "type": "checkbox",
+        "id": "quick_view_enabled",
+        "label": "Activar vista rápida en tarjetas",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "back_to_top",
+        "label": "Botón 'volver arriba'",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "recently_viewed_track",
+        "label": "Guardar productos vistos recientemente",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Ficha de producto"
+      },
+      {
+        "type": "text",
+        "id": "whatsapp_number",
+        "label": "WhatsApp para consultas (con prefijo, sin +)",
+        "info": "Ej: 34600111222. Muestra el botón 'Preguntar por esta prenda'."
+      },
+      {
+        "type": "range",
+        "id": "delivery_min_days",
+        "label": "Entrega estimada: mínimo",
+        "min": 1,
+        "max": 10,
+        "step": 1,
+        "unit": "d",
+        "default": 1
+      },
+      {
+        "type": "range",
+        "id": "delivery_max_days",
+        "label": "Entrega estimada: máximo",
+        "min": 1,
+        "max": 15,
+        "step": 1,
+        "unit": "d",
+        "default": 3
+      },
+      {
+        "type": "checkbox",
+        "id": "show_share",
+        "label": "Botones de compartir",
+        "default": true
+      },
+      {
+        "type": "richtext",
+        "id": "size_guide_text",
+        "label": "Guía de tallas por defecto (si no eliges página)",
+        "default": "<p>Nuestras prendas indican la talla de la etiqueta original. En la pestaña 'Medidas' encontrarás las medidas reales tomadas en plano. ¿Dudas? Escríbenos y te asesoramos.</p>"
       }
     ]
   },
   {
     "name": "Redes sociales",
     "settings": [
-      { "type": "text", "id": "social_instagram", "label": "Instagram", "info": "https://instagram.com/tu_tienda" },
-      { "type": "text", "id": "social_tiktok", "label": "TikTok" },
-      { "type": "text", "id": "social_whatsapp", "label": "WhatsApp (enlace wa.me)" },
-      { "type": "text", "id": "social_pinterest", "label": "Pinterest" }
+      {
+        "type": "text",
+        "id": "social_instagram",
+        "label": "Instagram",
+        "info": "https://instagram.com/tu_tienda"
+      },
+      {
+        "type": "text",
+        "id": "social_tiktok",
+        "label": "TikTok"
+      },
+      {
+        "type": "text",
+        "id": "social_whatsapp",
+        "label": "WhatsApp (enlace wa.me)"
+      },
+      {
+        "type": "text",
+        "id": "social_pinterest",
+        "label": "Pinterest"
+      }
     ]
   },
   {
     "name": "Favicon",
     "settings": [
-      { "type": "image_picker", "id": "favicon", "label": "Imagen", "info": "32 x 32px .png" }
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Imagen",
+        "info": "32 x 32px .png"
+      }
     ]
   }
 ]

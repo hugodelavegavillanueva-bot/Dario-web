@@ -1,66 +1,384 @@
 {
   "sections": {
-    "hero": {
-      "type": "hero",
+    "slideshow": {
+      "type": "slideshow",
+      "blocks": {
+        "s1": {
+          "type": "slide",
+          "settings": {
+            "overlay": 40,
+            "align": "left",
+            "eyebrow": "Archivo curado · Segunda mano",
+            "heading": "Lujo con <em>segunda</em> vida",
+            "text": "<p>Piezas seleccionadas de las casas más deseadas — de Moncler a Corteiz — verificadas y en estado casi nuevo.</p>",
+            "button_label": "Descubrir la colección",
+            "button_link": "shopify://collections/all",
+            "button_label_2": "Vender mis prendas",
+            "button_link_2": ""
+          }
+        },
+        "s2": {
+          "type": "slide",
+          "settings": {
+            "overlay": 45,
+            "align": "left",
+            "eyebrow": "Streetwear",
+            "heading": "Lo más <em>buscado</em>, verificado",
+            "text": "<p>Corteiz, Stone Island, Trapstar y las piezas agotadas que no encuentras en ningún sitio.</p>",
+            "button_label": "Comprar streetwear",
+            "button_link": "shopify://collections/all",
+            "button_label_2": "",
+            "button_link_2": ""
+          }
+        },
+        "s3": {
+          "type": "slide",
+          "settings": {
+            "overlay": 40,
+            "align": "center",
+            "eyebrow": "Invierno",
+            "heading": "Abrigos que <em>duran</em> décadas",
+            "text": "<p>Plumíferos y abrigos de lujo desde un 40% menos que en tienda.</p>",
+            "button_label": "Ver abrigos",
+            "button_link": "shopify://collections/all",
+            "button_label_2": "",
+            "button_link_2": ""
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3"
+      ],
       "settings": {
-        "layout": "full",
         "height": "full",
-        "align": "left",
-        "overlay": 45,
-        "eyebrow": "Archivo curado · Segunda mano",
-        "heading": "Lujo con <em>segunda</em> vida",
-        "text": "<p>Piezas seleccionadas de las casas más deseadas — de Moncler a Corteiz — verificadas y en estado casi nuevo.</p>",
-        "button_label": "Descubrir la colección",
-        "button_link": "shopify://collections/all",
-        "button_label_2": "Marcas",
-        "button_link_2": ""
+        "autoplay": true,
+        "speed": 6
+      }
+    },
+    "usp": {
+      "type": "usp-strip",
+      "blocks": {
+        "u1": {
+          "type": "item",
+          "settings": {
+            "icon": "shield",
+            "text": "Autenticidad garantizada"
+          }
+        },
+        "u2": {
+          "type": "item",
+          "settings": {
+            "icon": "camera",
+            "text": "Fotos reales de cada pieza"
+          }
+        },
+        "u3": {
+          "type": "item",
+          "settings": {
+            "icon": "truck",
+            "text": "Envío asegurado 24/48h"
+          }
+        },
+        "u4": {
+          "type": "item",
+          "settings": {
+            "icon": "return",
+            "text": "Devolución 14 días"
+          }
+        }
+      },
+      "block_order": [
+        "u1",
+        "u2",
+        "u3",
+        "u4"
+      ],
+      "settings": {
+        "dark": false
       }
     },
     "marquee": {
       "type": "brand-marquee",
       "blocks": {
-        "b1": { "type": "brand", "settings": { "name": "Moncler" } },
-        "b2": { "type": "brand", "settings": { "name": "Corteiz" } },
-        "b3": { "type": "brand", "settings": { "name": "Stone Island" } },
-        "b4": { "type": "brand", "settings": { "name": "Prada" } },
-        "b5": { "type": "brand", "settings": { "name": "Arc'teryx" } },
-        "b6": { "type": "brand", "settings": { "name": "Ralph Lauren" } },
-        "b7": { "type": "brand", "settings": { "name": "Carhartt WIP" } },
-        "b8": { "type": "brand", "settings": { "name": "Loro Piana" } }
+        "b1": {
+          "type": "brand",
+          "settings": {
+            "name": "Moncler"
+          }
+        },
+        "b2": {
+          "type": "brand",
+          "settings": {
+            "name": "Corteiz"
+          }
+        },
+        "b3": {
+          "type": "brand",
+          "settings": {
+            "name": "Stone Island"
+          }
+        },
+        "b4": {
+          "type": "brand",
+          "settings": {
+            "name": "Prada"
+          }
+        },
+        "b5": {
+          "type": "brand",
+          "settings": {
+            "name": "Arc'teryx"
+          }
+        },
+        "b6": {
+          "type": "brand",
+          "settings": {
+            "name": "Ralph Lauren"
+          }
+        },
+        "b7": {
+          "type": "brand",
+          "settings": {
+            "name": "Carhartt WIP"
+          }
+        },
+        "b8": {
+          "type": "brand",
+          "settings": {
+            "name": "Loro Piana"
+          }
+        }
       },
-      "block_order": ["b1", "b2", "b3", "b4", "b5", "b6", "b7", "b8"],
-      "settings": { "label": "Marcas", "speed": 45 }
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6",
+        "b7",
+        "b8"
+      ],
+      "settings": {
+        "label": "Marcas",
+        "speed": 45
+      }
     },
-    "new-arrivals": {
-      "type": "featured-collection",
+    "tabs": {
+      "type": "collection-tabs",
+      "blocks": {
+        "t1": {
+          "type": "tab",
+          "settings": {
+            "label": "Novedades"
+          }
+        },
+        "t2": {
+          "type": "tab",
+          "settings": {
+            "label": "Lujo"
+          }
+        },
+        "t3": {
+          "type": "tab",
+          "settings": {
+            "label": "Streetwear"
+          }
+        },
+        "t4": {
+          "type": "tab",
+          "settings": {
+            "label": "Abrigos"
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
       "settings": {
         "eyebrow": "Recién llegado",
-        "heading": "Nuevas <em>llegadas</em>",
+        "heading": "Del lujo al <em>streetwear</em>",
         "limit": 8,
         "columns": 4,
-        "link_label": "Ver todo",
-        "quick_add": true,
         "surface": false
+      }
+    },
+    "split": {
+      "type": "split-banner",
+      "blocks": {
+        "p1": {
+          "type": "panel",
+          "settings": {
+            "eyebrow": "Colección",
+            "heading": "Hombre",
+            "button_label": "Descubrir",
+            "link": "shopify://collections/all"
+          }
+        },
+        "p2": {
+          "type": "panel",
+          "settings": {
+            "eyebrow": "Colección",
+            "heading": "Mujer",
+            "button_label": "Descubrir",
+            "link": "shopify://collections/all"
+          }
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2"
+      ],
+      "settings": {
+        "flush": true
+      }
+    },
+    "iconic": {
+      "type": "product-carousel",
+      "settings": {
+        "eyebrow": "Lo más deseado",
+        "heading": "Piezas <em>icónicas</em>",
+        "limit": 12,
+        "per_view": 4,
+        "surface": false
+      }
+    },
+    "look": {
+      "type": "shop-the-look",
+      "blocks": {
+        "h1": {
+          "type": "hotspot",
+          "settings": {
+            "x": 48,
+            "y": 30
+          }
+        },
+        "h2": {
+          "type": "hotspot",
+          "settings": {
+            "x": 55,
+            "y": 58
+          }
+        },
+        "h3": {
+          "type": "hotspot",
+          "settings": {
+            "x": 44,
+            "y": 86
+          }
+        }
+      },
+      "block_order": [
+        "h1",
+        "h2",
+        "h3"
+      ],
+      "settings": {
+        "eyebrow": "Lookbook",
+        "heading": "Compra el <em>look</em>",
+        "surface": true,
+        "button_label": "Ver lookbook",
+        "button_link": ""
+      }
+    },
+    "countdown": {
+      "type": "countdown",
+      "settings": {
+        "date": "2026-12-01",
+        "time": "20:00",
+        "eyebrow": "Próximo drop",
+        "heading": "Drop 002 · <em>Archivo invierno</em>",
+        "text": "<p>Más de 60 piezas de Moncler, Stone Island y Corteiz. Suscríbete para entrar antes que nadie.</p>",
+        "done_text": "¡Ya disponible!",
+        "button_label": "Avísame",
+        "button_link": "#Newsletter"
       }
     },
     "categories": {
       "type": "collection-list",
       "blocks": {
-        "c1": { "type": "collection", "settings": { "title": "Abrigos & Plumíferos" } },
-        "c2": { "type": "collection", "settings": { "title": "Streetwear" } },
-        "c3": { "type": "collection", "settings": { "title": "Sastrería & Punto" } }
+        "c1": {
+          "type": "collection",
+          "settings": {
+            "title": "Abrigos & Plumíferos"
+          }
+        },
+        "c2": {
+          "type": "collection",
+          "settings": {
+            "title": "Streetwear"
+          }
+        },
+        "c3": {
+          "type": "collection",
+          "settings": {
+            "title": "Sastrería & Punto"
+          }
+        }
       },
-      "block_order": ["c1", "c2", "c3"],
-      "settings": { "eyebrow": "Explorar", "heading": "Comprar por <em>categoría</em>", "columns": 3, "ratio": "portrait", "center": false, "surface": false }
-    },
-    "manifesto": {
-      "type": "manifesto",
+      "block_order": [
+        "c1",
+        "c2",
+        "c3"
+      ],
       "settings": {
-        "style": "surface",
-        "eyebrow": "Nuestra filosofía",
-        "text": "Creemos que las mejores prendas merecen <em>más de una historia</em>. Seleccionamos, verificamos y damos una segunda vida a piezas excepcionales.",
-        "button_label": "Conoce el proceso",
-        "button_link": ""
+        "eyebrow": "Explorar",
+        "heading": "Comprar por <em>categoría</em>",
+        "columns": 3,
+        "ratio": "portrait",
+        "center": false,
+        "surface": false
+      }
+    },
+    "stats": {
+      "type": "stats",
+      "blocks": {
+        "s1": {
+          "type": "stat",
+          "settings": {
+            "number": 100,
+            "suffix": "%",
+            "label": "Piezas verificadas a mano"
+          }
+        },
+        "s2": {
+          "type": "stat",
+          "settings": {
+            "number": 60,
+            "suffix": "+",
+            "label": "Marcas seleccionadas"
+          }
+        },
+        "s3": {
+          "type": "stat",
+          "settings": {
+            "number": 48,
+            "suffix": "h",
+            "label": "Envío asegurado"
+          }
+        },
+        "s4": {
+          "type": "stat",
+          "settings": {
+            "number": 70,
+            "suffix": "%",
+            "label": "Ahorro medio vs. tienda"
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+      ],
+      "settings": {
+        "style": "default"
       }
     },
     "process": {
@@ -75,27 +393,169 @@
         "button_link": ""
       }
     },
-    "values": {
-      "type": "values",
+    "reviews": {
+      "type": "testimonials",
       "blocks": {
-        "v1": { "type": "value", "settings": { "icon": "shield", "title": "100% auténtico", "text": "<p>Cada pieza se verifica por expertos antes de publicarse. Si no es auténtica, te devolvemos el dinero.</p>" } },
-        "v2": { "type": "value", "settings": { "icon": "sparkle", "title": "Casi nuevo", "text": "<p>Solo aceptamos prendas en estado excelente o superior. Sin sorpresas.</p>" } },
-        "v3": { "type": "value", "settings": { "icon": "camera", "title": "Fotos reales", "text": "<p>Fotografiamos la prenda exacta que recibirás, con todos sus detalles.</p>" } },
-        "v4": { "type": "value", "settings": { "icon": "truck", "title": "Envío asegurado", "text": "<p>Embalaje premium y envío con seguimiento en 24/48h.</p>" } }
+        "r1": {
+          "type": "review",
+          "settings": {
+            "stars": 5,
+            "title": "Mejor que en las fotos",
+            "quote": "El plumífero llegó como nuevo, con su bolsa original y hasta la etiqueta de repuesto. Embalaje de diez.",
+            "name": "Javier M.",
+            "city": "Madrid",
+            "verified": true,
+            "product_text": "Moncler Maya"
+          }
+        },
+        "r2": {
+          "type": "review",
+          "settings": {
+            "stars": 5,
+            "title": "Auténtico y rápido",
+            "quote": "Tenía dudas con comprar de segunda mano, pero la verificación y las fotos reales me dieron total confianza. Repetiré.",
+            "name": "Lucía G.",
+            "city": "Barcelona",
+            "verified": true,
+            "product_text": "Stone Island Overshirt"
+          }
+        },
+        "r3": {
+          "type": "review",
+          "settings": {
+            "stars": 5,
+            "title": "Imposible de encontrar",
+            "quote": "Llevaba meses buscando esa sudadera de Corteiz agotada en todas partes. Aquí estaba, a buen precio y perfecta.",
+            "name": "Adrián R.",
+            "city": "Valencia",
+            "verified": true,
+            "product_text": "Corteiz Alcatraz Hoodie"
+          }
+        },
+        "r4": {
+          "type": "review",
+          "settings": {
+            "stars": 5,
+            "title": "Atención de lujo",
+            "quote": "Me asesoraron por WhatsApp con la talla y acertaron. El trato es de boutique.",
+            "name": "Marta S.",
+            "city": "Sevilla",
+            "verified": true,
+            "product_text": "Prada Re-Nylon"
+          }
+        }
       },
-      "block_order": ["v1", "v2", "v3", "v4"],
-      "settings": { "style": "dark", "eyebrow": "Por qué comprar aquí", "heading": "Segunda mano, <em>primera clase</em>", "show_numbers": false }
+      "block_order": [
+        "r1",
+        "r2",
+        "r3",
+        "r4"
+      ],
+      "settings": {
+        "style": "surface",
+        "eyebrow": "Compras verificadas",
+        "heading": "Lo que dicen <em>nuestros clientes</em>",
+        "rating": "4,9",
+        "rating_text": "basado en reseñas verificadas"
+      }
     },
     "conditions": {
       "type": "condition-guide",
       "blocks": {
-        "l1": { "type": "level", "settings": { "level": 5, "title": "Nuevo con etiqueta", "text": "<p>Nunca usado. Conserva todas sus etiquetas y, cuando aplica, su embalaje original.</p>" } },
-        "l2": { "type": "level", "settings": { "level": 4, "title": "Como nuevo", "text": "<p>Usado una o dos veces. Sin ningún signo visible de uso.</p>" } },
-        "l3": { "type": "level", "settings": { "level": 3, "title": "Excelente", "text": "<p>Mínimos signos de uso, solo apreciables al detalle. Detallados en la ficha.</p>" } },
-        "l4": { "type": "level", "settings": { "level": 2, "title": "Muy bueno", "text": "<p>Ligeros signos de uso que no afectan a su aspecto. Siempre fotografiados.</p>" } }
+        "l1": {
+          "type": "level",
+          "settings": {
+            "level": 5,
+            "title": "Nuevo con etiqueta",
+            "text": "<p>Nunca usado. Conserva todas sus etiquetas y, cuando aplica, su embalaje original.</p>"
+          }
+        },
+        "l2": {
+          "type": "level",
+          "settings": {
+            "level": 4,
+            "title": "Como nuevo",
+            "text": "<p>Usado una o dos veces. Sin ningún signo visible de uso.</p>"
+          }
+        },
+        "l3": {
+          "type": "level",
+          "settings": {
+            "level": 3,
+            "title": "Excelente",
+            "text": "<p>Mínimos signos de uso, solo apreciables al detalle. Detallados en la ficha.</p>"
+          }
+        },
+        "l4": {
+          "type": "level",
+          "settings": {
+            "level": 2,
+            "title": "Muy bueno",
+            "text": "<p>Ligeros signos de uso que no afectan a su aspecto. Siempre fotografiados.</p>"
+          }
+        }
       },
-      "block_order": ["l1", "l2", "l3", "l4"],
-      "settings": { "eyebrow": "Transparencia total", "heading": "Nuestra escala de <em>estado</em>", "intro": "<p>Cada prenda indica su estado real. Así sabes exactamente lo que vas a recibir.</p>", "surface": false }
+      "block_order": [
+        "l1",
+        "l2",
+        "l3",
+        "l4"
+      ],
+      "settings": {
+        "eyebrow": "Transparencia total",
+        "heading": "Nuestra escala de <em>estado</em>",
+        "intro": "<p>Cada prenda indica su estado real. Así sabes exactamente lo que vas a recibir.</p>",
+        "surface": false
+      }
+    },
+    "values": {
+      "type": "values",
+      "blocks": {
+        "v1": {
+          "type": "value",
+          "settings": {
+            "icon": "shield",
+            "title": "100% auténtico",
+            "text": "<p>Cada pieza se verifica por expertos antes de publicarse. Si no es auténtica, te devolvemos el dinero.</p>"
+          }
+        },
+        "v2": {
+          "type": "value",
+          "settings": {
+            "icon": "sparkle",
+            "title": "Casi nuevo",
+            "text": "<p>Solo aceptamos prendas en estado excelente o superior. Sin sorpresas.</p>"
+          }
+        },
+        "v3": {
+          "type": "value",
+          "settings": {
+            "icon": "camera",
+            "title": "Fotos reales",
+            "text": "<p>Fotografiamos la prenda exacta que recibirás, con todos sus detalles.</p>"
+          }
+        },
+        "v4": {
+          "type": "value",
+          "settings": {
+            "icon": "truck",
+            "title": "Envío asegurado",
+            "text": "<p>Embalaje premium y envío con seguimiento en 24/48h.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "v1",
+        "v2",
+        "v3",
+        "v4"
+      ],
+      "settings": {
+        "style": "dark",
+        "eyebrow": "Por qué comprar aquí",
+        "heading": "Segunda mano, <em>primera clase</em>",
+        "show_numbers": false
+      }
     },
     "sell": {
       "type": "cta-banner",
@@ -105,6 +565,58 @@
         "text": "<p>Compramos y vendemos en consignación prendas de marcas premium en excelente estado. Te respondemos en menos de 48h.</p>",
         "button_label": "Enviar mis prendas",
         "button_link": "shopify://pages/contact"
+      }
+    },
+    "blog": {
+      "type": "featured-blog",
+      "settings": {
+        "limit": 3,
+        "eyebrow": "Journal",
+        "heading": "Guías y <em>autenticación</em>",
+        "surface": false
+      }
+    },
+    "gallery": {
+      "type": "gallery",
+      "blocks": {
+        "g1": {
+          "type": "image",
+          "settings": {}
+        },
+        "g2": {
+          "type": "image",
+          "settings": {}
+        },
+        "g3": {
+          "type": "image",
+          "settings": {}
+        },
+        "g4": {
+          "type": "image",
+          "settings": {}
+        },
+        "g5": {
+          "type": "image",
+          "settings": {}
+        },
+        "g6": {
+          "type": "image",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "g1",
+        "g2",
+        "g3",
+        "g4",
+        "g5",
+        "g6"
+      ],
+      "settings": {
+        "eyebrow": "Síguenos",
+        "heading": "<em>@</em>tutienda",
+        "link_label": "Ver en Instagram",
+        "columns": 6
       }
     },
     "newsletter": {
@@ -117,5 +629,24 @@
       }
     }
   },
-  "order": ["hero", "marquee", "new-arrivals", "categories", "manifesto", "process", "values", "conditions", "sell", "newsletter"]
+  "order": [
+    "slideshow",
+    "usp",
+    "marquee",
+    "tabs",
+    "split",
+    "iconic",
+    "look",
+    "countdown",
+    "categories",
+    "stats",
+    "process",
+    "reviews",
+    "conditions",
+    "values",
+    "sell",
+    "blog",
+    "gallery",
+    "newsletter"
+  ]
 }

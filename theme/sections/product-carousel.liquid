@@ -1,0 +1,40 @@
+{%- assign collection = section.settings.collection | default: collections.all -%}
+<section class="section{% if section.settings.surface %} section--surface{% endif %}" data-carousel>
+  <div class="page-width">
+    <div class="section-header reveal">
+      <div>
+        {%- if section.settings.eyebrow != blank -%}<span class="eyebrow eyebrow--line">{{ section.settings.eyebrow }}</span>{%- endif -%}
+        <h2 class="heading-italic">{{ section.settings.heading }}</h2>
+      </div>
+      <div class="carousel-nav">
+        <a href="{{ collection.url }}" class="link-underline hide-mobile">{{ 'general.view_all' | t }}</a>
+        <button type="button" class="carousel-nav__btn" data-carousel-prev aria-label="{{ 'general.previous' | t }}">←</button>
+        <button type="button" class="carousel-nav__btn" data-carousel-next aria-label="{{ 'general.next' | t }}">→</button>
+      </div>
+    </div>
+  </div>
+  <div class="carousel" data-carousel-track style="--per-view: {{ section.settings.per_view }};">
+    {%- for product in collection.products limit: section.settings.limit -%}
+      <div class="carousel__item">{% render 'product-card', product: product, show_quick_add: true %}</div>
+    {%- else -%}
+      {%- for i in (1..6) -%}<div class="carousel__item">{% render 'product-card-placeholder' %}</div>{%- endfor -%}
+    {%- endfor -%}
+  </div>
+  <div class="page-width"><div class="carousel-progress"><span data-carousel-progress></span></div></div>
+</section>
+
+{% schema %}
+{
+  "name": "Carrusel de productos",
+  "class": "section-product-carousel",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Lo más deseado" },
+    { "type": "inline_richtext", "id": "heading", "label": "Título", "default": "Piezas <em>icónicas</em>" },
+    { "type": "collection", "id": "collection", "label": "Colección" },
+    { "type": "range", "id": "limit", "label": "Número de productos", "min": 4, "max": 20, "step": 1, "default": 12 },
+    { "type": "range", "id": "per_view", "label": "Productos visibles (escritorio)", "min": 3, "max": 6, "step": 1, "default": 4 },
+    { "type": "checkbox", "id": "surface", "label": "Fondo secundario", "default": false }
+  ],
+  "presets": [{ "name": "Carrusel de productos" }]
+}
+{% endschema %}

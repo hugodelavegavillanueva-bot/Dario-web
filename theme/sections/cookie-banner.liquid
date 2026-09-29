@@ -1,0 +1,22 @@
+{%- if section.settings.enabled -%}
+  <div class="cookie-banner" data-cookie-banner hidden>
+    <p>{{ section.settings.text }}{% if section.settings.link != blank %} <a href="{{ section.settings.link }}" style="text-decoration:underline;">{{ 'cookies.more' | t }}</a>{% endif %}</p>
+    <div class="cookie-banner__actions">
+      <button type="button" class="button button--outline" data-cookie="decline">{{ 'cookies.decline' | t }}</button>
+      <button type="button" class="button" data-cookie="accept">{{ 'cookies.accept' | t }}</button>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Aviso de cookies",
+  "class": "section-cookie",
+  "settings": [
+    { "type": "checkbox", "id": "enabled", "label": "Activar", "default": true },
+    { "type": "text", "id": "text", "label": "Texto", "default": "Usamos cookies para mejorar tu experiencia y analizar el tráfico." },
+    { "type": "url", "id": "link", "label": "Enlace a política de cookies" },
+    { "type": "paragraph", "content": "Conecta con la API de privacidad de Shopify: la decisión del cliente se guarda como consentimiento." }
+  ]
+}
+{% endschema %}

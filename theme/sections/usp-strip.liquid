@@ -1,0 +1,54 @@
+<div class="usp-strip{% if section.settings.dark %} usp-strip--dark{% endif %}">
+  <div class="page-width usp-strip__inner">
+    {%- for block in section.blocks -%}
+      <div class="usp-strip__item" {{ block.shopify_attributes }}>
+        {%- if block.settings.icon != 'none' -%}{% render 'icon', icon: block.settings.icon %}{%- endif -%}
+        <span>{{ block.settings.text }}</span>
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Barra de ventajas",
+  "class": "section-usp-strip",
+  "max_blocks": 5,
+  "settings": [
+    { "type": "checkbox", "id": "dark", "label": "Fondo oscuro", "default": false }
+  ],
+  "blocks": [
+    {
+      "type": "item", "name": "Ventaja",
+      "settings": [
+        {
+          "type": "select", "id": "icon", "label": "Icono",
+          "options": [
+            { "value": "none", "label": "Ninguno" },
+            { "value": "shield", "label": "Escudo" },
+            { "value": "truck", "label": "Camión" },
+            { "value": "return", "label": "Devolución" },
+            { "value": "sparkle", "label": "Brillo" },
+            { "value": "camera", "label": "Cámara" },
+            { "value": "leaf", "label": "Hoja" },
+            { "value": "tag", "label": "Etiqueta" }
+          ],
+          "default": "shield"
+        },
+        { "type": "text", "id": "text", "label": "Texto", "default": "Autenticidad garantizada" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Barra de ventajas",
+      "blocks": [
+        { "type": "item", "settings": { "icon": "shield", "text": "Autenticidad garantizada" } },
+        { "type": "item", "settings": { "icon": "camera", "text": "Fotos reales de cada pieza" } },
+        { "type": "item", "settings": { "icon": "truck", "text": "Envío asegurado 24/48h" } },
+        { "type": "item", "settings": { "icon": "return", "text": "Devolución 14 días" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

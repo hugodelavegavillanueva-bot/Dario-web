@@ -1,0 +1,5 @@
+{%- comment -%} Usado por JS (favoritos / vistos recientemente) vía ?section_id=product-card-render {%- endcomment -%}
+<div data-rendered-card>{% render 'product-card', product: product, show_quick_add: true %}</div>
+{% schema %}
+{ "name": "Tarjeta (interno)" }
+{% endschema %}

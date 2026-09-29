@@ -1,0 +1,93 @@
+{%- capture star -%}<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M6 0l1.6 3.9 4.2.3-3.2 2.7 1 4.1L6 8.8 2.4 11l1-4.1L.2 4.2l4.2-.3Z"/></svg>{%- endcapture -%}
+<section class="section{% if section.settings.style == 'dark' %} section--dark{% elsif section.settings.style == 'surface' %} section--surface{% endif %}" data-carousel>
+  <div class="page-width">
+    <div class="section-header reveal">
+      <div>
+        {%- if section.settings.eyebrow != blank -%}<span class="eyebrow eyebrow--line">{{ section.settings.eyebrow }}</span>{%- endif -%}
+        <h2 class="heading-italic">{{ section.settings.heading }}</h2>
+        {%- if section.settings.rating != blank -%}
+          <div class="rating-summary">
+            <span class="stars">{%- for i in (1..5) -%}{{ star }}{%- endfor -%}</span>
+            <span><strong>{{ section.settings.rating }}</strong> / 5 · {{ section.settings.rating_text }}</span>
+          </div>
+        {%- endif -%}
+      </div>
+      <div class="carousel-nav">
+        <button type="button" class="carousel-nav__btn" data-carousel-prev aria-label="{{ 'general.previous' | t }}">←</button>
+        <button type="button" class="carousel-nav__btn" data-carousel-next aria-label="{{ 'general.next' | t }}">→</button>
+      </div>
+    </div>
+  </div>
+  <div class="carousel carousel--reviews" data-carousel-track style="--per-view: 3;">
+    {%- for block in section.blocks -%}
+      <figure class="carousel__item review" {{ block.shopify_attributes }}>
+        <div class="stars" role="img" aria-label="{{ block.settings.stars }}/5">
+          {%- for i in (1..block.settings.stars) -%}{{ star }}{%- endfor -%}
+        </div>
+        {%- if block.settings.title != blank -%}<p class="review__title">{{ block.settings.title }}</p>{%- endif -%}
+        <blockquote class="review__quote">&ldquo;{{ block.settings.quote }}&rdquo;</blockquote>
+        <figcaption class="review__who">
+          <span>{{ block.settings.name }}{% if block.settings.city != blank %} · {{ block.settings.city }}{% endif %}</span>
+          {%- if block.settings.verified -%}
+            <span class="review__verified"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 6.3 4.6 9 10 3"/></svg>{{ 'general.verified' | t }}</span>
+          {%- endif -%}
+        </figcaption>
+        {%- assign p = block.settings.product -%}
+        {%- if p != blank -%}
+          <a href="{{ p.url }}" class="review__product">
+            {%- if p.featured_media -%}{{ p.featured_media | image_url: width: 120 | image_tag: loading: 'lazy', alt: p.title }}{%- endif -%}
+            <span><span class="card__vendor">{{ p.vendor }}</span><br>{{ p.title }}</span>
+          </a>
+        {%- elsif block.settings.product_text != blank -%}
+          <p class="review__bought">{{ 'general.bought' | t }}: {{ block.settings.product_text }}</p>
+        {%- endif -%}
+      </figure>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Reseñas de clientes",
+  "class": "section-testimonials",
+  "max_blocks": 12,
+  "settings": [
+    {
+      "type": "select", "id": "style", "label": "Estilo",
+      "options": [{ "value": "default", "label": "Claro" }, { "value": "surface", "label": "Secundario" }, { "value": "dark", "label": "Oscuro" }],
+      "default": "surface"
+    },
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Compras verificadas" },
+    { "type": "inline_richtext", "id": "heading", "label": "Título", "default": "Lo que dicen <em>nuestros clientes</em>" },
+    { "type": "text", "id": "rating", "label": "Nota media (vacío para ocultar)", "default": "4,9", "info": "Pon solo datos reales." },
+    { "type": "text", "id": "rating_text", "label": "Texto de la nota", "default": "basado en reseñas verificadas" }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Reseña",
+      "settings": [
+        { "type": "range", "id": "stars", "label": "Estrellas", "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "text", "id": "title", "label": "Titular" },
+        { "type": "textarea", "id": "quote", "label": "Opinión", "default": "Llegó impecable, tal y como en las fotos." },
+        { "type": "text", "id": "name", "label": "Nombre", "default": "Cliente" },
+        { "type": "text", "id": "city", "label": "Ciudad" },
+        { "type": "checkbox", "id": "verified", "label": "Compra verificada", "default": true },
+        { "type": "product", "id": "product", "label": "Producto comprado (opcional)" },
+        { "type": "text", "id": "product_text", "label": "O texto del producto", "info": "Por si la prenda ya se vendió" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Reseñas de clientes",
+      "blocks": [
+        { "type": "review", "settings": { "title": "Mejor que en las fotos", "quote": "El plumífero llegó como nuevo, con su bolsa original y hasta la etiqueta de repuesto. Embalaje de diez.", "name": "Javier M.", "city": "Madrid", "product_text": "Moncler Maya" } },
+        { "type": "review", "settings": { "title": "Auténtico y rápido", "quote": "Tenía dudas con comprar de segunda mano, pero la verificación y las fotos reales me dieron total confianza. Repetiré.", "name": "Lucía G.", "city": "Barcelona", "product_text": "Stone Island Overshirt" } },
+        { "type": "review", "settings": { "title": "Imposible de encontrar", "quote": "Llevaba meses buscando esa sudadera de Corteiz agotada en todas partes. Aquí estaba, a buen precio y perfecta.", "name": "Adrián R.", "city": "Valencia", "product_text": "Corteiz Alcatraz Hoodie" } },
+        { "type": "review", "settings": { "title": "Atención de lujo", "quote": "Me asesoraron por WhatsApp con la talla y acertaron. El trato es de boutique.", "name": "Marta S.", "city": "Sevilla", "product_text": "Prada Re-Nylon" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

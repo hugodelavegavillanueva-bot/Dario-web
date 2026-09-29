@@ -1,0 +1,146 @@
+{
+  "sections": {
+    "intro": {
+      "type": "hero",
+      "settings": {
+        "layout": "split",
+        "height": "large",
+        "eyebrow": "Nuestra historia",
+        "heading": "Moda con <em>memoria</em>",
+        "text": "<p>Nacimos de una idea sencilla: las grandes prendas no deberían acabar olvidadas en un armario. Buscamos, verificamos y damos una segunda vida a piezas excepcionales — del plumífero de lujo a la sudadera más buscada del momento.</p>",
+        "button_label": "Ver la colección",
+        "button_link": "shopify://collections/all",
+        "button_label_2": "",
+        "button_link_2": ""
+      }
+    },
+    "stats": {
+      "type": "stats",
+      "blocks": {
+        "s1": {
+          "type": "stat",
+          "settings": {
+            "number": 100,
+            "suffix": "%",
+            "label": "Piezas verificadas a mano"
+          }
+        },
+        "s2": {
+          "type": "stat",
+          "settings": {
+            "number": 60,
+            "suffix": "+",
+            "label": "Marcas seleccionadas"
+          }
+        },
+        "s3": {
+          "type": "stat",
+          "settings": {
+            "number": 48,
+            "suffix": "h",
+            "label": "Envío asegurado"
+          }
+        },
+        "s4": {
+          "type": "stat",
+          "settings": {
+            "number": 70,
+            "suffix": "%",
+            "label": "Ahorro medio vs. tienda"
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+      ],
+      "settings": {
+        "style": "surface"
+      }
+    },
+    "manifesto": {
+      "type": "manifesto",
+      "settings": {
+        "style": "default",
+        "eyebrow": "Lo que creemos",
+        "text": "La prenda más sostenible es la que <em>ya existe</em>. Nuestra misión es que las mejores sigan viviendo.",
+        "button_label": "",
+        "button_link": ""
+      }
+    },
+    "process": {
+      "type": "image-with-text",
+      "settings": {
+        "reverse": true,
+        "eyebrow": "El proceso",
+        "heading": "Verificado a <em>mano</em>, pieza a pieza",
+        "text": "<p>Revisamos etiquetas, costuras, herrajes, tejidos y códigos de autenticidad. Fotografiamos la pieza exacta que recibirás y describimos cualquier detalle de uso. Solo publicamos lo que nosotros mismos compraríamos.</p>",
+        "button_label": "Guía de autenticidad",
+        "button_link": ""
+      }
+    },
+    "values": {
+      "type": "values",
+      "blocks": {
+        "v1": {
+          "type": "value",
+          "settings": {
+            "icon": "shield",
+            "title": "Autenticidad",
+            "text": "<p>Garantía de devolución del 100% si una pieza no es auténtica.</p>"
+          }
+        },
+        "v2": {
+          "type": "value",
+          "settings": {
+            "icon": "leaf",
+            "title": "Sostenibilidad",
+            "text": "<p>Cada compra alarga la vida de una prenda y evita producir una nueva.</p>"
+          }
+        },
+        "v3": {
+          "type": "value",
+          "settings": {
+            "icon": "camera",
+            "title": "Transparencia",
+            "text": "<p>Fotos reales, estado honesto y medidas tomadas a mano.</p>"
+          }
+        },
+        "v4": {
+          "type": "value",
+          "settings": {
+            "icon": "hanger",
+            "title": "Curaduría",
+            "text": "<p>Rechazamos más piezas de las que aceptamos. Solo lo mejor llega a la tienda.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "v1",
+        "v2",
+        "v3",
+        "v4"
+      ],
+      "settings": {
+        "style": "dark",
+        "eyebrow": "Nuestros valores",
+        "heading": "Cuatro <em>promesas</em>",
+        "show_numbers": false
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {}
+    }
+  },
+  "order": [
+    "intro",
+    "stats",
+    "manifesto",
+    "process",
+    "values",
+    "newsletter"
+  ]
+}

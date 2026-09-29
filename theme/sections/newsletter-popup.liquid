@@ -1,0 +1,48 @@
+{%- if section.settings.enabled -%}
+  <div class="popup" id="NewsletterPopup" data-popup data-delay="{{ section.settings.delay }}" data-days="{{ section.settings.days }}" data-test="{{ request.design_mode }}" aria-hidden="true" role="dialog" aria-modal="true" aria-label="{{ section.settings.heading | strip_html | escape }}">
+    <div class="popup__overlay" data-popup-close></div>
+    <div class="popup__panel{% if section.settings.image == blank %} popup__panel--noimg{% endif %}">
+      {%- if section.settings.image != blank -%}
+        <div class="popup__media">{{ section.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', sizes: '420px' }}</div>
+      {%- endif -%}
+      <div class="popup__content">
+        <button type="button" class="drawer__close popup__close" data-popup-close aria-label="{{ 'general.close' | t }}">{% render 'icon', icon: 'close' %}</button>
+        {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+        <h2 class="h2 heading-italic">{{ section.settings.heading }}</h2>
+        {%- if section.settings.text != blank -%}<div class="muted">{{ section.settings.text }}</div>{%- endif -%}
+        {%- form 'customer', id: 'PopupNewsletter' -%}
+          <input type="hidden" name="contact[tags]" value="newsletter, popup">
+          {%- if form.posted_successfully? -%}
+            <p style="margin-top:1.5rem;">{{ 'newsletter.success' | t }}</p>
+            {%- if section.settings.code != blank -%}
+              <p class="popup__code" data-copy="{{ section.settings.code }}">{{ section.settings.code }}</p>
+            {%- endif -%}
+          {%- else -%}
+            <div class="newsletter__form">
+              <input type="email" name="contact[email]" class="newsletter__input" placeholder="{{ 'newsletter.placeholder' | t }}" required aria-label="{{ 'newsletter.placeholder' | t }}">
+              <button type="submit" class="newsletter__submit">{{ 'newsletter.button' | t }} →</button>
+            </div>
+          {%- endif -%}
+        {%- endform -%}
+        <button type="button" class="popup__dismiss" data-popup-close>{{ 'newsletter.no_thanks' | t }}</button>
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Popup de newsletter",
+  "class": "section-popup",
+  "settings": [
+    { "type": "checkbox", "id": "enabled", "label": "Activar", "default": true },
+    { "type": "range", "id": "delay", "label": "Mostrar tras", "min": 2, "max": 60, "step": 1, "unit": "s", "default": 8 },
+    { "type": "range", "id": "days", "label": "No volver a mostrar durante", "min": 1, "max": 60, "step": 1, "unit": "d", "default": 14 },
+    { "type": "image_picker", "id": "image", "label": "Imagen" },
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Acceso anticipado" },
+    { "type": "inline_richtext", "id": "heading", "label": "Título", "default": "−10% en tu <em>primera pieza</em>" },
+    { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Únete a la lista y recibe las nuevas llegadas 24h antes que nadie.</p>" },
+    { "type": "text", "id": "code", "label": "Código de descuento a mostrar", "info": "Créalo antes en Descuentos. Déjalo vacío si no ofreces código." }
+  ]
+}
+{% endschema %}

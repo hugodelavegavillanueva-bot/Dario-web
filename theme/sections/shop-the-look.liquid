@@ -1,0 +1,87 @@
+<section class="section{% if section.settings.surface %} section--surface{% endif %}">
+  <div class="page-width">
+    <div class="section-header reveal">
+      <div>
+        {%- if section.settings.eyebrow != blank -%}<span class="eyebrow eyebrow--line">{{ section.settings.eyebrow }}</span>{%- endif -%}
+        <h2 class="heading-italic">{{ section.settings.heading }}</h2>
+      </div>
+    </div>
+    <div class="look{% if section.settings.reverse %} look--reverse{% endif %}">
+      <div class="look__media reveal">
+        {%- if section.settings.image != blank -%}
+          {{ section.settings.image | image_url: width: 1800 | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 60vw, 100vw', widths: '600, 900, 1200, 1800' }}
+        {%- else -%}
+          <div class="card__placeholder">{{ 'lifestyle-1' | placeholder_svg_tag }}</div>
+        {%- endif -%}
+        {%- for block in section.blocks -%}
+          {%- assign p = block.settings.product -%}
+          <button type="button" class="hotspot" style="left: {{ block.settings.x }}%; top: {{ block.settings.y }}%;" data-hotspot="{{ forloop.index0 }}" aria-label="{{ p.title | default: 'Producto' | escape }}" {{ block.shopify_attributes }}>
+            <span></span>
+          </button>
+        {%- endfor -%}
+      </div>
+      <div class="look__list">
+        {%- if section.settings.text != blank -%}<div class="muted rte" style="margin-bottom:2rem;">{{ section.settings.text }}</div>{%- endif -%}
+        {%- for block in section.blocks -%}
+          {%- assign p = block.settings.product -%}
+          <a href="{{ p.url | default: '#' }}" class="look__item" data-hotspot-item="{{ forloop.index0 }}">
+            <span class="look__num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+            <span class="look__thumb">
+              {%- if p.featured_media -%}
+                {{ p.featured_media | image_url: width: 200 | image_tag: loading: 'lazy', alt: p.title }}
+              {%- endif -%}
+            </span>
+            <span class="look__info">
+              <span class="card__vendor">{{ p.vendor | default: 'Marca' }}</span>
+              <span class="card__title" style="display:block;margin:0;">{{ p.title | default: 'Selecciona un producto' }}</span>
+              {%- if p != blank -%}{% render 'price', product: p %}{%- endif -%}
+            </span>
+            <span class="arrow">→</span>
+          </a>
+        {%- endfor -%}
+        {%- if section.settings.button_label != blank -%}
+          <a href="{{ section.settings.button_link }}" class="button button--outline" style="margin-top:2rem;">{{ section.settings.button_label }}</a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Compra el look",
+  "class": "section-shop-the-look",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Imagen del look" },
+    { "type": "checkbox", "id": "reverse", "label": "Imagen a la derecha", "default": false },
+    { "type": "checkbox", "id": "surface", "label": "Fondo secundario", "default": false },
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Lookbook" },
+    { "type": "inline_richtext", "id": "heading", "label": "Título", "default": "Compra el <em>look</em>" },
+    { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Combinamos piezas de distintas casas para crear conjuntos con carácter. Pulsa sobre cada punto para ver la prenda.</p>" },
+    { "type": "text", "id": "button_label", "label": "Botón" },
+    { "type": "url", "id": "button_link", "label": "Enlace" }
+  ],
+  "blocks": [
+    {
+      "type": "hotspot",
+      "name": "Punto de producto",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Producto" },
+        { "type": "range", "id": "x", "label": "Posición horizontal", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
+        { "type": "range", "id": "y", "label": "Posición vertical", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Compra el look",
+      "blocks": [
+        { "type": "hotspot", "settings": { "x": 45, "y": 30 } },
+        { "type": "hotspot", "settings": { "x": 55, "y": 60 } },
+        { "type": "hotspot", "settings": { "x": 40, "y": 85 } }
+      ]
+    }
+  ]
+}
+{% endschema %}

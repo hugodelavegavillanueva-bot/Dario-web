@@ -1,6 +1,26 @@
 {
   "sections": {
-    "main": { "type": "main-collection", "settings": { "per_page": 24, "columns": 4, "show_image": true, "quick_add": true } }
+    "main": {
+      "type": "main-collection",
+      "settings": {
+        "per_page": 24,
+        "columns": 4,
+        "show_image": true,
+        "quick_add": true,
+        "sidebar": true,
+        "pagination": "load_more",
+        "promo_position": 5
+      }
+    },
+    "recent": {
+      "type": "recently-viewed",
+      "settings": {
+        "limit": 4
+      }
+    }
   },
-  "order": ["main"]
+  "order": [
+    "main",
+    "recent"
+  ]
 }

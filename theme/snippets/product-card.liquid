@@ -74,7 +74,17 @@
       {%- endif -%}
     </div>
 
-    {%- if show_quick_add and product.available and product.has_only_default_variant -%}
+    {%- if settings.wishlist_enabled -%}
+      <button type="button" class="card__wish" data-wishlist-toggle="{{ product.handle }}" aria-label="{{ 'wishlist.add' | t }}" aria-pressed="false">
+        {% render 'icon', icon: 'heart' %}
+      </button>
+    {%- endif -%}
+
+    {%- if settings.quick_view_enabled and product.available -%}
+      <div class="card__quick">
+        <button type="button" class="button" data-quick-view="{{ product.url }}"><span>{{ 'products.product.quick_view' | t }}</span></button>
+      </div>
+    {%- elsif show_quick_add and product.available and product.has_only_default_variant -%}
       <div class="card__quick">
         {%- form 'product', product, data-ajax-cart: '' -%}
           <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">

@@ -1,0 +1,42 @@
+{%- liquid
+  assign target = section.settings.date | append: 'T' | append: section.settings.time | append: ':00'
+-%}
+<section class="countdown{% if section.settings.image != blank %} countdown--image{% endif %}" data-countdown="{{ target }}">
+  {%- if section.settings.image != blank -%}
+    <div class="countdown__media">{{ section.settings.image | image_url: width: 2400 | image_tag: loading: 'lazy', sizes: '100vw', widths: '750, 1200, 1800, 2400' }}</div>
+  {%- endif -%}
+  <div class="page-width countdown__inner reveal">
+    {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+    <h2 class="h1 heading-italic">{{ section.settings.heading }}</h2>
+    {%- if section.settings.text != blank -%}<div class="countdown__text">{{ section.settings.text }}</div>{%- endif -%}
+    <div class="countdown__timer" data-countdown-timer>
+      <div><span data-cd="d">00</span><small>{{ 'countdown.days' | t }}</small></div>
+      <div><span data-cd="h">00</span><small>{{ 'countdown.hours' | t }}</small></div>
+      <div><span data-cd="m">00</span><small>{{ 'countdown.minutes' | t }}</small></div>
+      <div><span data-cd="s">00</span><small>{{ 'countdown.seconds' | t }}</small></div>
+    </div>
+    <p class="countdown__done" data-countdown-done hidden>{{ section.settings.done_text }}</p>
+    {%- if section.settings.button_label != blank -%}
+      <a href="{{ section.settings.button_link }}" class="button {% if section.settings.image != blank %}button--light{% endif %}">{{ section.settings.button_label }}</a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Cuenta atrás (Drop)",
+  "class": "section-countdown",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Imagen de fondo" },
+    { "type": "text", "id": "date", "label": "Fecha del lanzamiento", "default": "2026-12-01", "info": "Formato AAAA-MM-DD" },
+    { "type": "text", "id": "time", "label": "Hora", "default": "20:00", "info": "Formato HH:MM (hora local del visitante)" },
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Próximo drop" },
+    { "type": "inline_richtext", "id": "heading", "label": "Título", "default": "Drop 002 · <em>Archivo invierno</em>" },
+    { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Más de 60 piezas de Moncler, Stone Island y Corteiz. Suscríbete para entrar antes que nadie.</p>" },
+    { "type": "text", "id": "done_text", "label": "Texto al terminar", "default": "¡Ya disponible!" },
+    { "type": "text", "id": "button_label", "label": "Botón", "default": "Avísame" },
+    { "type": "url", "id": "button_link", "label": "Enlace" }
+  ],
+  "presets": [{ "name": "Cuenta atrás (Drop)" }]
+}
+{% endschema %}

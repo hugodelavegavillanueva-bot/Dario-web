@@ -9,9 +9,11 @@ sin tocar código. El nombre de la tienda se toma automáticamente de Shopify.
 
 ![Portada](docs/preview/01-portada.png)
 
-| Ficha de producto | Colección | Móvil |
+| Ficha de producto | Colección | Guía de tallas |
 |---|---|---|
-| ![](docs/preview/03-ficha-producto.png) | ![](docs/preview/04-coleccion.png) | ![](docs/preview/05-movil.png) |
+| ![](docs/preview/03-ficha-producto.png) | ![](docs/preview/04-coleccion.png) | ![](docs/preview/06-guia-tallas.png) |
+
+![Móvil](docs/preview/05-movil.png)
 
 > Las capturas usan imágenes de muestra; con las fotos reales de las prendas se verá mucho mejor.
 
@@ -39,6 +41,11 @@ Alternativa con Shopify CLI: `cd theme && shopify theme push --unpublished`.
 ### Páginas (Tienda online → Páginas) — asignar la plantilla indicada
 | Página | Plantilla | Qué muestra |
 |---|---|---|
+| Favoritos | `page.favoritos` | Lista de deseos del cliente (asígnala también en Configuración del tema → Funciones de tienda) |
+| Nosotros | `page.nosotros` | Historia, cifras, proceso y valores |
+| Lookbook | `page.lookbook` | Looks con puntos de producto clicables |
+| Guía de tallas | `page.guia-tallas` | Tablas de equivalencias + cómo medimos |
+| Autenticidad | `page.autenticidad` | Proceso de verificación, escala de estados y garantía |
 | Marcas | `page.marcas` | Índice A–Z automático de todas las marcas |
 | Vender | `page.vender` | Landing "vende con nosotros" + formulario |
 | Contacto | `page.contact` | Formulario (con asunto) + FAQ |
@@ -64,6 +71,7 @@ Crea estos metacampos con espacio de nombres `custom` (todos opcionales):
 | Color | `custom.color` | Texto de una línea | Ficha técnica |
 | Precio original | `custom.precio_original` | Dinero | "Precio original en tienda" |
 | Talla | `custom.talla` | Texto de una línea | Solo si no usas variantes de talla |
+| Completa el look | `custom.complementos` | Producto (lista) | Prendas sugeridas para combinar en la ficha |
 
 Sin metacampos también funciona: el estado puede ponerse como **etiqueta** `Condicion:Como nuevo`.
 
@@ -78,19 +86,49 @@ por fecha). Asígnalas en la sección **Lista de colecciones** de la portada.
 
 ## 3. Qué incluye
 
-**Portada (todo reordenable y editable):** Hero a pantalla completa (imagen, imagen móvil o vídeo) ·
-carrusel de marcas · colección destacada · categorías · manifiesto · imagen con texto · garantías ·
-escala de estados · banner "vende con nosotros" · newsletter · galería/Instagram · FAQ · índice de marcas.
+### Portada (27 secciones disponibles, todas reordenables)
+| Sección | Para qué sirve |
+|---|---|
+| **Slideshow** | Portada con varias diapositivas, autoplay, barra de progreso, flechas y swipe en móvil |
+| Hero / Portada | Imagen o vídeo único a pantalla completa, o formato dividido |
+| **Barra de ventajas** | Autenticidad · fotos reales · envío · devoluciones |
+| Carrusel de marcas | Nombres/logos en movimiento que llevan a cada marca |
+| **Colecciones en pestañas** | Novedades / Lujo / Streetwear / Abrigos en una sola sección |
+| **Banner dividido** | Hombre / Mujer (o Lujo / Streetwear) a pantalla completa |
+| **Carrusel de productos** | Deslizable con flechas y barra de progreso |
+| **Compra el look** | Foto con puntos clicables enlazados a cada prenda |
+| **Cuenta atrás (Drop)** | Temporizador hasta el próximo lanzamiento |
+| **Cifras** | Números animados (100% verificado, 60+ marcas…) |
+| **Reseñas de clientes** | Carrusel con estrellas, compra verificada y producto comprado |
+| **Vídeo a pantalla completa** | Campaña en vídeo con botón pausa |
+| **Blog destacado** · **Logos / prensa** · **Vistos recientemente** | |
+| Colección destacada · Lista de colecciones · Manifiesto · Imagen con texto · Garantías · Guía de estados · Banner "vende" · Newsletter · Galería/Instagram · FAQ · Índice de marcas · Formulario | |
 
-**Tienda:** cabecera transparente sobre el hero con mega menú · buscador predictivo · cesta lateral
-AJAX · ficha de producto con galería + zoom, ficha técnica (talla/estado/color/ref.), aviso de pieza
-única, sellos de confianza, desplegables, botón de compra rápida, barra fija en móvil, productos
-relacionados y datos estructurados para Google (`UsedCondition`) · colecciones con filtros, orden y
-cambio de cuadrícula · cuentas de cliente · blog · 404 · página de contraseña · tarjeta regalo.
+### Funciones de tienda
+- **Favoritos** (corazón en tarjetas y ficha, contador en cabecera, página de favoritos).
+- **Vista rápida** desde la tarjeta con selector de talla y añadir a la cesta.
+- **Cesta lateral** con barra de **envío gratis**, venta cruzada, nota/regalo y métodos de pago.
+- **Popup de newsletter** con código de descuento opcional (no se repite durante X días).
+- **Aviso de cookies** conectado a la API de privacidad de Shopify.
+- Buscador predictivo, mega menú, cabecera transparente, botón volver arriba, avisos (toast).
 
-**Configuración del tema:** colores (3 estilos predefinidos: *Default* marfil, *Noir* oscuro, *Street*
-blanco), tipografía (serif editorial o sans moderna), proporción de fotos, textos de autenticidad y
-envío, redes sociales, favicon.
+### Ficha de producto
+Galería con zoom · ficha técnica (talla, estado con puntos, color, referencia) · aviso de pieza única ·
+**favorito** · **entrega estimada con fechas reales** · **guía de tallas en panel lateral** (con medidas
+de la propia prenda) · **consulta por WhatsApp** con mensaje precargado · sellos de confianza ·
+desplegables (descripción, estado, medidas, composición, autenticidad, envío) · **completa el look** ·
+**compartir** (WhatsApp, Pinterest, copiar enlace) · barra fija de compra en móvil · relacionados ·
+**vistos recientemente** · datos estructurados para Google.
+
+### Colección
+**Filtros en columna lateral** (escritorio) o panel (móvil) · talla en botones · **píldoras de
+subcategorías** · **banner promocional dentro de la rejilla** · **"Cargar más"** con progreso ·
+ordenación · cambio de cuadrícula · vistos recientemente.
+
+### Configuración del tema
+Colores (3 estilos: *Default* marfil, *Noir* oscuro, *Street* blanco), tipografía, proporción de fotos,
+textos de autenticidad/envío, umbral de envío gratis, colección de venta cruzada, WhatsApp, días de
+entrega, guía de tallas por defecto, redes sociales, favicon.
 
 ## 4. Entregar la tienda al cliente
 

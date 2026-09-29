@@ -1,0 +1,37 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": { "layout": "full", "height": "large", "align": "center", "eyebrow": "Lookbook", "heading": "Archivo <em>invierno</em>", "text": "<p>Piezas de distintas casas, combinadas con intención.</p>", "button_label": "", "button_link": "", "button_label_2": "", "button_link_2": "" }
+    },
+    "look1": {
+      "type": "shop-the-look",
+      "blocks": {
+        "h1": { "type": "hotspot", "settings": { "x": 48, "y": 32 } },
+        "h2": { "type": "hotspot", "settings": { "x": 52, "y": 62 } },
+        "h3": { "type": "hotspot", "settings": { "x": 45, "y": 88 } }
+      },
+      "block_order": ["h1", "h2", "h3"],
+      "settings": { "eyebrow": "Look 01", "heading": "Lujo <em>discreto</em>" }
+    },
+    "look2": {
+      "type": "shop-the-look",
+      "blocks": {
+        "h1": { "type": "hotspot", "settings": { "x": 50, "y": 30 } },
+        "h2": { "type": "hotspot", "settings": { "x": 55, "y": 70 } }
+      },
+      "block_order": ["h1", "h2"],
+      "settings": { "eyebrow": "Look 02", "heading": "Street <em>archive</em>", "reverse": true, "surface": true }
+    },
+    "split": {
+      "type": "split-banner",
+      "blocks": {
+        "p1": { "type": "panel", "settings": { "eyebrow": "Colección", "heading": "Lujo", "button_label": "Descubrir" } },
+        "p2": { "type": "panel", "settings": { "eyebrow": "Colección", "heading": "Streetwear", "button_label": "Descubrir" } }
+      },
+      "block_order": ["p1", "p2"],
+      "settings": { "flush": true }
+    }
+  },
+  "order": ["hero", "look1", "look2", "split"]
+}

@@ -1,0 +1,66 @@
+<section class="section{% if section.settings.surface %} section--surface{% endif %}" data-tabs>
+  <div class="page-width">
+    <div class="section-header section-header--center reveal">
+      {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      <h2 class="heading-italic">{{ section.settings.heading }}</h2>
+      <div class="tabs" role="tablist">
+        {%- for block in section.blocks -%}
+          <button type="button" role="tab" class="tabs__tab{% if forloop.first %} is-active{% endif %}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}" data-tab="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+            {{ block.settings.label | default: block.settings.collection.title | default: 'Pestaña' }}
+          </button>
+        {%- endfor -%}
+      </div>
+    </div>
+
+    {%- for block in section.blocks -%}
+      {%- assign c = block.settings.collection | default: collections.all -%}
+      <div class="tabs__panel{% if forloop.first %} is-active{% endif %}" role="tabpanel" data-tab-panel="{{ forloop.index0 }}"{% unless forloop.first %} hidden{% endunless %}>
+        <div class="product-grid" style="--cols: {{ section.settings.columns }}; --cols-tablet: 3;">
+          {%- for product in c.products limit: section.settings.limit -%}
+            {% render 'product-card', product: product, show_quick_add: true %}
+          {%- else -%}
+            {%- for i in (1..4) -%}{% render 'product-card-placeholder' %}{%- endfor -%}
+          {%- endfor -%}
+        </div>
+        <div class="text-center" style="margin-top:3rem;">
+          <a href="{{ c.url }}" class="button button--outline">{{ 'general.view_all' | t }} · {{ block.settings.label | default: c.title }}</a>
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Colecciones en pestañas",
+  "class": "section-collection-tabs",
+  "max_blocks": 5,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Selección" },
+    { "type": "inline_richtext", "id": "heading", "label": "Título", "default": "Del lujo al <em>streetwear</em>" },
+    { "type": "range", "id": "limit", "label": "Productos por pestaña", "min": 4, "max": 12, "step": 1, "default": 8 },
+    { "type": "range", "id": "columns", "label": "Columnas", "min": 3, "max": 5, "step": 1, "default": 4 },
+    { "type": "checkbox", "id": "surface", "label": "Fondo secundario", "default": false }
+  ],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Pestaña",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Nombre", "default": "Lujo" },
+        { "type": "collection", "id": "collection", "label": "Colección" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Colecciones en pestañas",
+      "blocks": [
+        { "type": "tab", "settings": { "label": "Lujo" } },
+        { "type": "tab", "settings": { "label": "Streetwear" } },
+        { "type": "tab", "settings": { "label": "Abrigos" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

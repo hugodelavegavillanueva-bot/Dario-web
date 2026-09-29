@@ -87,6 +87,12 @@
             {% render 'icon', icon: 'account' %}
           </a>
         {%- endif -%}
+        {%- if settings.wishlist_enabled -%}
+          <a href="{{ settings.wishlist_page.url | default: '/pages/favoritos' }}" class="icon-button hide-mobile" aria-label="{{ 'wishlist.title' | t }}">
+            {% render 'icon', icon: 'heart' %}
+            <span class="cart-count" data-wishlist-count hidden><span>0</span></span>
+          </a>
+        {%- endif -%}
         <a href="{{ routes.cart_url }}" class="icon-button" data-drawer-open="CartDrawer" aria-label="{{ 'layout.header.cart' | t }}">
           {% render 'icon', icon: 'bag' %}
           <span class="cart-count" data-cart-count {% if cart.item_count == 0 %}hidden{% endif %}><span>{{ cart.item_count }}</span></span>
@@ -128,7 +134,10 @@
         {%- endfor -%}
       </ul>
     </div>
-    <div class="drawer__footer">
+    <div class="drawer__footer" style="display:flex;flex-wrap:wrap;gap:1.5rem;">
+      {%- if settings.wishlist_enabled -%}
+        <a class="link-underline" href="{{ settings.wishlist_page.url | default: '/pages/favoritos' }}">{{ 'wishlist.title' | t }}</a>
+      {%- endif -%}
       {%- if shop.customer_accounts_enabled -%}
         <a class="link-underline" href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}">{{ 'layout.header.account' | t }}</a>
       {%- endif -%}

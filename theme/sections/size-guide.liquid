@@ -1,0 +1,43 @@
+<div class="page-width page-width--medium" style="padding-bottom: clamp(4rem, 8vw, 7rem);">
+  <div class="page-header">
+    <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+    <h1 class="heading-italic">{{ section.settings.heading }}</h1>
+    {%- if section.settings.text != blank -%}<div class="muted" style="max-width:38rem;margin:0 auto;">{{ section.settings.text }}</div>{%- endif -%}
+  </div>
+  <div class="rte">
+    {%- if page.content != blank -%}{{ page.content }}{%- endif -%}
+    {%- if section.settings.show_tables -%}{% render 'size-tables' %}{%- endif -%}
+  </div>
+  <div class="editorial" style="margin-top:4rem;">
+    <div>
+      <h2 class="h3">{{ section.settings.how_heading }}</h2>
+      <div class="rte muted">{{ section.settings.how_text }}</div>
+    </div>
+    <div class="section--surface" style="padding:2rem;">
+      <p class="eyebrow">{{ 'products.product.size_help' | t }}</p>
+      <p>{{ section.settings.help_text }}</p>
+      {%- if settings.whatsapp_number != blank -%}
+        <a class="button" href="https://wa.me/{{ settings.whatsapp_number | remove: '+' | remove: ' ' }}" target="_blank" rel="noopener">WhatsApp</a>
+      {%- else -%}
+        <a class="button" href="/pages/contact">{{ 'contact.send' | t }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Guía de tallas",
+  "class": "section-size-guide",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Ayuda" },
+    { "type": "inline_richtext", "id": "heading", "label": "Título", "default": "Guía de <em>tallas</em>" },
+    { "type": "richtext", "id": "text", "label": "Introducción", "default": "<p>Trabajamos con muchas casas distintas, y cada una tiene su propio patrón. Usa esta guía como referencia y revisa siempre las medidas reales de cada prenda.</p>" },
+    { "type": "checkbox", "id": "show_tables", "label": "Mostrar tablas de equivalencias", "default": true },
+    { "type": "text", "id": "how_heading", "label": "Título 'cómo medir'", "default": "Cómo medimos cada prenda" },
+    { "type": "richtext", "id": "how_text", "label": "Texto 'cómo medir'", "default": "<p><strong>Pecho:</strong> de axila a axila con la prenda en plano.<br><strong>Largo:</strong> desde el punto más alto del hombro hasta el bajo.<br><strong>Manga:</strong> desde la costura del hombro hasta el puño.</p>" },
+    { "type": "text", "id": "help_text", "label": "Texto de ayuda", "default": "¿Dudas entre dos tallas? Dinos tu altura y cómo te queda otra prenda y te recomendamos." }
+  ],
+  "presets": [{ "name": "Guía de tallas" }]
+}
+{% endschema %}
