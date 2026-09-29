@@ -7,7 +7,7 @@
         "eyebrow": "Vende con nosotros",
         "heading": "Dale una <em>segunda vida</em> a tu armario",
         "text": "<p>Nos encargamos de todo: valoración, fotografía profesional, autenticación, venta y envío. Tú solo cobras.</p>",
-        "button_label": "Solicitar valoración", "button_link": "shopify://pages/contact",
+        "button_label": "Solicitar valoración", "button_link": "/pages/contact",
         "button_label_2": "", "button_link_2": ""
       }
     },
