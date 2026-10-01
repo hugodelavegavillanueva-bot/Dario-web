@@ -162,7 +162,7 @@
       "settings": {
         "eyebrow": "Recién subido",
         "heading": "Últimas <em>prendas</em>",
-        "limit": 10,
+        "limit": 15,
         "columns": 5,
         "link_label": "Ver todo",
         "quick_add": true,
@@ -251,18 +251,6 @@
         "link": "/pages/marcas",
         "center": false,
         "surface": true
-      }
-    },
-    "deals": {
-      "type": "featured-collection",
-      "settings": {
-        "eyebrow": "Chollos",
-        "heading": "Bajadas de <em>precio</em>",
-        "limit": 5,
-        "columns": 5,
-        "link_label": "Ver todo",
-        "quick_add": true,
-        "surface": false
       }
     },
     "how": {
@@ -452,7 +440,6 @@
     "categories",
     "new",
     "brands",
-    "deals",
     "how",
     "sell",
     "conditions",
