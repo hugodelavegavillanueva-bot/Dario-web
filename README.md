@@ -62,6 +62,7 @@ prendas reales.
 | `demo-perchero-calido.jpg` | [pexels.com/photo/4169370](https://www.pexels.com/photo/4169370/) |
 | `demo-perchero-color.jpg` | [pexels.com/photo/4857762](https://www.pexels.com/photo/4857762/) |
 | `demo-perchero-plumifero.jpg` | [pexels.com/photo/6045058](https://www.pexels.com/photo/6045058/) |
+| `demo-perchas-oscuro.jpg` (portada) | [pexels.com/photo/102129](https://www.pexels.com/photo/102129/) |
 | `demo-perchero-tienda.jpg` | [pexels.com/photo/1884584](https://www.pexels.com/photo/1884584/) |
 | `demo-punto.jpg` | [pexels.com/photo/5710046](https://www.pexels.com/photo/5710046/) |
 | `demo-ropa-doblada.jpg` | [pexels.com/photo/6461392](https://www.pexels.com/photo/6461392/) |
